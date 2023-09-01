@@ -12,8 +12,6 @@ const About = ({ data }) => {
 
   useEffect(() => {
     const rssUrl = 'https://www.gamespot.com/feeds/news';
-
-    // Define your POST request parameters (if needed)
     const postData = {
       // You can include any necessary data here if required by the RSS service
     };
