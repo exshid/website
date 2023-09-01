@@ -1,7 +1,7 @@
 import TwSizeIndicator from "@components/TwSizeIndicator";
 import config from "@config/config.json";
 import { Head, Html, Main, NextScript } from "next/document";
-import MustRead from "@layouts/MustRead";
+import MustRead from "@layouts/components/MustRead";
 
 const Document = () => {
   // destructuring items from config object
