@@ -4,11 +4,14 @@ import { markdownify } from "@lib/utils/textConverter";
 import shortcodes from "@shortcodes/all";
 import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import xml2js from 'xml2js';
 
 const About = ({ data }) => {
   const { frontmatter, mdxContent } = data;
   const { title, image, social } = frontmatter;
+
+  const [firstItemTitle, setFirstItemTitle] = useState('');
 
   useEffect(() => {
     fetch('/api/rss')
@@ -18,9 +21,20 @@ const About = ({ data }) => {
         }
         return response.text(); // Parse the response as text
       })
-      .then((data) => {
-        // Log the response data to the console
-        console.log('Response Data:', data);
+      .then((xmlData) => {
+        // Parse the XML data into JSON
+        xml2js.parseString(xmlData, (err, result) => {
+          if (err) {
+            throw new Error('Error parsing XML');
+          }
+
+          // Extract the title of the first item
+          const firstItem = result.rss.channel[0].item[0];
+          const title = firstItem.title[0];
+
+          // Set the title in the component state
+          setFirstItemTitle(title);
+        });
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -43,7 +57,7 @@ const About = ({ data }) => {
         )}
         {markdownify(title, "h1", "h2")}
         <Social source={social} className="social-icons-simple my-8" />
-
+<h5>{firstItemTitle}</h5>
         <div className="content">
           <MDXRemote {...mdxContent} components={shortcodes} />
         </div>
