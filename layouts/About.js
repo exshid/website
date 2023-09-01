@@ -4,6 +4,7 @@ import { markdownify } from "@lib/utils/textConverter";
 import shortcodes from "@shortcodes/all";
 import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
+import React, { useEffect } from 'react';
 
 const About = ({ data }) => {
   const { frontmatter, mdxContent } = data;
