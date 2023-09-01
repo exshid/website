@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "Bookworm Next | Personal Blog Theme",
+    "title": "Gaming website and ecyclopedia",
     "base_url": "/",
     "favicon": "/images/favicon.png",
     "logo": "/images/logo.png",
@@ -18,7 +18,7 @@
   "params": {
     "tag_manager_id": "",
     "contact_form_action": "#",
-    "copyright": "Copyright © 2022 a theme by [themefisher](https://themefisher.com)"
+    "copyright": "Copyright © 2023 a theme by [themefisher](https://themefisher.com)"
   },
 
   "metadata": {
