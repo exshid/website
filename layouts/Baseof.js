@@ -90,7 +90,6 @@ const Base = ({
       </Head>
       <Header />
       {/* main site */}
-<MustRead/>
       <main>{children}</main>
       <Footer />
     </>
