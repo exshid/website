@@ -11,28 +11,12 @@ const About = ({ data }) => {
   const { title, image, social } = frontmatter;
 
   useEffect(() => {
-    const rssUrl = 'https://www.gamespot.com/feeds/news';
-    const postData = {
-      // You can include any necessary data here if required by the RSS service
-    };
-
-    // Define the options for the fetch request
-    const requestOptions = {
-      method: 'POST',
-      // headers: {
-      //   // Add any headers if required
-      //   'Content-Type': 'application/json',
-      // },
-      body: JSON.stringify(postData), // You can convert postData to the desired format
-    };
-
-    // Make the POST request using fetch
-    fetch(rssUrl, requestOptions)
+    fetch('/api/rss')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.json(); // Parse the response as JSON
+        return response.text(); // Parse the response as text
       })
       .then((data) => {
         // Log the response data to the console
@@ -41,9 +25,8 @@ const About = ({ data }) => {
       .catch((error) => {
         console.error('Error:', error);
       });
-    }, []);
-    
-    
+  }, []);
+      
       return (
     <section className="section">
       <div className="container text-center">
