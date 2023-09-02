@@ -6,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import xml2js from 'xml2js';
+import axios from 'axios';
 
 const About = ({ data }) => {
   const { frontmatter, mdxContent } = data;
