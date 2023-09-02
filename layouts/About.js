@@ -6,14 +6,12 @@ import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import xml2js from 'xml2js';
-import axios from 'axios';
 
 const About = ({ data }) => {
   const { frontmatter, mdxContent } = data;
   const { title, image, social } = frontmatter;
 
   const [firstItemTitle, setFirstItemTitle] = useState('');
-  const [aiResponse, setAiResponse] = useState('');
 
   useEffect(() => {
     fetch('/api/rss')
@@ -36,58 +34,12 @@ const About = ({ data }) => {
 
           // Set the title in the component state
           setFirstItemTitle(title);
-
-          // Send the title to the OpenAI API
-          sendTitleToOpenAI(title);
         });
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, []);
-
-  const sendTitleToOpenAI = async (title) => {
-    try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/completions',
-        {
-          model: 'text-babbage-001',
-          prompt:
-            'Title: "' +
-            title +
-            '"\n\nthree questions. if the answer to all those is yes, send "true". If one is no, send "false".\n1-is this a news article?\n2-is this an advertisement?\n3-is this noteworthy for a website?\n',
-          temperature: 1,
-          max_tokens: 1,
-          top_p: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer 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', // Replace with your OpenAI API key
-          },
-        }
-      );
-  
-      // Check if the response contains text
-      if (response.data.choices && response.data.choices.length > 0) {
-        // Extract the text from the response
-        const aiResponse = response.data.choices[0].text;
-  
-        // Log the OpenAI API response
-        console.log('OpenAI API Response:', aiResponse);
-  
-        // Set the AI response in the component state
-        setAiResponse(aiResponse);
-      } else {
-        console.warn('OpenAI API response does not contain text.');
-      }
-    } catch (error) {
-      console.error('Error sending request to OpenAI:', error);
-    }
-  };
-  
       
       return (
     <section className="section">
