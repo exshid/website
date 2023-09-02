@@ -65,23 +65,29 @@ const About = ({ data }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer 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', // Replace with your OpenAI API key
+            Authorization: 'Bearer YOUR_API_KEY', // Replace with your OpenAI API key
           },
         }
       );
-
-      // Log the OpenAI API response
-      console.log('OpenAI API Response:', response.data.choices[0].text);
-      console.log('OpenAI API Response:', response.data.choices[0]);
-      console.log('OpenAI API Response:', response.data.choices);
-
-      // Set the AI response in the component state
-      setAiResponse(response.data.choices[0].text);
+  
+      // Check if the response contains text
+      if (response.data.choices && response.data.choices.length > 0) {
+        // Extract the text from the response
+        const aiResponse = response.data.choices[0].text;
+  
+        // Log the OpenAI API response
+        console.log('OpenAI API Response:', aiResponse);
+  
+        // Set the AI response in the component state
+        setAiResponse(aiResponse);
+      } else {
+        console.warn('OpenAI API response does not contain text.');
+      }
     } catch (error) {
       console.error('Error sending request to OpenAI:', error);
     }
   };
-
+  
       
       return (
     <section className="section">
