@@ -65,7 +65,7 @@ const About = ({ data }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer YOUR_API_KEY', // Replace with your OpenAI API key
+            Authorization: 'Bearer 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', // Replace with your OpenAI API key
           },
         }
       );
