@@ -72,6 +72,8 @@ const About = ({ data }) => {
 
       // Log the OpenAI API response
       console.log('OpenAI API Response:', response.data.choices[0].text);
+      console.log('OpenAI API Response:', response.data.choices[0]);
+      console.log('OpenAI API Response:', response.data.choices);
 
       // Set the AI response in the component state
       setAiResponse(response.data.choices[0].text);
