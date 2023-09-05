@@ -49,7 +49,7 @@ const API_KEY = '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'
     try {
       console.log('ChatGPT Response:', firstItemTitle);
       const response = await axios.post('https://api.openai.com/v1/completions', {
-        prompt: `I ask you two questions, and i want you to say "true", if all of your responses are "yes", and "false", if either of your responses are "no".
+        prompt: `give a one word response. I ask you two questions, and i want you to say "true", if all of your responses are "yes", and "false", if either of your responses are "no".
         Title: ${firstItemTitle}
         1-is this the title of an advertisement post? 2-is this the title of a noteworthy news article?
         `,
