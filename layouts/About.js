@@ -50,7 +50,7 @@ const API_KEY = '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'
     try {
       const response = await axios.post('https://api.openai.com/v1/completions', {
         prompt: 'Write a joke about cheese.',
-        model="babbage-002",
+        model:"babbage-002",
         max_tokens: 50,
       }, {
         headers: {
@@ -68,7 +68,7 @@ const API_KEY = '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'
       // Now, ask ChatGPT to repeat the joke in all caps
       const repeatResponse = await axios.post('https://api.openai.com/v1/completions', {
         prompt: `Repeat the joke "${jokeText}" in all caps.`,
-        model="babbage-002",
+        model:"babbage-002",
         max_tokens: 50,
       }, {
         headers: {
