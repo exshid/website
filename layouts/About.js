@@ -48,9 +48,9 @@ const API_KEY = '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'
 
   const fetchJoke = async () => {
     try {
-      const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+      const response = await axios.post('https://api.openai.com/v1/completions', {
         prompt: 'Write a dad joke about cheese.',
-        model:"gpt-3.5-turbo",
+        model:"davinci-002",
         max_tokens: 50,
       }, {
         headers: {
@@ -66,9 +66,9 @@ const API_KEY = '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'
       console.log('ChatGPT Response:', jokeText);
 
       // Now, ask ChatGPT to repeat the joke in all caps
-      const repeatResponse = await axios.post('https://api.openai.com/v1/chat/completions', {
+      const repeatResponse = await axios.post('https://api.openai.com/v1/completions', {
         prompt: `Repeat the joke "${joke}" in all caps.`,
-        model:"gpt-3.5-turbo",
+        model:"davinci-002",
         max_tokens: 50,
       }, {
         headers: {
