@@ -12,7 +12,7 @@ const About = ({ data }) => {
   const { title, image, social } = frontmatter;
 
   const [firstItemTitle, setFirstItemTitle] = useState('');
-
+/*
   useEffect(() => {
     fetch('/api/rss')
       .then((response) => {
@@ -40,7 +40,47 @@ const About = ({ data }) => {
         console.error('Error:', error);
       });
   }, []);
-      
+      */
+
+  
+  const [joke, setJoke] = useState('');
+
+  const fetchJoke = async () => {
+    try {
+      const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+        prompt: 'Write a joke about cheese.',
+        max_tokens: 50,
+      }, {
+        headers: {
+          'Authorization': 'Bearer YOUR_API_KEY_HERE',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const jokeText = response.data.choices[0].text;
+
+      // Save the joke in state
+      setJoke(jokeText);
+      console.log('ChatGPT Response:', jokeText);
+
+      // Now, ask ChatGPT to repeat the joke in all caps
+      const repeatResponse = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+        prompt: `Repeat the joke "${jokeText}" in all caps.`,
+        max_tokens: 50,
+      }, {
+        headers: {
+          'Authorization': 'Bearer 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',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const repeatedJoke = repeatResponse.data.choices[0].text;
+      console.log('ChatGPT Repeat Response:', repeatedJoke);
+    } catch (error) {
+      console.error('Error fetching joke:', error);
+    }
+  };
+
       return (
     <section className="section">
       <div className="container text-center">
@@ -59,6 +99,15 @@ const About = ({ data }) => {
         <Social source={social} className="social-icons-simple my-8" />
 <h5>{firstItemTitle}</h5>
         <div className="content">
+        <div className="App">
+      <h1>Cheesy Joke Generator</h1>
+      <button onClick={fetchJoke}>Get Cheese Joke</button>
+      <div>
+        <h2>Joke:</h2>
+        <p>{joke}</p>
+      </div>
+    </div>
+
           <MDXRemote {...mdxContent} components={shortcodes} />
         </div>
       </div>
