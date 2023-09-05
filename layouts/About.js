@@ -11,7 +11,7 @@ import axios from 'axios';
 const About = ({ data }) => {
   const { frontmatter, mdxContent } = data;
   const { title, image, social } = frontmatter;
-
+const API_KEY = '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'
   const [firstItemTitle, setFirstItemTitle] = useState('');
 /*
   useEffect(() => {
@@ -53,7 +53,7 @@ const About = ({ data }) => {
         max_tokens: 50,
       }, {
         headers: {
-          'Authorization': 'Bearer YOUR_API_KEY_HERE',
+          'Authorization': `Bearer ${API_KEY}`,
           'Content-Type': 'application/json',
         },
       });
@@ -70,7 +70,7 @@ const About = ({ data }) => {
         max_tokens: 50,
       }, {
         headers: {
-          'Authorization': 'Bearer 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',
+          'Authorization': `Bearer ${API_KEY}`,
           'Content-Type': 'application/json',
         },
       });
