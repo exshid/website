@@ -13,7 +13,7 @@ const About = ({ data }) => {
   const { title, image, social } = frontmatter;
 const API_KEY = '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'
   const [firstItemTitle, setFirstItemTitle] = useState('');
-/*
+
   useEffect(() => {
     fetch('/api/rss')
       .then((response) => {
@@ -41,15 +41,18 @@ const API_KEY = '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'
         console.error('Error:', error);
       });
   }, []);
-      */
 
   
   const [joke, setJoke] = useState('');
 
   const fetchJoke = async () => {
     try {
+      console.log('ChatGPT Response:', firstItemTitle);
       const response = await axios.post('https://api.openai.com/v1/completions', {
-        prompt: 'Write a dad joke about cheese.',
+        prompt: `I ask you two questions, and i want you to say "true", if all of your responses are "yes", and "false", if either of your responses are "no".
+        Title: ${firstItemTitle}
+        1-is this the title of an advertisement post? 2-is this the title of a noteworthy news article?
+        `,
         model:"davinci-002",
         max_tokens: 50,
       }, {
@@ -66,20 +69,8 @@ const API_KEY = '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'
       console.log('ChatGPT Response:', jokeText);
 
       // Now, ask ChatGPT to repeat the joke in all caps
-      const repeatResponse = await axios.post('https://api.openai.com/v1/completions', {
-        prompt: `Repeat the joke "${joke}" in all caps.`,
-        model:"davinci-002",
-        max_tokens: 50,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const repeatedJoke = repeatResponse.data.choices[0].text;
-      console.log('ChatGPT Repeat Response:', repeatedJoke);
-    } catch (error) {
+      
+} catch (error) {
       console.error('Error fetching joke:', error);
     }
   };
