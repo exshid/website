@@ -5,7 +5,6 @@ import { getSinglePage } from "@lib/contentParser";
 import MustRead from "@layouts/components/MustRead";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
-import { articles } from "./articles";
 import { articles } from "@layouts/components/articles.js";
 
 // blog pagination
