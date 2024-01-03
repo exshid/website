@@ -6,6 +6,7 @@ import MustRead from "@layouts/components/MustRead";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 import { articles } from "../content/articles";
+import { articles } from "@content/articles";
 
 // blog pagination
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
