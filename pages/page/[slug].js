@@ -8,7 +8,6 @@ const { blog_folder } = config.settings;
 import { articles } from "./articles";
 import { articles } from "@layouts/components/articles.js";
 
-
 // blog pagination
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
   const indexOfLastPost = currentPage * pagination;
