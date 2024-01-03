@@ -5,6 +5,7 @@ import { getSinglePage } from "@lib/contentParser";
 import MustRead from "@layouts/components/MustRead";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
+import { articles } from "../content/articles";
 
 // blog pagination
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
@@ -15,7 +16,7 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
 
   return (
     <Base>
-<MustRead/>
+<MustRead articles={articles} />
       <section className="section">
         <div className="container">
           <Posts className="mb-16" posts={currentPosts} authors={authors} />
