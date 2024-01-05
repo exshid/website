@@ -30,7 +30,6 @@ const MustRead = ({ articles }) => {
         const title = firstItem.title[0];
   
         // Set the title in the component state
-        setFirstItemTitle(title);
   
         // Call the run function after setting the title
         run(title);
