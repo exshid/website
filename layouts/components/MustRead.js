@@ -39,7 +39,7 @@ const MustRead = ({ articles }) => {
   
         // Call the run function after setting the title
         run(title);
-        run(postDescription);
+        runPost(postDescription);
 
       });
     };
@@ -92,7 +92,7 @@ const MustRead = ({ articles }) => {
       setFirstItemTitle(response.text());
     };
   
-    const run = async (postDescription) => {
+    const runPost = async (postDescription) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
