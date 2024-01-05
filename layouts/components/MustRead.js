@@ -27,6 +27,9 @@ const MustRead = ({ articles }) => {
   
         // Extract the title of the first item
         const firstItem = result.rss.channel[0].item[0];
+        
+        console.log('first: ' + firstItem);
+
         const title = firstItem.title[0];
   
         // Set the title in the component state
@@ -70,7 +73,7 @@ const MustRead = ({ articles }) => {
       ];
   
       const parts = [
-        { text: `rewrite this title: "${title}"` }
+        { text: `rewrite this title: ${title}` }
       ];
   
       const result = await model.generateContent({
@@ -80,7 +83,7 @@ const MustRead = ({ articles }) => {
       });
   
       const response = result.response;
-      console.log(response.text(), title);
+      console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
     };
   
