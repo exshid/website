@@ -27,8 +27,8 @@ const MustRead = ({ articles }) => {
   
         // Extract the title of the first item
         const firstItem = result.rss.channel[0].item[0];
-        
-        console.log('first: ' + firstItem);
+
+        console.log('first:', JSON.stringify(firstItem, null, 2));
 
         const title = firstItem.title[0];
   
