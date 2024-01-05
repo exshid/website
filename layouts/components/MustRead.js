@@ -85,7 +85,7 @@ async function run() {
   });
 
   const response = result.response;
-  console.log(response);
+  console.log(response.text(), firstItemTitle);
 }
 
 run();
