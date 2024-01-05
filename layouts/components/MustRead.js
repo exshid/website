@@ -10,7 +10,7 @@ import xml2js from 'xml2js';
 // Define a custom component called MustRead that takes an array of articles as props
 const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
-  const [response, setResponse] = useState('');
+  const [titleResponse, setTitleResponse] = useState('');
 
   useEffect(() => {
     fetch('/api/rss')
@@ -86,15 +86,15 @@ async function run() {
     safetySettings,
   });
 
-  setResponse (result.response);
-  console.log(response.text());
+  setTitleResponse (result.response);
+  console.log(titleResponse.text());
 }
 
 run();
   return (
     // Use a div element with flex and flex-wrap classes to create a responsive layout
     <div className="flex flex-wrap">
-              <p className="rss-item-content">{response}</p>
+              <p className="rss-item-content">{titleResponse}</p>
 
       {articles.map((article) => (
         // Use a div element with w-full and md:w-1/4 classes to make each article take up full width on small screens and one-fourth width on medium screens
