@@ -11,90 +11,83 @@ import xml2js from 'xml2js';
 const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
 
-useEffect(() => {
-  const fetchData = async () => {
-    const response = await fetch('/api/rss');
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const xmlData = await response.text(); // Parse the response as text
-
-    // Parse the XML data into JSON
-    xml2js.parseString(xmlData, (err, result) => {
-      if (err) {
-        throw new Error('Error parsing XML');
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/api/rss');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-
-      // Extract the title of the first item
-      const firstItem = result.rss.channel[0].item[0];
-      const title = firstItem.title[0];
-
-      // Set the title in the component state
-      setFirstItemTitle(title);
-
-      // Call the run function after setting the title
-      run(title);
+      const xmlData = await response.text(); // Parse the response as text
+  
+      // Parse the XML data into JSON
+      xml2js.parseString(xmlData, (err, result) => {
+        if (err) {
+          throw new Error('Error parsing XML');
+        }
+  
+        // Extract the title of the first item
+        const firstItem = result.rss.channel[0].item[0];
+        const title = firstItem.title[0];
+  
+        // Set the title in the component state
+        setFirstItemTitle(title);
+  
+        // Call the run function after setting the title
+        run(title);
+      });
+    };
+  
+    const run = async (title) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      };
+  
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+  
+      const parts = [
+        { text: `rewrite this title: "${title}"` }
+      ];
+  
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      console.log(response.text(), title);
+      setFirstItemTitle(response.text());
+    };
+  
+    fetchData().catch((error) => {
+      console.error('Error:', error);
     });
-  };
+  }, []);
 
-  fetchData().catch((error) => {
-    console.error('Error:', error);
-  });
-}, []);
-
-// node --version # Should be >= 18
-// npm install @google/generative-ai
-
-const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
-
-async function run(title) {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
-  const generationConfig = {
-    temperature: 0.8,
-    topK: 1,
-    topP: 1,
-    maxOutputTokens: 2048,
-  };
-
-  const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-  ];
-
-  const parts = [
-    { text: `rewrite this title: "${title}"` }
-  ];
-
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts }],
-    generationConfig,
-    safetySettings,
-  });
-
-  const response = result.response;
-  console.log(response.text(), title);
-  setFirstItemTitle(response.text());
-}
-
-run();
-  return (
+    return (
     // Use a div element with flex and flex-wrap classes to create a responsive layout
     <div className="flex flex-wrap">
               <p className="rss-item-content">{firstItemTitle}</p>
