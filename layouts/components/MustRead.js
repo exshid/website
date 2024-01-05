@@ -36,7 +36,10 @@ const MustRead = ({ articles }) => {
         run(title);
       });
     };
-  
+    const MODEL_NAME = "gemini-pro";
+    const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
+    
+    
     const run = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
