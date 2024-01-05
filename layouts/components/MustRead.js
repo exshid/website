@@ -123,7 +123,8 @@ const MustRead = ({ articles }) => {
       ];
   
       const parts = [
-        { text: `rewrite this post like a professional CNN journalist: ${postDescription}` }
+        { text: `rewrite this post in a professional way. if there is any quotes, do not change it any way: ${postDescription}` }
+      
       ];
   
       const result = await model.generateContent({
