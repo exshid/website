@@ -92,7 +92,6 @@ run();
   return (
     // Use a div element with flex and flex-wrap classes to create a responsive layout
     <div className="flex flex-wrap">
-              <p className="rss-item-content">{firstItemTitle}</p>
 
       {articles.map((article) => (
         // Use a div element with w-full and md:w-1/4 classes to make each article take up full width on small screens and one-fourth width on medium screens
