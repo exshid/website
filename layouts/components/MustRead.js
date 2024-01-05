@@ -123,7 +123,7 @@ const MustRead = ({ articles }) => {
       ];
   
       const parts = [
-        { text: `rewrite this post like CNN and BBC: ${postDescription}` }
+        { text: `rewrite this post like a professional CNN journalist: ${postDescription}` }
       ];
   
       const result = await model.generateContent({
@@ -134,17 +134,20 @@ const MustRead = ({ articles }) => {
   
       const response = result.response;
       console.log(response.text(), ' and ', postDescription);
+      setFirstItemPost(response.text());
     };
   
     fetchData().catch((error) => {
       console.error('Error:', error);
     });
+
   }, []);
 
     return (
     // Use a div element with flex and flex-wrap classes to create a responsive layout
     <div className="flex flex-wrap">
               <p className="rss-item-content">{firstItemTitle}</p>
+              <p className="rss-item-content">{firstItemPost}</p>
 
       {articles.map((article) => (
         // Use a div element with w-full and md:w-1/4 classes to make each article take up full width on small screens and one-fourth width on medium screens
