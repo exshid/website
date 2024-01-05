@@ -9,84 +9,90 @@ import xml2js from 'xml2js';
 
 // Define a custom component called MustRead that takes an array of articles as props
 const MustRead = ({ articles }) => {
-  const [firstItemTitle, setFirstItemTitle] = useState('');
+ const [firstItemTitle, setFirstItemTitle] = useState('');
 
   useEffect(() => {
-    fetch('/api/rss')
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/rss');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.text(); // Parse the response as text
-      })
-      .then((xmlData) => {
-        // Parse the XML data into JSON
-        xml2js.parseString(xmlData, (err, result) => {
-          if (err) {
-            throw new Error('Error parsing XML');
-          }
 
-          // Extract the title of the first item
-          const firstItem = result.rss.channel[0].item[0];
-          const title = firstItem.title[0];
-
-          // Set the title in the component state
-          setFirstItemTitle(title);
+        const xmlData = await response.text();
+        const result = await new Promise((resolve, reject) => {
+          xml2js.parseString(xmlData, (err, result) => {
+            if (err) {
+              reject('Error parsing XML');
+            } else {
+              resolve(result);
+            }
+          });
         });
-      })
-      .catch((error) => {
+
+        const firstItem = result.rss.channel[0].item[0];
+        const title = firstItem.title[0];
+        setFirstItemTitle(title);
+      } catch (error) {
         console.error('Error:', error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
-// node --version # Should be >= 18
-// npm install @google/generative-ai
 
-const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
+  const generateContent = async () => {
+    try {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
-async function run() {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      };
 
-  const generationConfig = {
-    temperature: 0.8,
-    topK: 1,
-    topP: 1,
-    maxOutputTokens: 2048,
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+
+      const parts = [{ text: `rewrite this title: "${firstItemTitle}"` }];
+
+      const result = await model.generateContent({
+        contents: [{ role: 'user', parts }],
+        generationConfig,
+        safetySettings,
+      });
+
+      const response = result.response;
+      console.log(response.text(), firstItemTitle);
+      setFirstItemTitle(response.text());
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
-  const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-  ];
-
-  const parts = [
-    {text: "rewrite this title: \"Baldur's Gate 3 Adds Guns Thanks To This Mod\""},
-  ];
-
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts }],
-    generationConfig,
-    safetySettings,
-  });
-
-  const response = result.response;
-  console.log(response.text(), firstItemTitle);
-}
+  useEffect(() => {
+    if (firstItemTitle) {
+      generateContent();
+    }
+  }, [firstItemTitle]);
 
 run();
   return (
