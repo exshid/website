@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
-
 import xml2js from 'xml2js';
 
 // Define a custom component called MustRead that takes an array of articles as props
@@ -38,60 +32,11 @@ const MustRead = ({ articles }) => {
         console.error('Error:', error);
       });
   }, []);
-// node --version # Should be >= 18
-// npm install @google/generative-ai
 
-const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
-
-async function run() {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
-  const generationConfig = {
-    temperature: 0.8,
-    topK: 1,
-    topP: 1,
-    maxOutputTokens: 2048,
-  };
-
-  const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-  ];
-
-  const parts = [
-    { text: `rewrite this title: "${firstItemTitle}"` }
-  ];
-
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts }],
-    generationConfig,
-    safetySettings,
-  });
-
-  const response = result.response;
-  console.log(response.text());
-}
-
-run();
   return (
     // Use a div element with flex and flex-wrap classes to create a responsive layout
     <div className="flex flex-wrap">
+              <p className="rss-item-content">{firstItemTitle}</p>
 
       {articles.map((article) => (
         // Use a div element with w-full and md:w-1/4 classes to make each article take up full width on small screens and one-fourth width on medium screens
