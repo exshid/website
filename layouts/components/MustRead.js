@@ -10,6 +10,7 @@ import xml2js from 'xml2js';
 // Define a custom component called MustRead that takes an array of articles as props
 const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
+  const [firstItemPost, setFirstItemPost] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +39,8 @@ const MustRead = ({ articles }) => {
   
         // Call the run function after setting the title
         run(title);
+        run(postDescription);
+
       });
     };
     const MODEL_NAME = "gemini-pro";
@@ -87,6 +90,50 @@ const MustRead = ({ articles }) => {
       const response = result.response;
       console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
+    };
+  
+    const run = async (postDescription) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      };
+  
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+  
+      const parts = [
+        { text: `rewrite this post like CNN and BBC: ${postDescription}` }
+      ];
+  
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      console.log(response.text(), ' and ', postDescription);
     };
   
     fetchData().catch((error) => {
