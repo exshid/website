@@ -24,6 +24,7 @@ export default async function handler(req, res) {
       res.status(500).json({ error: 'An error occurred while fetching the RSS data' });
     }
   }
+  const RSS = () => {
 
 const [firstItemTitle, setFirstItemTitle] = useState('');
 const [firstItemPost, setFirstItemPost] = useState('');
@@ -153,3 +154,4 @@ useEffect(() => {
   });
 
 }, []);
+  }
