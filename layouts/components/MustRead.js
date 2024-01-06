@@ -84,17 +84,7 @@ const MustRead = ({ articles }) => {
       const response = result.response;
       console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
-      if(firstItemTitle !== lastTitle[0].title) {
-
-      fs.writeFileSync('./title.js', 
-      `export const lastTitle = [{ title: "${firstItemTitle}" }]`);
   
-    // Restart server
-    restartServer();
-    console.log(firstItemTitle, ' and done ', lastTitle[0].title);
-
-  }
-
     };
   
     const runPost = async (postDescription) => {
