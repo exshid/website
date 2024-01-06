@@ -29,7 +29,6 @@ export default async function handler(req, res) {
 const [firstItemTitle, setFirstItemTitle] = useState('');
 const [firstItemPost, setFirstItemPost] = useState('');
 
-useEffect(() => {
   const fetchData = async () => {
     const response = await fetch('/api/rss');
     if (!response.ok) {
@@ -153,5 +152,5 @@ useEffect(() => {
     console.error('Error:', error);
   });
 
-}, []);
+
   }
