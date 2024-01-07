@@ -1,5 +1,5 @@
-import { lastTitle } from "@layouts/components/title.js";
 import React, { useEffect, useState } from 'react';
+import { lastTitle } from "@layouts/components/title.js";
 import {
   GoogleGenerativeAI,
   HarmCategory,
@@ -40,7 +40,10 @@ const MustRead = ({ articles }) => {
     const MODEL_NAME = "gemini-pro";
     const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
     
-    
+    console.log(lastTitle);
+
+    if (lastTitle !== title) {
+
     const run = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
@@ -85,6 +88,10 @@ const MustRead = ({ articles }) => {
       console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
   
+      fetch(`/api/rss?title=${title}`) 
+  .then((res) => res.json()) // parse the response as JSON
+  .then((data) => console.log(data.message)); // log the message from the response
+
     };
   
     const runPost = async (postDescription) => {
@@ -130,10 +137,11 @@ const MustRead = ({ articles }) => {
       console.log(response.text(), ' and ', postDescription);
       setFirstItemPost(response.text());
     };
+
       fetchData().catch((error) => {
       console.error('Error:', error);
     });
-  }, []);
+  }}, []);
     return (
     <div className="flex flex-wrap">
               <p className="rss-item-content">{firstItemTitle}</p>
