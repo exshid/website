@@ -88,7 +88,7 @@ const MustRead = ({ articles }) => {
       console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
   
-      fetch(`/api/rss?title=${title}`) 
+      fetch(`/api/title?title=${title}`) 
   .then((res) => res.json()) // parse the response as JSON
   .then((data) => console.log(data.message)); // log the message from the response
 
