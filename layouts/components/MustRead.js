@@ -42,7 +42,7 @@ const MustRead = ({ articles }) => {
     
     console.log(lastTitle);
 
-    if (lastTitle !== title) {
+    if (lastTitle !== firstItemTitle) {
 
     const run = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
@@ -88,7 +88,7 @@ const MustRead = ({ articles }) => {
       console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
   
-      fetch(`/api/title?title=${title}`) 
+      fetch(`/api/title?title=${firstItemTitle}`) 
   .then((res) => res.json()) // parse the response as JSON
   .then((data) => console.log(data.message)); // log the message from the response
 
