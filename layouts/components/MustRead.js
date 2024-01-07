@@ -11,7 +11,7 @@ import xml2js from 'xml2js';
 const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
   const [firstItemPost, setFirstItemPost] = useState('');
-
+let run;
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api/rss');
@@ -44,7 +44,7 @@ const MustRead = ({ articles }) => {
 
     if (lastTitle !== firstItemTitle) {
 
-    const run = async (title) => {
+     run = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   

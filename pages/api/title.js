@@ -3,4 +3,3 @@ export default function handler(req, res) {
     res.status(200).json({ message: `Hello, ${title}!` }); // send a response with the name
     console.log('from rss ', title)
   }
-  
