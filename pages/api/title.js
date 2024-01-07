@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     try {
         const newContent = 'hello world'; // The content to replace the file with
         const filePath = path.join(process.cwd(), 'layouts/components', 'title.js'); // Path to the title.js file
