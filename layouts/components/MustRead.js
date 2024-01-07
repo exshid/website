@@ -12,6 +12,8 @@ const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
   const [firstItemPost, setFirstItemPost] = useState('');
 let run;
+let runPost;
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api/rss');
@@ -94,7 +96,7 @@ let run;
 
     };
   
-    const runPost = async (postDescription) => {
+     runPost = async (postDescription) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
