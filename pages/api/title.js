@@ -27,7 +27,7 @@ let runPost;
       const title = firstItem.title[0];
       const postDescription = firstItem.description[0];
       console.log('first: ', postDescription);
-
+      firstItemTitle = title;
       run(title);
       runPost(postDescription);
 
