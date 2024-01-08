@@ -25,6 +25,7 @@
     "axios": "1.5.0",
     "xml2js":"0.6.2",
     "fs": "latest",
+    "node-fetch": "latest",
     "remark-gfm": "^3.0.1",
 "@google/generative-ai": "0.1.3"
   },

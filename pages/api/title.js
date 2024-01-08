@@ -1,4 +1,4 @@
-const fs = require('fs');
+/*const fs = require('fs');
 import {
   GoogleGenerativeAI,
   HarmCategory,
@@ -152,5 +152,53 @@ export default function handler(req, res) {
     res.status(200).json({ message: 'File created successfully' });
   } else {
     res.status(400).json({ message: 'File already exists' });
+  }
+}
+*/
+
+
+
+// Import the required modules
+import fetch from 'node-fetch';
+import xml2js from 'xml2js';
+import fs from 'fs';
+
+// Create an async function for your API route
+export default async function handler(req, res) {
+  try {
+    // Fetch the RSS feed
+    const response = await fetch('/api/rss');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // Parse the XML data
+    const xmlData = await response.text();
+    let jsonData;
+    xml2js.parseString(xmlData, (err, result) => {
+      if (err) {
+        throw new Error('Error parsing XML');
+      }
+      jsonData = result;
+    });
+
+    // Extract the first item and its details
+    const firstItem = jsonData.rss.channel[0].item[0];
+    const title = firstItem.title[0];
+    const postDescription = firstItem.description[0];
+
+    // Save the data to a new JavaScript file
+    const data = `export const fetchedData = [${JSON.stringify({ title, postDescription })}];\n`;
+    fs.writeFile('fetchedData.js', data, (err) => {
+      if (err) {
+        throw new Error('Error writing file');
+      }
+    });
+
+    // Return the data as JSON
+    res.status(200).json({ title, postDescription });
+  } catch (error) {
+    // Handle any errors
+    res.status(500).json({ error: error.message });
   }
 }
