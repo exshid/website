@@ -11,9 +11,7 @@ import xml2js from 'xml2js';
 const MustRead = ({ articles }) => {
     return (
     <div className="flex flex-wrap">
-              <p className="rss-item-content">{firstItemTitle}</p>
-              <p className="rss-item-content">{firstItemPost}</p>
-      {articles.map((article) => (
+                  {articles.map((article) => (
         <div className="w-full md:w-1/4 p-4">
           <ArticleCard {...article} />
         </div>
