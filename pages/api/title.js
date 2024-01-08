@@ -1,3 +1,4 @@
+const fs = require('fs');
 import {
   GoogleGenerativeAI,
   HarmCategory,
@@ -136,22 +137,20 @@ let runPost;
   });
 }
 
-const fs = require('fs');
 
-// Assuming your data is in a file called 'data.js'
-fs.readFile('../../layouts/components/title.js', 'utf8', function(err, data) {
-    if (err) {
-        return console.log(err);
-    }
+import { existsSync, writeFileSync } from 'fs';
 
+export default function handler(req, res) {
+  // Define the path and content of the new file
+  const filePath = './newFile.js';
+  const content = 'let variable1 = "Hello";\nlet variable2 = "World";\n';
 
-    // This is the regex to find the title string in your file
-    let regex = /title: "([^"]*)"/g;
-
-    // This is the replacement string
-    let newdata = data.replace(regex, `title: "${firstItemTitle}"`);
-
-    fs.writeFile('../../layouts/components/title.js', newdata, 'utf8', function(err) {
-      if (err) return console.log(err);
-    });
-});
+  // Check if the file already exists
+  if (!existsSync(filePath)) {
+    // Create the new file with the specified content
+    writeFileSync(filePath, content);
+    res.status(200).json({ message: 'File created successfully' });
+  } else {
+    res.status(400).json({ message: 'File already exists' });
+  }
+}
