@@ -74,6 +74,7 @@ const MustRead = ({ articles }) => {
           },
         ];
       
+        console.log('hi' + firstItemTitle)
         const parts = [
           {  text: `rewrite this title: ${firstItemTitle}`},
         ];
@@ -91,7 +92,6 @@ const MustRead = ({ articles }) => {
       run();
       
 }, []);
-console.log(firstItemTitle)
 
 
 async function addTweetHandler() {
