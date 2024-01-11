@@ -15,7 +15,7 @@ const MustRead = ({ articles }) => {
    const [firstItemPost, setFirstItemPost] = useState('');
 
    useEffect(() => {
-    fetch('/api/rss')
+    const response = await fetch('/api/rss')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -42,6 +42,7 @@ const MustRead = ({ articles }) => {
       .catch((error) => {
         console.error('Error:', error);
       });
+      
       console.log('title5:', firstItemTitle);
 
       const MODEL_NAME = "gemini-pro";
