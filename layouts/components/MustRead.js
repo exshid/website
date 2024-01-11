@@ -11,7 +11,7 @@ import xml2js from 'xml2js';
 const MustRead = ({ articles }) => {
   async function addTweetHandler() {
     let formData = { biography: '', username: '', date: '' };
-    formData.biography = `This user's name is ${user.name}`;
+    formData.biography = `This user's name isr.name}`;
     formData.username = 'username';
     formData.date = new Date().toDateString();
  
