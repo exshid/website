@@ -10,19 +10,20 @@ import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
   async function addTweetHandler() {
-    formData.biography = `This user's name isuser.name}`
-    formData.username = 'username'
-    formData.name = 'nane'
+    let formData = { biography: '', username: '', date: '' };
+    formData.biography = `This user's name is ${user.name}`;
+    formData.username = 'username';
     formData.date = new Date().toDateString();
-    formData.avatar = 'hi';
+ 
+  
 
     const response = await fetch('/api/new-tweet', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+      })
     console.log(response, response.ok)
     if (!response.ok) {
         return error()
