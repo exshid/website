@@ -1,7 +1,7 @@
 // pages/api/rss.js
 
 export default async function handler(req, res) {
-    const rssUrl = 'https://www.gamespot.com/feeds/news';
+    const rssUrl = 'http://feeds.feedburner.com/ign/all';
   
     try {
       const response = await fetch(rssUrl);
