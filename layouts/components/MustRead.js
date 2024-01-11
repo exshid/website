@@ -44,7 +44,7 @@ const MustRead = ({ articles }) => {
       const MODEL_NAME = "gemini-pro";
       const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
       
-      async function run() {
+      async function run(title) {
         const genAI = new GoogleGenerativeAI(API_KEY);
         const model = genAI.getGenerativeModel({ model: MODEL_NAME });
       
@@ -73,10 +73,10 @@ const MustRead = ({ articles }) => {
             threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
           },
         ];
-      
-        console.log('hi' + firstItemTitle)
+        console.log('hi' + title)
+
         const parts = [
-          {  text: `rewrite this title: ${firstItemTitle}`},
+          {  text: `rewrite this title: ${title}`},
         ];
       
         const result = await model.generateContent({
@@ -88,6 +88,7 @@ const MustRead = ({ articles }) => {
         const response = result.response;
         console.log(response.text(), firstItemTitle);
       }
+      console.log('zhi' + firstItemTitle)
       
       run();
       
