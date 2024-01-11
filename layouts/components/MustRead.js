@@ -35,14 +35,15 @@ const MustRead = ({ articles }) => {
 
           // Set the title in the component state
           setFirstItemTitle(title);
-          console.error('title:' + title);
+          console.log('title:' + title, firstItemTitle);
 
         });
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-  
+      console.log('title5:' + title, firstItemTitle);
+
       const MODEL_NAME = "gemini-pro";
       const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
       
