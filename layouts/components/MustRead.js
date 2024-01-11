@@ -10,11 +10,12 @@ import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
    const [firstItemTitle, setFirstItemTitle] = useState('');
-  const [firstItemPost, setFirstItemPost] = useState('');
+   const [firstR, setFirstR] = useState('');
+ 
+   const [firstItemPost, setFirstItemPost] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/api/rss');
+   const fetchData = async () => {
+     const response = await fetch('/api/rss');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -34,10 +35,12 @@ const MustRead = ({ articles }) => {
         console.log(title);
         
         run(title);
-        console.log('first:', JSON.stringify(firstItem, null, 2));
-        
+        setFirstR(title);
+        console.log(firstR);
+
       });
     };
+    useEffect(() => {
     const MODEL_NAME = "gemini-pro";
     const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
     
