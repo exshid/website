@@ -15,8 +15,6 @@ const MustRead = ({ articles }) => {
     formData.username = 'username';
     formData.date = new Date().toDateString();
  
-  
-
     const response = await fetch('/api/new-tweet', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -28,7 +26,6 @@ const MustRead = ({ articles }) => {
     if (!response.ok) {
         return error()
     }
-    success()
 }
 
   return (
