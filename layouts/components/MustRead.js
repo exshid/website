@@ -31,9 +31,10 @@ const MustRead = ({ articles }) => {
         const title = firstItem.title[0];
         const postDescription = firstItem.description[0];
         console.log('first: ', postDescription);
+        console.log(title);
         
         run(title);
-        runPost(postDescription);
+        console.log('first:', JSON.stringify(firstItem, null, 2));
         
       });
     };
@@ -84,20 +85,15 @@ const MustRead = ({ articles }) => {
       const response = result.response;
       console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
-      if(firstItemTitle !== lastTitle[0].title) {
-
-      fs.writeFileSync('./title.js', 
-      `export const lastTitle = [{ title: "${firstItemTitle}" }]`);
-  
     // Restart server
     restartServer();
     console.log(firstItemTitle, ' and done ', lastTitle[0].title);
     
-  }
   
 };
 
 }, []);
+console.log(firstItemTitle)
 
 
 async function addTweetHandler() {
