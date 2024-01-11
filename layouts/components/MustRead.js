@@ -9,10 +9,100 @@ import {
 import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
-  async function addTweetHandler() {
-    let formData = { biography: '', username: '', date: '' };
-    formData.biography = `This user's name isr.name}`;
-    formData.username = 'username';
+   const [firstItemTitle, setFirstItemTitle] = useState('');
+  const [firstItemPost, setFirstItemPost] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/api/rss');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const xmlData = await response.text();
+      
+      xml2js.parseString(xmlData, (err, result) => {
+        if (err) {
+          throw new Error('Error parsing XML');
+        }
+        const firstItem = result.rss.channel[0].item[0];
+        
+        console.log('first:', JSON.stringify(firstItem, null, 2));
+        
+        const title = firstItem.title[0];
+        const postDescription = firstItem.description[0];
+        console.log('first: ', postDescription);
+        
+        run(title);
+        runPost(postDescription);
+        
+      });
+    };
+    const MODEL_NAME = "gemini-pro";
+    const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
+    
+    
+    const run = async (title) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      };
+  
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+  
+      const parts = [
+        { text: `rewrite this title: ${title}` }
+      ];
+  
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      console.log(response.text(), ' and ', title);
+      setFirstItemTitle(response.text());
+      if(firstItemTitle !== lastTitle[0].title) {
+
+      fs.writeFileSync('./title.js', 
+      `export const lastTitle = [{ title: "${firstItemTitle}" }]`);
+  
+    // Restart server
+    restartServer();
+    console.log(firstItemTitle, ' and done ', lastTitle[0].title);
+    
+  }
+  
+};
+
+}, []);
+
+
+async function addTweetHandler() {
+  let formData = { biography: '', username: '', date: '' };
+    formData.title = firstItemTitle;
     formData.date = new Date().toDateString();
  
     const response = await fetch('/api/new-tweet', {
