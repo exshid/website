@@ -14,87 +14,82 @@ const MustRead = ({ articles }) => {
  
    const [firstItemPost, setFirstItemPost] = useState('');
 
-   const fetchData = async () => {
-     const response = await fetch('/api/rss');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const xmlData = await response.text();
-      
-      xml2js.parseString(xmlData, (err, result) => {
-        if (err) {
-          throw new Error('Error parsing XML');
+   useEffect(() => {
+    fetch('/api/rss')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-        const firstItem = result.rss.channel[0].item[0];
-        
-        console.log('first:', JSON.stringify(firstItem, null, 2));
-        
-        const title = firstItem.title[0];
-        const postDescription = firstItem.description[0];
-        console.log('first: ', postDescription);
-        console.log(title);
-        
-        run(title);
-        setFirstR(title);
-        console.log(firstR);
+        return response.text(); // Parse the response as text
+      })
+      .then((xmlData) => {
+        // Parse the XML data into JSON
+        xml2js.parseString(xmlData, (err, result) => {
+          if (err) {
+            throw new Error('Error parsing XML');
+          }
 
-      });
-    };
-    useEffect(() => {
-    const MODEL_NAME = "gemini-pro";
-    const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
-    
-    
-    const run = async (title) => {
-      const genAI = new GoogleGenerativeAI(API_KEY);
-      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-  
-      const generationConfig = {
-        temperature: 0.8,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-      };
-  
-      const safetySettings = [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-      ];
-  
-      const parts = [
-        { text: `rewrite this title: ${title}` }
-      ];
-  
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts }],
-        generationConfig,
-        safetySettings,
+          // Extract the title of the first item
+          const firstItem = result.rss.channel[0].item[0];
+          const title = firstItem.title[0];
+
+          // Set the title in the component state
+          setFirstItemTitle(title);
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
       });
   
-      const response = result.response;
-      console.log(response.text(), ' and ', title);
-      setFirstItemTitle(response.text());
-    // Restart server
-    restartServer();
-    console.log(firstItemTitle, ' and done ', lastTitle[0].title);
-    
-  
-};
-
+      const MODEL_NAME = "gemini-pro";
+      const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
+      
+      async function run() {
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+      
+        const generationConfig = {
+          temperature: 0.8,
+          topK: 1,
+          topP: 1,
+          maxOutputTokens: 2048,
+        };
+      
+        const safetySettings = [
+          {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+          },
+        ];
+      
+        const parts = [
+          {text: `rewrite this title: {firstItemTitle}`},
+        ];
+      
+        const result = await model.generateContent({
+          contents: [{ role: "user", parts }],
+          generationConfig,
+          safetySettings,
+        });
+      
+        const response = result.response;
+        console.log(response.text(), firstItemTitle);
+      }
+      
+      run();
+      
 }, []);
 console.log(firstItemTitle)
 
