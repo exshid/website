@@ -75,7 +75,7 @@ const MustRead = ({ articles }) => {
         ];
       
         const parts = [
-          {text: `rewrite this title: {firstItemTitle}`},
+          {  text: `rewrite this title: ${firstItemTitle}`},
         ];
       
         const result = await model.generateContent({
