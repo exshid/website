@@ -42,7 +42,7 @@ const MustRead = ({ articles }) => {
       .catch((error) => {
         console.error('Error:', error);
       });
-      console.log('title5:' + title, firstItemTitle);
+      console.log('title5:', firstItemTitle);
 
       const MODEL_NAME = "gemini-pro";
       const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
