@@ -15,31 +15,31 @@ const MustRead = ({ articles }) => {
   const [firstCats, setFirstCats] = useState();
   const [firstURL, setFirstURL] = useState();
   const [firstImageURL, setFirstImageURL] = useState();
-
+  
   async function postSenderHandler() {
-  const date = new Date();
-const year = date.getFullYear();
-const month = date.getMonth() + 1;
-const day = date.getDate();
-const paddedMonth = month.toString().padStart(2, "0");
-const paddedDay = day.toString().padStart(2, "0");
-const dateString = `${year}-${paddedMonth}-${paddedDay}`;
-
-    let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,
-    url: firstURL, image:firstImageURL, date: dateString};
-      
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const paddedMonth = month.toString().padStart(2, "0");
+    const paddedDay = day.toString().padStart(2, "0");
+    const dateString = `${year}-${paddedMonth}-${paddedDay}`;
+    
+      let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,
+      url: firstURL, image:firstImageURL, date: dateString};
+    
     const response = await fetch('/api/new-tweet', {
-      method: 'POST',
-      body: JSON.stringify(postData),
-      headers: {
-          'Content-Type': 'application/json'
+        method: 'POST',
+        body: JSON.stringify(postData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+      console.log(response, response.ok)
+      if (!response.ok) {
+          return error()
       }
-      })
-    console.log(response, response.ok)
-    if (!response.ok) {
-        return error()
-    }    
-    }
+  }
 
     async function postGet() {
 
@@ -325,13 +325,11 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   }, []);
 
   useEffect(() => {
-    console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
-    );
-
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
-      console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
-      );
       postSenderHandler()
+      console.log('done');
+      console.log('title: ', firstItemTitle, 'content: ',
+       firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL);
     }     
   
   }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
