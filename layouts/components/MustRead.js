@@ -39,6 +39,16 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       if (!response.ok) {
           return error()
       }
+      const response = await fetch('/api/new-tweet', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    
+    const dataCol = await response.json();
+    console.log(dataCol);
+    
   }
   
   useEffect(() => {
