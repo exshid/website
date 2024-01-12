@@ -1,4 +1,3 @@
-import { MongoClient } from 'mongodb'
 import React, { useEffect, useState } from 'react';
 import { lastTitle } from "@layouts/components/title.js";
 import {
@@ -288,7 +287,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       ];
   
       const parts = [
-        { text: `what would be proper url PermaLink for a news article with this title? ${title}; first, rewrite ${title} and then rewrite it all in lowercase and write - instead of space.` }
+        { text: `what would be proper url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
       ];
   
       const result = await model.generateContent({
@@ -308,20 +307,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
   }, []);
 
-  async function fetchData() {
-    const client = new MongoClient('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-    await client.connect();
-    const collection = client.db("tweets").collection("rweets");
-    const data = await collection.find({}).toArray();
-    await client.close();
-    return data;
-}
-
-const [data, setData] = useState(null);
-
   useEffect(() => {
-    fetchData().then((data) => setData(data));
-
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
       console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
       );
@@ -362,5 +348,6 @@ const ArticleCard = ({ image, title, description, author }) => {
     </div>
   );
 };
+
 
 export default MustRead;
