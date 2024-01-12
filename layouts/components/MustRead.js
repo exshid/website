@@ -16,14 +16,21 @@ const MustRead = ({ articles }) => {
   const [firstURL, setFirstURL] = useState();
   const [firstImageURL, setFirstImageURL] = useState();
 
-  async function addTweetHandler() {
-    let formData = { biography: '', username: '', date: '' };
-      formData.title = firstItemTitle;
-      formData.date = new Date().toDateString();
-   
+  async function postSenderHandler() {
+  const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+const paddedMonth = month.toString().padStart(2, "0");
+const paddedDay = day.toString().padStart(2, "0");
+const dateString = `${year}-${paddedMonth}-${paddedDay}`;
+
+    let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,
+    url: firstURL, image:firstImageURL, date: dateString};
+      
       const response = await fetch('/api/new-tweet', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(postData),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -51,10 +58,8 @@ const MustRead = ({ articles }) => {
         // Extract the title of the first item
         const firstItem = result.rss.channel[0].item[0];
 
-        console.log('first:', JSON.stringify(firstItem, null, 2));
         const title = firstItem.title[0];
         const postDescription = firstItem["content:encoded"][0];
-        console.log('first: ', postDescription);
         const imageUrl = firstItem["media:content"][0]["$"]["url"];
         
         setFirstImageURL(imageUrl);
@@ -106,7 +111,7 @@ const MustRead = ({ articles }) => {
       ];
   
       const parts = [
-        { text: `rewrite this title: ${title}` }
+        { text: `sir, rewrite this title with a publish-ready quality: ${title}. do it only once, and send nothing other than the rewritten title.` }
       ];
   
       const result = await model.generateContent({
@@ -116,7 +121,6 @@ const MustRead = ({ articles }) => {
       });
   
       const response = result.response;
-      console.log(response.text(), ' and ', title);
       setFirstItemTitle(response.text());
     };
   
@@ -162,7 +166,6 @@ const MustRead = ({ articles }) => {
       });
   
       const response = result.response;
-      console.log(response.text(), ' and ', postDescription);
       setFirstItemPost(response.text());
     };
     
@@ -207,7 +210,6 @@ const MustRead = ({ articles }) => {
       });
   
       const response = result.response;
-      console.log(response.text(), ' and ', title);
       setFirstTags(response.text());
     };
 
@@ -252,7 +254,6 @@ const MustRead = ({ articles }) => {
       });
   
       const response = result.response;
-      console.log(response.text(), ' and ', title);
       setFirstCats(response.text());
     };
     const runURL = async (title) => {
@@ -296,7 +297,6 @@ const MustRead = ({ articles }) => {
       });
   
       const response = result.response;
-      console.log(response.text(), ' and ', title);
       setFirstURL(response.text());
     };
 
@@ -311,13 +311,13 @@ const MustRead = ({ articles }) => {
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
       console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
       );
+      postSenderHandler()
     }     
   
   }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
 
   return (
     <div className="flex flex-wrap">
-      <button onClick={addTweetHandler}>Click</button>
                   {articles.map((article) => (
         <div className="w-full md:w-1/4 p-4">
           <ArticleCard {...article} />
