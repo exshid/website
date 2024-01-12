@@ -324,6 +324,9 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   }, []);
 
   useEffect(() => {
+    console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
+    );
+
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
       console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
       );
