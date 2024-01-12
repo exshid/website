@@ -76,7 +76,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
         const title = firstItem.title[0];
         const postDescription = firstItem["content:encoded"][0];
-        const imageUrl = firstItem["media:content"][0]["$"]["url"];
+        const imageUrl = firstItem["media:content"][0]["url"];
         
         setFirstImageURL(imageUrl);
 
