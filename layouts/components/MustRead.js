@@ -9,12 +9,12 @@ import {
 import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
-  const [firstItemTitle, setFirstItemTitle] = useState('');
-  const [firstItemPost, setFirstItemPost] = useState('');
-  const [firstTags, setFirstTags] = useState('');
-  const [firstCats, setFirstCats] = useState('');
-  const [firstURL, setFirstURL] = useState('');
-  const [firstImageURL, setFirstImageURL] = useState('');
+  const [firstItemTitle, setFirstItemTitle] = useState();
+  const [firstItemPost, setFirstItemPost] = useState();
+  const [firstTags, setFirstTags] = useState();
+  const [firstCats, setFirstCats] = useState();
+  const [firstURL, setFirstURL] = useState();
+  const [firstImageURL, setFirstImageURL] = useState();
 
   async function addTweetHandler() {
     let formData = { biography: '', username: '', date: '' };
@@ -197,7 +197,7 @@ const MustRead = ({ articles }) => {
       ];
   
       const parts = [
-        { text: `what would be proper tags for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+        { text: `what people, games, films, tv shows, companies, etc are mentioned in this title? ${title}; write them as tags in this format: ["diy", "toy"]` }
       ];
   
       const result = await model.generateContent({
@@ -299,8 +299,6 @@ const MustRead = ({ articles }) => {
       console.log(response.text(), ' and ', title);
       setFirstURL(response.text());
     };
-    console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
-      );
 
 
     fetchData().catch((error) => {
@@ -309,7 +307,13 @@ const MustRead = ({ articles }) => {
 
   }, []);
 
-
+  useEffect(() => {
+    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
+      console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
+      );
+    }     
+  
+  }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
 
   return (
     <div className="flex flex-wrap">
