@@ -288,7 +288,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       ];
   
       const parts = [
-        { text: `what would be proper url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
+        { text: `what would be proper url PermaLink for a news article with this title? ${title}; first, rewrite ${title} and then rewrite it all in lowercase and write - instead of space.` }
       ];
   
       const result = await model.generateContent({
@@ -313,18 +313,19 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
       );
       postSenderHandler()
+      const mDB = async () => {
+      
+      const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+      const db = client.db()
+      const tweetsCollection = db.collection('rweets');
+      const rweets = await tweetsCollection.find().toArray()
+      console.log(rweets)
+    
+      client.close()
+      }
     }     
   
   }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
-
-  
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
-  const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find().toArray()
-  console.log(rweets)
-
-  client.close()
 
   return (
     <div className="flex flex-wrap">
