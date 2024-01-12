@@ -43,6 +43,8 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       
       
     }
+    async function postGet() {
+
     const responseGet = await fetch('/api/new-tweet', {
       method: 'GET',
       headers: {
@@ -56,8 +58,9 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   } else {
       console.log('Error:', responseGet.status, responseGet.statusText);
   }
-  
+}
   useEffect(() => {
+    postGet()
     const fetchData = async () => {
       const response = await fetch('/api/rss');
       if (!response.ok) {
