@@ -28,24 +28,22 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,
     url: firstURL, image:firstImageURL, date: dateString};
       
-      const response = await fetch('/api/new-tweet', {
-        method: 'POST',
-        body: JSON.stringify(postData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        })
-      console.log(response, response.ok)
-      if (!response.ok) {
-          return error()
+    const response = await fetch('/api/new-tweet', {
+      method: 'POST',
+      body: JSON.stringify(postData),
+      headers: {
+          'Content-Type': 'application/json'
       }
-     
-      
-      
+      })
+    console.log(response, response.ok)
+    if (!response.ok) {
+        return error()
+    }    
     }
+
     async function postGet() {
 
-    const responseGet = await fetch('/api/new-tweet', {
+    const responseGet = await fetch('/api/get-data', {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json'
