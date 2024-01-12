@@ -47,9 +47,8 @@ const MustRead = ({ articles }) => {
         const firstItem = result.rss.channel[0].item[0];
 
         console.log('first:', JSON.stringify(firstItem, null, 2));
-
         const title = firstItem.title[0];
-        const postDescription = firstItem.content:encoded[0];
+        const postDescription = firstItem.content[0];
         console.log('first: ', postDescription);
   
         // Set the title in the component state
