@@ -1,3 +1,4 @@
+import { MongoClient } from 'mongodb'
 import React, { useEffect, useState } from 'react';
 import { lastTitle } from "@layouts/components/title.js";
 import {
@@ -315,6 +316,15 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     }     
   
   }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
+
+  
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
+  const tweetsCollection = db.collection('rweets');
+  const rweets = await tweetsCollection.find().toArray()
+  console.log(rweets)
+
+  client.close()
 
   return (
     <div className="flex flex-wrap">
