@@ -335,7 +335,11 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       postSenderHandler()
       console.log('done');
     }
-  }  }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
+  }else {
+    console.log('post already exists');
+}
+
+}, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
 
 
   return (
