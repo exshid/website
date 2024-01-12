@@ -350,15 +350,4 @@ const ArticleCard = ({ image, title, description, author }) => {
   );
 };
 
-export async function getStaticProps() {
-
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
-  const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find().toArray()
-  console.log(rweets);
-
-  client.close()
-}
-
 export default MustRead;
