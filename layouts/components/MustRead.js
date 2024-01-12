@@ -51,7 +51,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   
   if (responseGet.ok) {
       const data5 = await responseGet.json();
-      setOldTitle(data5[array.length - 1].image);
+      setOldTitle(data5[data5.length - 1].image);
       console.log(oldTitle);
 
   } else {
