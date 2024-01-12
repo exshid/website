@@ -15,6 +15,7 @@ const MustRead = ({ articles }) => {
   const [firstCats, setFirstCats] = useState();
   const [firstURL, setFirstURL] = useState();
   const [firstImageURL, setFirstImageURL] = useState();
+  const [oldTitle, setOldTitle] = useState();
 
   async function postSenderHandler() {
   const date = new Date();
@@ -25,8 +26,7 @@ const paddedMonth = month.toString().padStart(2, "0");
 const paddedDay = day.toString().padStart(2, "0");
 const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
-    let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,
-    url: firstURL, image:firstImageURL, date: dateString};
+    let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString};
       
     const response = await fetch('/api/new-tweet', {
       method: 'POST',
@@ -51,7 +51,9 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   
   if (responseGet.ok) {
       const data5 = await responseGet.json();
-      console.log(data5);
+      setOldTitle(data5[array.length - 1].image);
+      console.log(oldTitle);
+
   } else {
       console.log('Error:', responseGet.status, responseGet.statusText);
   }
@@ -280,7 +282,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         temperature: 0.8,
         topK: 1,
         topP: 1,
-        maxOutputTokens: 20,
+        maxOutputTokens: 200,
       };
   
       const safetySettings = [
@@ -327,10 +329,14 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     console.log('title: ', firstItemTitle, 'content: ',
      firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
     );
-    if (firstItemPost) {
+    
+    if (oldTitle !== firstImageURL) {
+    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
       postSenderHandler()
       console.log('done');
-    }}, [firstItemPost]);
+    }
+  }  }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
+
 
   return (
     <div className="flex flex-wrap">
