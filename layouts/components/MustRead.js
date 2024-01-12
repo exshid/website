@@ -40,7 +40,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         return error()
     }    
     }
-    postSenderHandler();
     async function postGet() {
 
     const responseGet = await fetch('/api/get-data', {
