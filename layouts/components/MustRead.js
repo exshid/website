@@ -40,21 +40,21 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
           return error()
       }
      
-      const responseGet = await fetch('/api/new-tweet', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    
-    if (responseGet.ok) {
-        const data5 = await responseGet.json();
-        console.log(data5);
-    } else {
-        console.log('Error:', responseGet.status, responseGet.statusText);
-    }
-    
       
+      
+    }
+    const responseGet = await fetch('/api/new-tweet', {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  
+  if (responseGet.ok) {
+      const data5 = await responseGet.json();
+      console.log(data5);
+  } else {
+      console.log('Error:', responseGet.status, responseGet.statusText);
   }
   
   useEffect(() => {
