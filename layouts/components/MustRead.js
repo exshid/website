@@ -11,6 +11,11 @@ import xml2js from 'xml2js';
 const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
   const [firstItemPost, setFirstItemPost] = useState('');
+  const [firstTags, setFirstTags] = useState('');
+  const [firstCats, setFirstCats] = useState('');
+  const [firstURL, setFirstURL] = useState('');
+  const [firstImageURL, setFirstImageURL] = useState('');
+
   async function addTweetHandler() {
     let formData = { biography: '', username: '', date: '' };
       formData.title = firstItemTitle;
@@ -50,12 +55,19 @@ const MustRead = ({ articles }) => {
         const title = firstItem.title[0];
         const postDescription = firstItem["content:encoded"][0];
         console.log('first: ', postDescription);
-  
+        const imageUrl = firstItem["media:content"][0]["$"]["url"];
+        
+        setFirstImageURL(imageUrl);
+
         // Set the title in the component state
   
         // Call the run function after setting the title
         run(title);
         runPost(postDescription);
+        runTags(title);
+        runCats(title);
+        runURL(title);
+
 
       });
     };
@@ -153,7 +165,144 @@ const MustRead = ({ articles }) => {
       console.log(response.text(), ' and ', postDescription);
       setFirstItemPost(response.text());
     };
+    
+    const runTags = async (title) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      };
+  
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+  
+      const parts = [
+        { text: `what would be proper tags for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+      ];
+  
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      console.log(response.text(), ' and ', title);
+      setFirstTags(response.text());
+    };
+
+    const runCats = async (title) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 2048,
+      };
+  
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+  
+      const parts = [
+        { text: `what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+      ];
+  
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      console.log(response.text(), ' and ', title);
+      setFirstCats(response.text());
+    };
+    const runURL = async (title) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  
+      const generationConfig = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 20,
+      };
+  
+      const safetySettings = [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ];
+  
+      const parts = [
+        { text: `what would be proper url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
+      ];
+  
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      console.log(response.text(), ' and ', title);
+      setFirstURL(response.text());
+    };
+    console.log('title: ', firstItemTitle, 'content: ', firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
+      );
+
+
     fetchData().catch((error) => {
       console.error('Error:', error);
     });
