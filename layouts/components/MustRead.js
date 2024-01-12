@@ -328,10 +328,10 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     console.log('title: ', firstItemTitle, 'content: ',
      firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
     );
-    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
+    if (firstItemPost) {
       postSenderHandler()
       console.log('done');
-    }}, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
+    }}, [firstItemPost]);
 
   return (
     <div className="flex flex-wrap">
