@@ -11,7 +11,24 @@ import xml2js from 'xml2js';
 const MustRead = ({ articles }) => {
   const [firstItemTitle, setFirstItemTitle] = useState('');
   const [firstItemPost, setFirstItemPost] = useState('');
-
+  async function addTweetHandler() {
+    let formData = { biography: '', username: '', date: '' };
+      formData.title = firstItemTitle;
+      formData.date = new Date().toDateString();
+   
+      const response = await fetch('/api/new-tweet', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+      console.log(response, response.ok)
+      if (!response.ok) {
+          return error()
+      }
+  }
+  
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api/rss');
@@ -32,7 +49,7 @@ const MustRead = ({ articles }) => {
         console.log('first:', JSON.stringify(firstItem, null, 2));
 
         const title = firstItem.title[0];
-        const postDescription = firstItem.description[0];
+        const postDescription = firstItem.content:encoded[0];
         console.log('first: ', postDescription);
   
         // Set the title in the component state
@@ -123,8 +140,8 @@ const MustRead = ({ articles }) => {
       ];
   
       const parts = [
-        { text: `rewrite this post in a professional way. if there is any quotes, do not change it any way: ${postDescription}` }
-      
+        { text: `sir, you are a professional writer. rewrite this post in a publish-ready quality. if there is any quotes, do not change it any way. separate pargaraphs using HTML <p> tags: ${postDescription}` }
+  
       ];
   
       const result = await model.generateContent({
@@ -145,23 +162,6 @@ const MustRead = ({ articles }) => {
   }, []);
 
 
-async function addTweetHandler() {
-  let formData = { biography: '', username: '', date: '' };
-    formData.title = firstItemTitle;
-    formData.date = new Date().toDateString();
- 
-    const response = await fetch('/api/new-tweet', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: {
-          'Content-Type': 'application/json'
-      }
-      })
-    console.log(response, response.ok)
-    if (!response.ok) {
-        return error()
-    }
-}
 
   return (
     <div className="flex flex-wrap">
