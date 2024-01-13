@@ -257,9 +257,9 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
   ))}
 </div>
-<div className="bg-white p-6 rounded-lg shadow-lg">
+<div className="bg-white p-6 flex">
   
-  <div className="space-y-4">  
+  <div className="space-y-4 w-3/4">  
   <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
       <div>
@@ -294,6 +294,19 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
     
   </div>
+  <div className="flex flex-col space-y-4 w-1/4">
+  {articles.map((article) => (
+    <div className="flex justify-between items-start space-x-4">
+      <div className="flex-1 space-y-2">
+        <h2 className="font-bold text-xl">{article.title}</h2>
+        <p className="text-gray-500">{article.description}</p>
+        <p className="text-sm text-gray-400">5 MIN READ</p>
+      </div>
+      <img className="w-32 h-20 object-cover" src={article.image} alt={article.title} />
+    </div>
+  ))}
+</div>
+
 </div>
 
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden md:flex">
