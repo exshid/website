@@ -249,12 +249,14 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 const ArticleCard = ({ image, title, description, author }) => {
   return (
     <div className="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-      <div className="flex">
+      <div className="flex flex-col">
+        <div className="h-72 w-80">
         <img
-          className="h-48 w-full object-cover md:w-48"
+          className="h-full w-full object-cover"
           src={image}
           alt={title}
         />
+        </div>
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
             {title}
