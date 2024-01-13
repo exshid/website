@@ -248,7 +248,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   {articles.slice(0, 4).map((podcast) => (
     <div key={podcast.id} className="w-full sm:w-1/2 lg:w-1/4 p-2">
       <div className="p-4 rounded-lg flex">
-        <img src={podcast.image} alt={podcast.title} className="w-full h-32 object-cover mb-2"/>
+        <img src={podcast.image} alt={podcast.title} className="w-full h-32 p-3 object-cover mb-2"/>
        <div>
         <h3 className="text-lg font-bold mb-1">{podcast.title}</h3>
         <p className="text-xs text-gray-400 mt-2">{podcast.author}</p>
@@ -261,7 +261,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   
   <div className="space-y-4">  
   <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -269,7 +269,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -277,7 +277,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -285,7 +285,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
