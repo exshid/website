@@ -105,12 +105,14 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         const imageUrl = firstItem["media:content"][0]["$"]["url"];
         
         setFirstImageURL(imageUrl);
+        if (oldTitle !== firstImageURL) {
+
         run(title);
         runPost(postDescription);
         runTags(title);
         runCats(title);
         runURL(title);
-
+        }
 
       });
     };
