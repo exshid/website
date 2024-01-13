@@ -243,6 +243,19 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         </div>
       ))}
     </div>
+    <div className="flex flex-wrap md:flex-nowrap space-x-4">
+  {articles.slice(0, 4).map((podcast) => (
+    <div className="w-full md:w-1/4 bg-white rounded-lg shadow-md p-4 mb-4 md:mb-0">
+      <img src={podcast.image} alt={podcast.title} className="w-full h-64 object-cover rounded-lg" />
+      <h2 className="text-xl font-bold mt-4">{podcast.title}</h2>
+      <p className="text-sm text-gray-500">{podcast.description}</p>
+      <div className="mt-2">
+        <span className="text-sm text-gray-400">{podcast.author}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden md:flex">
     <div class="md:w-1/2">
       <img class="h-64 w-full object-cover md:h-full" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="News articles"/>
