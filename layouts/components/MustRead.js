@@ -9,6 +9,33 @@ import {
 import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
+  const generationConfig = {
+    temperature: 0.8,
+    topK: 1,
+    topP: 1,
+    maxOutputTokens: 2048,
+  };
+
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+  ];
+
+
   const [firstItemTitle, setFirstItemTitle] = useState();
   const [firstItemPost, setFirstItemPost] = useState();
   const [firstTags, setFirstTags] = useState();
@@ -65,15 +92,12 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const xmlData = await response.text(); // Parse the response as text
+      const xmlData = await response.text(); 
   
-      // Parse the XML data into JSON
       xml2js.parseString(xmlData, (err, result) => {
         if (err) {
           throw new Error('Error parsing XML');
         }
-  
-        // Extract the title of the first item
         const firstItem = result.rss.channel[0].item[0];
 
         const title = firstItem.title[0];
@@ -81,10 +105,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         const imageUrl = firstItem["media:content"][0]["$"]["url"];
         
         setFirstImageURL(imageUrl);
-
-        // Set the title in the component state
-  
-        // Call the run function after setting the title
         run(title);
         runPost(postDescription);
         runTags(title);
@@ -94,40 +114,16 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
       });
     };
+
     const MODEL_NAME = "gemini-pro";
     const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
     
-    
+    if (oldTitle !== firstImageURL) {
+
     const run = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-  
-      const generationConfig = {
-        temperature: 0.8,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-      };
-  
-      const safetySettings = [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-      ];
-  
+
       const parts = [
         { text: `sir, rewrite this title with a publish-ready quality: ${title}. do it only once, and send nothing other than the rewritten title.` }
       ];
@@ -145,32 +141,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     const runPost = async (postDescription) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-  
-      const generationConfig = {
-        temperature: 0.8,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-      };
-  
-      const safetySettings = [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-      ];
   
       const parts = [
         { text: `sir, you are a professional writer. rewrite this post in a publish-ready quality. if there is any quotes, do not change it any way. separate pargaraphs using HTML <p> tags: ${postDescription}` }
@@ -191,32 +161,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
-      const generationConfig = {
-        temperature: 0.8,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-      };
-  
-      const safetySettings = [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-      ];
-  
       const parts = [
         { text: `what people, games, films, tv shows, companies, etc are mentioned in this title? ${title}; write them as tags in this format: ["diy", "toy"]` }
       ];
@@ -234,33 +178,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     const runCats = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-  
-      const generationConfig = {
-        temperature: 0.8,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-      };
-  
-      const safetySettings = [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-      ];
-  
+   
       const parts = [
         { text: `what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
       ];
@@ -278,33 +196,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
-      const generationConfig = {
-        temperature: 0.8,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 200,
-      };
-  
-      const safetySettings = [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-      ];
-  
-      const parts = [
+        const parts = [
         { text: `what would be proper url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
       ];
   
@@ -317,7 +209,9 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const response = result.response;
       setFirstURL(response.text());
     };
-
+  }else {
+    console.log('post already exists');
+}
 
     fetchData().catch((error) => {
       console.error('Error:', error);
@@ -330,14 +224,10 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
      firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
     );
     
-    if (oldTitle !== firstImageURL) {
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
       postSenderHandler()
       console.log('done');
-    }
-  }else {
-    console.log('post already exists');
-}
+  }
 
 }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
 
