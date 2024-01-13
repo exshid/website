@@ -243,15 +243,16 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         </div>
       ))}
     </div>
-    <div className="flex flex-wrap justify-between p-4 bg-gray-800 text-white">
+    <div className="flex flex-wrap justify-between p-4 text-white">
   <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
   {articles.slice(0, 4).map((podcast) => (
     <div key={podcast.id} className="w-full sm:w-1/2 lg:w-1/4 p-2">
-      <div className="bg-gray-700 p-4 rounded-lg">
-        <img src={podcast.image} alt={podcast.title} className="w-full h-32 object-cover rounded-lg mb-2"/>
+      <div className="p-4 rounded-lg flex">
+        <img src={podcast.image} alt={podcast.title} className="w-full h-32 object-cover mb-2"/>
+       <div>
         <h3 className="text-lg font-bold mb-1">{podcast.title}</h3>
-        <p className="text-sm">{podcast.description}</p>
         <p className="text-xs text-gray-400 mt-2">{podcast.author}</p>
+        </div>
       </div>
     </div>
   ))}
