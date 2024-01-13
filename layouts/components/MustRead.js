@@ -258,32 +258,39 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   ))}
 </div>
 <div className="bg-white p-6 rounded-lg shadow-lg">
-  <h2 className="text-2xl font-bold mb-2">THE IOWA CAUCUSES</h2>
   
-  <div className="space-y-4">
-    <div>
-      <h3 className="font-semibold">The G.O.P primary will kick off on Monday with Trump as the front-runner and Haley and DeSantis vying for second place.</h3>
-    </div>
-    
-    <div>
+  <div className="space-y-4">  
+  <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
+      </div>
     </div>
-    
-    <div>
+    <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
+      </div>
     </div>
-    
-    <div>
+    <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
+      </div>
+    </div>
+    <div className="flex">
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="w-full object-cover h-32 rounded-lg shadow-md"/>
+      <div>
+      <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
+      <p className="text-sm text-gray-500">By Robert Samuels</p>
+      </div>
     </div>
     
   </div>
