@@ -235,7 +235,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap divide-x px-6">
                   {articles.map((article) => (
         <div className="w-full md:w-1/4 p-4">
           <ArticleCard {...article} />
