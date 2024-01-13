@@ -235,13 +235,60 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
 
   return (
-    <div className="flex flex-wrap divide-x px-6">
-                  {articles.map((article) => (
+<>
+<div className="flex flex-wrap divide-x px-6">
+                  {articles.slice(0, 4).map((article) => (
         <div className="w-full md:w-1/4 p-4">
           <ArticleCard {...article} />
         </div>
       ))}
     </div>
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden md:flex">
+    <div class="md:w-1/2">
+      <img class="h-64 w-full object-cover md:h-full" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="News articles"/>
+    </div>
+    <div class="p-6 md:w-1/2">
+      <div class="flex items-baseline">
+        <span class="text-gray-600 font-semibold">News</span>
+        <span class="ml-2 text-sm text-gray-500">4 articles</span>
+      </div>
+      <ul class="mt-4 space-y-4">
+        <li class="flex items-start space-x-4">
+          <div class="flex-1">
+            <h3 class="text-lg font-medium text-gray-900">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</h3>
+            <p class="mt-2 text-sm text-gray-700">How Trump Captured Iowa’s Religious Right</p>
+            <p class="mt-1 text-sm text-gray-500">By John Doe</p>
+          </div>
+          <img class="h-16 w-16 object-cover rounded" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="People holding flags"/>
+        </li>
+        <li class="flex items-start space-x-4">
+          <div class="flex-1">
+            <h3 class="text-lg font-medium text-gray-900">The state’s evangelical voters were once skeptical of the former President. Now they are among his strongest supporters.</h3>
+            <p class="mt-2 text-sm text-gray-700">How Trump Captured Iowa’s Religious Right</p>
+            <p class="mt-1 text-sm text-gray-500">By Jane Doe</p>
+          </div>
+          <img class="h-16 w-16 object-cover rounded" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Interior of a church"/>
+        </li>
+        <li class="flex items-start space-x-4">
+          <div class="flex-1">
+            <h3 class="text-lg font-medium text-gray-900">In the run-up to the Iowa caucuses, Nikki Haley made her closing argument to the state's voters, pitching herself as the anti-chaos candidate.</h3>
+            <p class="mt-2 text-sm text-gray-700">The Last G.O.P Moderate in the Race</p>
+            <p class="mt-1 text-sm text-gray-500">By Sam Doe</p>
+          </div>
+          <img class="h-16 w-16 object-cover rounded" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="American flag"/>
+        </li>
+        <li class="flex items-start space-x-4">
+          <div class="flex-1">
+            <h3 class="text-lg font-medium text-gray-900">The Governor has won backing of state's political establishment. But as long as he comes across as Trump's mini-me, he doesn’t have a prayer.</h3>
+            <p class="mt-2 text-sm text-gray-700">Ron DeSantis’s Misguided Approach in Iowa</p>
+            <p class="mt-1 text-sm text-gray-500">By Kim Doe</p>
+          </div>
+          <img class="h-16 w-16 object-cover rounded" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Ron DeSantis at a podium" />
+        </li>
+      </ul>
+    </div>
+  </div>
+</>  
   );
 };
 
