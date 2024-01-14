@@ -9,6 +9,24 @@ import {
 import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
+  const categories = [
+    "Games", 
+    "Movies",
+    "TV Shows",
+    "Music",
+    "Books",
+    "Artificial Intelligence", 
+    "Augmented Reality",
+    "Virtual Reality",
+    "Animation",
+    "Anime",
+    "Comics",
+    "Podcasts",
+    "Live Events",
+    "Theme Parks",
+    "Celebrities",
+    "Award Shows"
+  ];
   const generationConfig = {
     temperature: 0.8,
     topK: 1,
@@ -41,6 +59,7 @@ const MustRead = ({ articles }) => {
   const [firstTags, setFirstTags] = useState();
   const [firstCats, setFirstCats] = useState();
   const [firstURL, setFirstURL] = useState();
+  const [firstIntro, setFirstIntro] = useState();
   const [firstImageURL, setFirstImageURL] = useState();
   const [oldTitle, setOldTitle] = useState();
 
@@ -53,7 +72,7 @@ const paddedMonth = month.toString().padStart(2, "0");
 const paddedDay = day.toString().padStart(2, "0");
 const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
-    let postData = { title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString};
+    let postData = { description: firstIntro,title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString};
       
     const response = await fetch('/api/new-tweet', {
       method: 'POST',
@@ -101,6 +120,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         const firstItem = result.rss.channel[0].item[0];
 
         const title = firstItem.title[0];
+        const intro = firstItem.description[0];
         const postDescription = firstItem["content:encoded"][0];
         const imageUrl = firstItem["media:content"][0]["$"]["url"];
         
@@ -111,6 +131,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         runPost(postDescription);
         runTags(title);
         runCats(title);
+        runDescription(intro);
         runURL(title);
         }
 
@@ -119,7 +140,8 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
     const MODEL_NAME = "gemini-pro";
     const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
-    
+    console.log(oldTitle, firstImageURL);
+
     if (oldTitle !== firstImageURL) {
 
     const run = async (title) => {
@@ -139,7 +161,27 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const response = result.response;
       setFirstItemTitle(response.text());
     };
+
+    
+    const runDescription = async (intro) => {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+
+      const parts = [
+        { text: `sir, rewrite this post intro with a publish-ready quality: ${runDescription}. do it only once, and send nothing other than the rewritten post intro.` }
+      ];
   
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts }],
+        generationConfig,
+        safetySettings,
+      });
+  
+      const response = result.response;
+      setFirstIntro(response.text());
+    };
+
+
     const runPost = async (postDescription) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
@@ -182,7 +224,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
    
       const parts = [
-        { text: `what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+        { text: `out of the categories in the array ${categories}, what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
       ];
   
       const result = await model.generateContent({
@@ -211,7 +253,8 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const response = result.response;
       setFirstURL(response.text());
     };
-  }else {
+  }
+  else {
     console.log('post already exists');
 }
 
@@ -226,12 +269,12 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
      firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
     );
     
-    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL) {
+    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL, firstIntro) {
       postSenderHandler()
       console.log('done');
   }
 
-}, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL]);
+}, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro]);
 
 
   return (
