@@ -64,15 +64,22 @@ const MustRead = ({ articles }) => {
   const [oldTitle, setOldTitle] = useState();
 
   async function postSenderHandler() {
-  const date = new Date();
-const year = date.getFullYear();
-const month = date.getMonth() + 1;
-const day = date.getDate();
-const paddedMonth = month.toString().padStart(2, "0");
-const paddedDay = day.toString().padStart(2, "0");
-const dateString = `${year}-${paddedMonth}-${paddedDay}`;
-
-    let postData = { description: firstIntro,title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString};
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    
+    const paddedMonth = month.toString().padStart(2, "0");
+    const paddedDay = day.toString().padStart(2, "0");
+    const paddedHour = hour.toString().padStart(2, "0");
+    const paddedMinute = minute.toString().padStart(2, "0");
+    
+    const dateString = `${year}-${paddedMonth}-${paddedDay}`;
+    const timeString = `${paddedHour}:${paddedMinute}`;
+    
+    let postData = { description: firstIntro,title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString, time: timeString};
       
     const response = await fetch('/api/new-tweet', {
       method: 'POST',
@@ -273,7 +280,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     console.log('post already exists');
 }
 
-}, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro]);
+}, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro, oldTitle]);
 
 
   return (
@@ -513,7 +520,7 @@ const ArticleCard = ({ image, title, description, author }) => {
         />
         </div>
         <div className="py-8">
-          <div className="text-lg font-bold">
+          <div className="text-lg font-bold text-black">
             {title}
           </div>
               <p className="mt-2 text-gray-500">{description}</p>
