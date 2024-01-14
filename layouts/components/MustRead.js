@@ -273,7 +273,7 @@ const MustRead = ({ articles }) => {
     );
     console.log(oldTitle, firstImageURL);
 
-    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL, firstIntro) {
+    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL && firstIntro && oldTitle !== firstImageURL) {
     
       postSenderHandler()
       console.log('done');
