@@ -17,7 +17,7 @@ import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 import { articles } from "@layouts/components/articles.js";
-import { categories } from "@layouts/components/categories.js";
+import { categoriesPost } from "@layouts/components/categories.js";
 
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
   const indexOfLastPost = currentPage * pagination;
