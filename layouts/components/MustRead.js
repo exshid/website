@@ -9,24 +9,6 @@ import {
 import xml2js from 'xml2js';
 
 const MustRead = ({ articles }) => {
-  const categories = [
-    "Games", 
-    "Movies",
-    "TV Shows",
-    "Music",
-    "Books",
-    "Artificial Intelligence", 
-    "Augmented Reality",
-    "Virtual Reality",
-    "Animation",
-    "Anime",
-    "Comics",
-    "Podcasts",
-    "Live Events",
-    "Theme Parks",
-    "Celebrities",
-    "Award Shows"
-  ];
   
   const generationConfig = {
     temperature: 0.8,
@@ -139,12 +121,6 @@ const MustRead = ({ articles }) => {
 
         if (oldTitle !== firstImageURL) {
 
-        run(title);
-        runPost(postDescription);
-        runTags(title);
-        runCats(title);
-        runDescription(intro);
-        runURL(title);
         }
 
       });
@@ -231,8 +207,28 @@ const MustRead = ({ articles }) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
    
+      const categoriesPost = [
+        "Games", 
+        "Movies",
+        "TV Shows",
+        "Music",
+        "Books",
+        "Artificial Intelligence", 
+        "Augmented Reality",
+        "Virtual Reality",
+        "Animation",
+        "Anime",
+        "Comics",
+        "Podcasts",
+        "Live Events",
+        "Theme Parks",
+        "Celebrities",
+        "Award Shows"
+      ];
+    
+
       const parts = [
-        { text: `out of the categories in the array ${categories}, what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+        { text: `out of the categories in the array ${categoriesPost}, what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
       ];
   
       const result = await model.generateContent({
