@@ -245,7 +245,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
     <div className="flex flex-wrap justify-between p-4 px-20 text-white">
   <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
-  <div className="divide-x">
+  <div className="divide-x flex flex-wrap justify-between">
   {articles.slice(0, 4).map((podcast) => (
     <div key={podcast.id} className="w-full sm:w-1/2 lg:w-1/4 p-2">
       <div className="p-4 rounded-lg flex">
@@ -259,46 +259,46 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   ))}
   </div>
 </div>
-<div className="bg-white p-6 flex px-20 divide-x">
+<div className="bg-white p-6 flex px-20">
   
-  <div className="space-y-4 w-3/4 pr-20 divide-y">  
+  <div className="w-3/4 pr-20 divide-y">  
   <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
       <div>
-      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <h3 className="font-semibold text-2xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
       <div>
-      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <h3 className="font-semibold text-2xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
       <div>
-      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <h3 className="font-semibold text-2xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
       <div>
-      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <h3 className="font-semibold text-2xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     
   </div>
-  <div className="flex flex-col space-y-4 w-1/4 divide-y">
+  <div className="flex flex-col w-1/4 divide-y">
   {articles.map((article) => (
-    <div className="flex justify-between items-start px-2">
+    <div className="flex justify-between items-start p-2">
       <div className="flex-1 space-y-2">
         <h2 className="font-bold text-lg">{article.title}</h2>
       </div>
