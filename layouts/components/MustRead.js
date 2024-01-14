@@ -109,7 +109,7 @@ const MustRead = ({ articles }) => {
   if (responseGet.ok) {
       const data5 = await responseGet.json();
       setOldTitle(data5[data5.length - 1].image);
-      console.log(data5, oldTitle, firstImageURL);
+      console.log(data5, data5[data5.length - 1].image, oldTitle, firstImageURL);
 
   } else {
       console.log('Error:', responseGet.status, responseGet.statusText);
@@ -136,6 +136,8 @@ const MustRead = ({ articles }) => {
         const imageUrl = firstItem["media:content"][0]["$"]["url"];
         
         setFirstImageURL(imageUrl);
+        console.log(oldTitle, firstImageURL);
+
         if (oldTitle !== firstImageURL) {
 
         run(title);
