@@ -118,11 +118,21 @@ const MustRead = ({ articles }) => {
         
         setFirstImageURL(imageUrl);
         console.log('g', oldTitle, firstImageURL);
+        if (oldTitle && firstImageURL) {
 
         if (oldTitle !== firstImageURL) {
 
-        }
+        run(title);
+        runPost(postDescription);
+        runTags(title);
+        runCats(title);
+        runDescription(intro);
+        runURL(title);
+        } else{
+          console.log('Post exists');
 
+        }
+      }
       });
     };
 
