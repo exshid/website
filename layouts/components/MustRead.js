@@ -243,8 +243,9 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         </div>
       ))}
     </div>
-    <div className="flex flex-wrap justify-between p-4 divide-x px-20 text-white">
+    <div className="flex flex-wrap justify-between p-4 px-20 text-white">
   <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
+  <div className="divide-x">
   {articles.slice(0, 4).map((podcast) => (
     <div key={podcast.id} className="w-full sm:w-1/2 lg:w-1/4 p-2">
       <div className="p-4 rounded-lg flex">
@@ -256,6 +257,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
   ))}
+  </div>
 </div>
 <div className="bg-white p-6 flex px-20 divide-x">
   
@@ -263,32 +265,32 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
-      <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
-      <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
+      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
-      <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
-      <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
+      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
-      <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
-      <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
+      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
     <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
-      <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
-      <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
+      <h3 className="font-semibold text-xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
+      <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
@@ -296,7 +298,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   </div>
   <div className="flex flex-col space-y-4 w-1/4 divide-y">
   {articles.map((article) => (
-    <div className="flex justify-between items-start space-x-4">
+    <div className="flex justify-between items-start px-2">
       <div className="flex-1 space-y-2">
         <h2 className="font-bold text-lg">{article.title}</h2>
       </div>
@@ -320,15 +322,15 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         <li className="flex items-start space-x-4">
           <div className="flex-1">
             <h3 className="text-lg font-medium text-gray-900">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</h3>
-            <p className="mt-2 text-sm text-gray-700">How Trump Captured Iowa’s Religious Right</p>
+            <p className="mt-2 text-sm text-gray-700">How Trump Captured Iowas Religious Right</p>
             <p className="mt-1 text-sm text-gray-500">By John Doe</p>
           </div>
           <img className="h-16 w-16 object-cover rounded" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="People holding flags"/>
         </li>
         <li className="flex items-start space-x-4">
           <div className="flex-1">
-            <h3 className="text-lg font-medium text-gray-900">The state’s evangelical voters were once skeptical of the former President. Now they are among his strongest supporters.</h3>
-            <p className="mt-2 text-sm text-gray-700">How Trump Captured Iowa’s Religious Right</p>
+            <h3 className="text-lg font-medium text-gray-900">The states evangelical voters were once skeptical of the former President. Now they are among his strongest supporters.</h3>
+            <p className="mt-2 text-sm text-gray-700">How Trump Captured Iowas Religious Right</p>
             <p className="mt-1 text-sm text-gray-500">By Jane Doe</p>
           </div>
           <img className="h-16 w-16 object-cover rounded" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Interior of a church"/>
