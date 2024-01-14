@@ -286,22 +286,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       <p className="text-sm text-gray-500">By Robert Samuels</p>
       </div>
     </div>
-      <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
-      <div>
-      <h3 className="font-semibold text-2xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
-      <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
-      <p className="text-sm text-gray-500">By Robert Samuels</p>
-      </div>
-    </div>
-    <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
-      <div>
-      <h3 className="font-semibold text-2xl pt-2">The Iowa Kingmakers Trying to Derail Trump</h3>
-      <p className="py-2">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
-      <p className="text-sm text-gray-500">By Robert Samuels</p>
-      </div>
-    </div>
     <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-52 rounded-lg"/>
       <div>
@@ -406,9 +390,10 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
         </li>
       </ul>
     </div>
+    </div>
     <div className="flex">
       <div>
-<div className="bg-white p-4">
+      <div className="bg-white p-4">
   <div className="font-bold text-black">Kansas City Outlasts Miami in Frigid N.F.L. Wild-Card Matchup</div>
   <div className="text-gray-500">FROM THE ATHLETIC</div>
   <div className="text-gray-500">2 MIN READ</div>
@@ -418,9 +403,12 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   <div className="text-gray-500">FROM THE ATHLETIC</div>
   <div className="text-gray-500">2 MIN READ</div>
 </div>
-
+<div className="bg-white p-4">
+  <div className="font-bold text-black">Kansas City Outlasts Miami in Frigid N.F.L. Wild-Card Matchup</div>
+  <div className="text-gray-500">FROM THE ATHLETIC</div>
+  <div className="text-gray-500">2 MIN READ</div>
 </div>
-
+</div>
 <div className="bg-white p-4">
   <div className="font-bold text-black">Leon Wildes, Immigration Lawyer Who Defended John Lennon, Dies at 90</div>
   <div className="text-gray-500">Battling the government for more than three years, he was able to prove that the Nixon White House was trying to deport the former Beatle for political reasons.</div>
@@ -429,23 +417,20 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 <div>
 <div className="bg-white p-4">
   <div className="font-bold text-black">In Race to Replace George Santos, Financial Questions Re-emerge</div>
-  <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New York’s Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
+  <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New Yorks Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
   <div className="text-gray-500">4 MIN READ</div>
 </div>
 <div className="bg-white p-4">
   <div className="font-bold text-black">In Race to Replace George Santos, Financial Questions Re-emerge</div>
-  <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New York’s Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
+  <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New Yorks Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
   <div className="text-gray-500">4 MIN READ</div>
 </div>
 <div className="bg-white p-4">
   <div className="font-bold text-black">In Race to Replace George Santos, Financial Questions Re-emerge</div>
-  <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New York’s Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
+  <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New Yorks Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
   <div className="text-gray-500">4 MIN READ</div>
 </div>
 
-</div>
-
-      </div>
 
       </div>
       </div>
