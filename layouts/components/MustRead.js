@@ -286,25 +286,29 @@ const MustRead = ({ articles }) => {
   return (
 <>
 <div className="flex space-x-4 px-80 py-3 w-full justify-between border-y">
-      {categoriesPost.map((item) => {
-        const href = item.toLowerCase().split(' ').join('-');
-          <Link key={Math.random()} href={`/${href}`}>
-            <a className="text-xs font-medium text-gray-600 hover:text-gray-900">
-              {item}
-            </a>
-          </Link>
-      })}
-    </div>
+  {categoriesPost.map((item) => {
+    const href = item.toLowerCase().split(' ').join('-');
+    return (
+      <Link key={Math.random()} href={`/${href}`}>
+        <a className="text-xs font-medium text-gray-600 hover:text-gray-900">
+          {item}
+        </a>
+      </Link>
+    );
+  })}
+</div>
 
 <div className="flex px-20">
 <div className="w-1/4 pt-4 divide-y">
-      {articles.slice(0, 5).map((item) => {
-          <div key={Math.random()} className="bg-white p-4">
-            <div className="font-bold text-black">{item.title}</div>
-            <div className="text-gray-500">{item.author}</div>
-          </div>
-      })}
-    </div>
+  {articles.slice(0, 5).map((item) => {
+    return (
+      <div key={Math.random()} className="bg-white p-4">
+        <div className="font-bold text-black">{item.title}</div>
+        <div className="text-gray-500">{item.author}</div>
+      </div>
+    );
+  })}
+</div>
 
     <div className="bg-white p-4 w-2/4">
       {articles.slice(0, 1).map((item) => (
