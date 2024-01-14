@@ -236,14 +236,14 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
   return (
 <>
-<div className="flex flex-wrap divide-x px-6">
+<div className="flex flex-wrap divide-x px-20">
                   {articles.slice(0, 4).map((article) => (
         <div className="w-full md:w-1/4 p-4">
           <ArticleCard {...article} />
         </div>
       ))}
     </div>
-    <div className="flex flex-wrap justify-between p-4 text-white">
+    <div className="flex flex-wrap justify-between p-4 divide-x px-20 text-white">
   <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
   {articles.slice(0, 4).map((podcast) => (
     <div key={podcast.id} className="w-full sm:w-1/2 lg:w-1/4 p-2">
@@ -259,8 +259,8 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 </div>
 <div className="bg-white p-6 flex px-20">
   
-  <div className="space-y-4 w-3/4 pr-20">  
-  <div className="flex">
+  <div className="space-y-4 w-3/4 pr-20 divide-x">  
+  <div className="flex divide-y">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
@@ -294,11 +294,11 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
     
   </div>
-  <div className="flex flex-col space-y-4 w-1/4">
+  <div className="flex flex-col space-y-4 w-1/4 divide-y">
   {articles.map((article) => (
     <div className="flex justify-between items-start space-x-4">
       <div className="flex-1 space-y-2">
-        <h2 className="font-bold text-xl">{article.title}</h2>
+        <h2 className="font-bold text-lg">{article.title}</h2>
       </div>
       <img className="w-32 h-20 object-cover" src={article.image} alt={article.title} />
     </div>
