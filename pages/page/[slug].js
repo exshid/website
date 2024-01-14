@@ -3,11 +3,22 @@ import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import { getSinglePage } from "@lib/contentParser";
 import MustRead from "@layouts/components/MustRead";
+import EditorContainer from "@layouts/components/EditorContainer";
+import EditorPickLeft from "@layouts/components/EditorPickLeft";
+import EditorPickCenter from "@layouts/components/EditorPickCenter";
+import EditorPickRight from "@layouts/components/EditorPickRight";
+import HeadLines from "@layouts/components/HeadLines";
+import CategoryLinks from "@layouts/components/CategoryLinks";
+import DontMissContainer from "@layouts/components/DontMissContainer";
+import DontMiss from "@layouts/components/DontMiss";
+import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
+import LatestPosts from "@layouts/components/LatestPosts";
+import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 import { articles } from "@layouts/components/articles.js";
+import { categories } from "@layouts/components/categories.js";
 
-// blog pagination
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
   const indexOfLastPost = currentPage * pagination;
   const indexOfFirstPost = indexOfLastPost - pagination;
@@ -16,7 +27,24 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
 
   return (
     <Base>
+    <CategoryLinks items={categoriesPost} />
+      <EditorContainer>
+    <EditorPickLeft items={articles} />
+    <EditorPickCenter items={articles} />
+    <EditorPickRight items={articles} />
+    </EditorContainer>
+
 <MustRead articles={articles} />
+    <HeadLines items={articles} />
+    <LatestPostsContainer>
+    <LatestPosts items={articles} />
+    <Sidebar items={articles} />
+      </LatestPostsContainer>
+    <DontMissContainer>
+    <DontMiss items={articles} headline="News"/>
+    <DontMiss items={articles} headline="News"/>
+
+    </DontMissContainer>
       <section className="section">
         <div className="container">
           <Posts className="mb-16" posts={currentPosts} authors={authors} />

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { lastTitle } from "@layouts/components/title.js";
 import {
   GoogleGenerativeAI,
   HarmCategory,
@@ -284,56 +283,6 @@ const MustRead = ({ articles }) => {
 
 
   return (
-<>
-<div className="flex space-x-4 px-80 py-3 w-full justify-between border-y">
-  {categoriesPost.map((item) => {
-    const href = item.toLowerCase().split(' ').join('-');
-    return (
-      <Link key={Math.random()} href={`/${href}`}>
-        <a className="text-xs font-medium text-gray-600 hover:text-gray-900">
-          {item}
-        </a>
-      </Link>
-    );
-  })}
-</div>
-
-<div className="flex px-20">
-<div className="w-1/4 pt-4 divide-y">
-  {articles.slice(0, 5).map((item) => {
-    return (
-      <div key={Math.random()} className="bg-white p-4">
-        <div className="font-bold text-black">{item.title}</div>
-        <div className="text-gray-500">{item.author}</div>
-      </div>
-    );
-  })}
-</div>
-
-    <div className="bg-white p-4 w-2/4">
-      {articles.slice(0, 1).map((item) => (
-        <div key={Math.random()}>
-          <img src={item.image} alt={item.title} className="object-cover p-3 w-full h-[26rem] rounded-lg"/>
-          <div className="font-bold p-3 text-black text-3xl">{item.title}</div>
-          <div className="text-gray-500 p-3">{item.description}</div>
-          <div className="text-gray-500 p-3">{item.author}</div>
-        </div>
-      ))}
-    </div>
-
-
-    <div className="w-1/4 pt-4 divide-y">
-      {articles.slice(0, 3).map((item) => (
-        <div key={Math.random()} className="bg-white p-4">
-          <div className="font-bold text-black">{item.title}</div>
-          <div className="text-gray-500">{item.description}</div>
-          <div className="text-gray-500">{item.author}</div>
-        </div>
-      ))}
-    </div>
-
-      </div>
-
 <div className="flex flex-wrap divide-x px-20">
                   {articles.slice(0, 4).map((article) => (
         <div className="w-full md:w-1/4 p-4">
@@ -341,87 +290,6 @@ const MustRead = ({ articles }) => {
         </div>
       ))}
     </div>
-    <div className="flex flex-wrap justify-between p-4 px-20">
-  <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
-  <div className="divide-x flex flex-wrap justify-between">
-  {articles.slice(0, 4).map((podcast) => (
-    <div key={Math.random()} className="w-full sm:w-1/2 lg:w-1/4 py-2">
-      <div className="py-4 rounded-lg flex">
-        <img src={podcast.image} alt={podcast.title} className="w-full h-32 px-3 rounded-sm object-cover mb-2"/>
-       <div>
-        <h3 className="text-lg font-bold mb-1">{podcast.title}</h3>
-        <p className="text-xs text-gray-400 mt-2">{podcast.author}</p>
-        </div>
-      </div>
-    </div>
-  ))}
-  </div>
-</div>
-<div className="bg-white p-6 flex px-20">
-<div className="w-3/4 pr-20 divide-y">
-      {articles.map((item) => (
-        <div key={Math.random()} className="flex">
-          <img src={item.image} alt={item.title} className="object-cover p-3 h-52 rounded-lg"/>
-          <div>
-            <h3 className="font-semibold text-2xl pt-2">{item.title}</h3>
-            <p className="py-2">{item.description}</p>
-            <p className="text-sm text-gray-500">{item.author}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-
-  <div className="flex flex-col w-1/4 divide-y">
-  {articles.slice(0, 6).map((article) => (
-    <div key={Math.random()} className="flex justify-between items-start p-2">
-      <div className="flex-1 space-y-2">
-        <h2 className="font-bold text-lg">{article.title}</h2>
-      </div>
-      <img className="w-32 h-20 object-cover" src={article.image} alt={article.title} />
-    </div>
-  ))}
-</div>
-
-</div>
-
-<div className="px-20 mx-auto bg-white divide-x rounded-lg overflow-hidden md:flex">
-      <div className="p-6 md:w-1/2">
-        <div className="flex items-baseline">
-          <span className="text-gray-600 font-semibold">News</span>
-          <span className="ml-2 text-sm text-gray-500">5 articles</span>
-        </div>
-        <ul className="mt-4 space-y-4">
-          {articles.map((item) => (
-            <li key={Math.random()} className="flex items-start space-x-4">
-              <div className="flex-1">
-                <h3 className="text-sm font-medium text-gray-900">{item.description}</h3>
-                <p className="mt-2 text-lg text-gray-700 font-bold">{item.title}</p>
-                <p className="mt-1 text-sm text-gray-500">{item.author}</p>
-              </div>
-              <img className="h-16 w-16 object-cover rounded" src={item.image} alt={item.title} />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="p-6 md:w-1/2">
-        <div className="flex items-baseline">
-          <span className="text-gray-600 font-semibold">News</span>
-          <span className="ml-2 text-sm text-gray-500">5 articles</span>
-        </div>
-        <ul className="mt-4 space-y-4">
-          {articles.map((item) => (
-            <li key={Math.random()} className="flex items-start space-x-4">
-              <div className="flex-1">
-                <h3 className="text-sm font-medium text-gray-900">{item.description}</h3>
-                <p className="mt-2 text-lg text-gray-700 font-bold">{item.title}</p>
-                <p className="mt-1 text-sm text-gray-500">{item.author}</p>
-              </div>
-              <img className="h-16 w-16 object-cover rounded" src={item.image} alt={item.title} />
-            </li>
-          ))}
-        </ul>
-      </div>    </div>
- </>  
   );
 };
 

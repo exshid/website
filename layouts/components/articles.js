@@ -1,4 +1,3 @@
-// articles.js
 export const articles = [
     {
       image: "https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg",
