@@ -257,10 +257,10 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
   ))}
 </div>
-<div className="bg-white p-6 flex px-20">
+<div className="bg-white p-6 flex px-20 divide-x">
   
-  <div className="space-y-4 w-3/4 pr-20 divide-x">  
-  <div className="flex divide-y">
+  <div className="space-y-4 w-3/4 pr-20 divide-y">  
+  <div className="flex">
       <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
