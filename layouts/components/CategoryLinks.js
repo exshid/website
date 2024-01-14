@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const CategoryLinks = ({ items }) => {
     return (
       <div className="flex space-x-4 px-80 py-3 w-full justify-between border-y">
