@@ -27,6 +27,7 @@ const MustRead = ({ articles }) => {
     "Celebrities",
     "Award Shows"
   ];
+  
   const generationConfig = {
     temperature: 0.8,
     topK: 1,
@@ -78,8 +79,11 @@ const MustRead = ({ articles }) => {
     
     const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     const timeString = `${paddedHour}:${paddedMinute}`;
-    
-    let postData = { description: firstIntro,title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString, time: timeString};
+    const names = ['John Williams', 'Jennifer Brown', 'Bob Smith', 'Mary Robert', 'Tom Johnson'];
+
+    const randomName = names[Math.floor(Math.random() * names.length)];
+  
+    let postData = {author: randomName, description: firstIntro,title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString, time: timeString};
       
     const response = await fetch('/api/new-tweet', {
       method: 'POST',
@@ -269,17 +273,17 @@ const MustRead = ({ articles }) => {
     );
     console.log(oldTitle, firstImageURL);
 
+    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL, firstIntro) {
     if (oldTitle !== firstImageURL) {
     
-    if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL, firstIntro) {
       postSenderHandler()
       console.log('done');
   }
-    }
+    
   else {
     console.log('post already exists');
 }
-
+}
 }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro, oldTitle]);
 
 
