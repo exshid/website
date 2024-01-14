@@ -236,6 +236,20 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
   return (
 <>
+<div class="flex space-x-4">
+  <a href="#" class="text-gray-600 hover:text-gray-900">The Latest</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">News</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Books & Culture</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Fiction & Poetry</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Humor & Cartoons</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Magazine</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Puzzles & Games</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Video</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Podcasts</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Goings On</a>
+  <a href="#" class="text-gray-600 hover:text-gray-900">Shop</a>
+</div>
+
 <div className="flex flex-wrap divide-x px-20">
                   {articles.slice(0, 4).map((article) => (
         <div className="w-full md:w-1/4 p-4">
@@ -392,7 +406,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
     </div>
     <div className="flex px-20">
-      <div className="w-1/4">
+      <div className="w-1/4 divide-x">
       <div className="bg-white p-4">
   <div className="font-bold text-black">Kansas City Outlasts Miami in Frigid N.F.L. Wild-Card Matchup</div>
   <div className="text-gray-500">FROM THE ATHLETIC</div>
@@ -408,15 +422,31 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   <div className="text-gray-500">FROM THE ATHLETIC</div>
   <div className="text-gray-500">2 MIN READ</div>
 </div>
+<div className="bg-white p-4">
+  <div className="font-bold text-black">Kansas City Outlasts Miami in Frigid N.F.L. Wild-Card Matchup</div>
+  <div className="text-gray-500">FROM THE ATHLETIC</div>
+  <div className="text-gray-500">2 MIN READ</div>
+</div>
+<div className="bg-white p-4">
+  <div className="font-bold text-black">Kansas City Outlasts Miami in Frigid N.F.L. Wild-Card Matchup</div>
+  <div className="text-gray-500">FROM THE ATHLETIC</div>
+  <div className="text-gray-500">2 MIN READ</div>
+</div>
+<div className="bg-white p-4">
+  <div className="font-bold text-black">Kansas City Outlasts Miami in Frigid N.F.L. Wild-Card Matchup</div>
+  <div className="text-gray-500">FROM THE ATHLETIC</div>
+  <div className="text-gray-500">2 MIN READ</div>
+</div>
+
 </div>
 <div className="bg-white p-4 w-2/4">
 <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image"
-className="object-cover p-3 w-full h-52 rounded-lg"/>
+className="object-cover p-3 w-full h-96 rounded-lg"/>
   <div className="font-bold text-black">Leon Wildes, Immigration Lawyer Who Defended John Lennon, Dies at 90</div>
   <div className="text-gray-500">Battling the government for more than three years, he was able to prove that the Nixon White House was trying to deport the former Beatle for political reasons.</div>
   <div className="text-gray-500">5 MIN READ</div>
 </div>
-<div className="w-1/4">
+<div className="w-1/4 divide-x">
 <div className="bg-white p-4">
   <div className="font-bold text-black">In Race to Replace George Santos, Financial Questions Re-emerge</div>
   <div className="text-gray-500">Mazi Pilip, the Republican candidate running in New Yorks Third District, drew scrutiny after her initial financial disclosure was missing information.</div>
