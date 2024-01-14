@@ -17,8 +17,8 @@
   },
   "fonts": {
     "font_family": {
-      "primary": "Ysabeau:wght@400;600;700",
-      "primary_type": "sans-serif"
+      "primary": "Quattrocento:wght@400;700",
+      "primary_type": "serif"
     },
     "font_size": {
       "base": "16",
