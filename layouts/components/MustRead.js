@@ -248,7 +248,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
   {articles.slice(0, 4).map((podcast) => (
     <div key={podcast.id} className="w-full sm:w-1/2 lg:w-1/4 p-2">
       <div className="p-4 rounded-lg flex">
-        <img src={podcast.image} alt={podcast.title} className="w-full h-32 p-3 object-cover mb-2"/>
+        <img src={podcast.image} alt={podcast.title} className="w-full h-32 px-3 rounded-sm object-cover mb-2"/>
        <div>
         <h3 className="text-lg font-bold mb-1">{podcast.title}</h3>
         <p className="text-xs text-gray-400 mt-2">{podcast.author}</p>
@@ -257,11 +257,11 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     </div>
   ))}
 </div>
-<div className="bg-white p-6 flex">
+<div className="bg-white p-6 flex px-20">
   
-  <div className="space-y-4 w-3/4">  
+  <div className="space-y-4 w-3/4 pr-20">  
   <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -269,7 +269,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -277,7 +277,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -285,7 +285,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       </div>
     </div>
     <div className="flex">
-      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg shadow-md"/>
+      <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="Article Image" className="object-cover p-3 h-64 rounded-lg"/>
       <div>
       <h3 className="font-semibold">The Iowa Kingmakers Trying to Derail Trump</h3>
       <p className="text-sm">With the former President polling well ahead of his rivals, a group of local G.O.P influencers gathered to attempt to push their party in another direction.</p>
@@ -299,8 +299,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     <div className="flex justify-between items-start space-x-4">
       <div className="flex-1 space-y-2">
         <h2 className="font-bold text-xl">{article.title}</h2>
-        <p className="text-gray-500">{article.description}</p>
-        <p className="text-sm text-gray-400">5 MIN READ</p>
       </div>
       <img className="w-32 h-20 object-cover" src={article.image} alt={article.title} />
     </div>
@@ -309,7 +307,7 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
 </div>
 
-    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden md:flex">
+    <div className="max-w-4xl mx-auto bg-white rounded-lg overflow-hidden md:flex">
     <div className="md:w-1/2">
       <img className="h-64 w-full object-cover md:h-full" src="https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg" alt="News articles"/>
     </div>
