@@ -140,10 +140,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
     const MODEL_NAME = "gemini-pro";
     const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
-    console.log(oldTitle, firstImageURL);
-
-    if (oldTitle !== firstImageURL) {
-
     const run = async (title) => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
@@ -253,10 +249,6 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
       const response = result.response;
       setFirstURL(response.text());
     };
-  }
-  else {
-    console.log('post already exists');
-}
 
     fetchData().catch((error) => {
       console.error('Error:', error);
@@ -268,11 +260,18 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
     console.log('title: ', firstItemTitle, 'content: ',
      firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
     );
+    console.log(oldTitle, firstImageURL);
+
+    if (oldTitle !== firstImageURL) {
     
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL, firstIntro) {
       postSenderHandler()
       console.log('done');
   }
+    }
+  else {
+    console.log('post already exists');
+}
 
 }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro]);
 
@@ -514,7 +513,7 @@ const ArticleCard = ({ image, title, description, author }) => {
         />
         </div>
         <div className="py-8">
-          <div className="uppercase tracking-wide text-sm font-semibold">
+          <div className="text-lg font-bold">
             {title}
           </div>
               <p className="mt-2 text-gray-500">{description}</p>
