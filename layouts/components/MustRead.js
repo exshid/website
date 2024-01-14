@@ -109,7 +109,7 @@ const MustRead = ({ articles }) => {
   if (responseGet.ok) {
       const data5 = await responseGet.json();
       setOldTitle(data5[data5.length - 1].image);
-      console.log(data5, oldTitle);
+      console.log(data5, oldTitle, firstImageURL);
 
   } else {
       console.log('Error:', responseGet.status, responseGet.statusText);
