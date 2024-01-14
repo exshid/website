@@ -136,7 +136,7 @@ const MustRead = ({ articles }) => {
         const imageUrl = firstItem["media:content"][0]["$"]["url"];
         
         setFirstImageURL(imageUrl);
-        console.log(oldTitle, firstImageURL);
+        console.log('g', oldTitle, firstImageURL);
 
         if (oldTitle !== firstImageURL) {
 
