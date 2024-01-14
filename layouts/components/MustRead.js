@@ -194,7 +194,7 @@ const MustRead = ({ articles }) => {
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
   
       const parts = [
-        { text: `sir, you are a professional writer. rewrite this post in a publish-ready quality. if there is any quotes, do not change it any way. separate pargaraphs using HTML <p> tags: ${postDescription}` }
+        { text: `sir, you are a professional writer. rewrite this post in a publish-ready quality. if there is any quotes, do not change it any way. separate pargaraphs using HTML <p> tags, and if there is any trace of mention another website, remove it: ${postDescription}` }
   
       ];
   
