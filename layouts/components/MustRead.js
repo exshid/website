@@ -267,7 +267,7 @@ const MustRead = ({ articles }) => {
       console.error('Error:', error);
     });
 
-  }, []);
+  }, [oldTitle, firstImageURL]);
 
   useEffect(() => {
     console.log('title: ', firstItemTitle, 'content: ',
