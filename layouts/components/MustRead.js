@@ -116,6 +116,7 @@ const MustRead = ({ articles }) => {
   }
 }
   useEffect(() => {
+    postGet()
     const fetchData = async () => {
       const response = await fetch('/api/rss');
       if (!response.ok) {
