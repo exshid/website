@@ -274,16 +274,11 @@ const MustRead = ({ articles }) => {
     console.log(oldTitle, firstImageURL);
 
     if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL, firstIntro) {
-    if (oldTitle !== firstImageURL) {
     
       postSenderHandler()
       console.log('done');
   }
     
-  else {
-    console.log('post already exists');
-}
-}
 }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro, oldTitle]);
 
 
