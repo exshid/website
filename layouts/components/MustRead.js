@@ -236,18 +236,18 @@ const dateString = `${year}-${paddedMonth}-${paddedDay}`;
 
   return (
 <>
-<div class="flex space-x-4">
-  <a href="#" class="text-gray-600 hover:text-gray-900">The Latest</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">News</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Books & Culture</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Fiction & Poetry</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Humor & Cartoons</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Magazine</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Puzzles & Games</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Video</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Podcasts</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Goings On</a>
-  <a href="#" class="text-gray-600 hover:text-gray-900">Shop</a>
+<div class="flex space-x-4 px-64 py-6 w-full justify-between border-y">
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">The Latest</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">News</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Books & Culture</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Fiction & Poetry</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Humor & Cartoons</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Magazine</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Puzzles & Games</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Video</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Podcasts</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Goings On</a>
+  <a href="#" class="text-xs font-medium text-gray-600 hover:text-gray-900">Shop</a>
 </div>
 
 <div className="flex flex-wrap divide-x px-20">
