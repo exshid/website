@@ -1,3 +1,71 @@
+import { MongoClient, ObjectId } from 'mongodb'
+
+
+function Tweet(items) {
+
+    return <>
+         <div id={items.rweetData.id}>
+            <p>{items.rweetData.title}</p>
+
+            <p className='tweet-text'>{items.rweetData.content}</p>
+        </div>
+        </>
+}
+
+export async function getStaticPaths() {
+
+    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+    const db = client.db()
+    const tweetsCollection = db.collection('rweets');
+
+    const rweets = await tweetsCollection.find({}, {
+        _id: 1,
+    }).toArray()
+    client.close()
+    return {
+        fallback: 'blocking',
+        paths: rweets.map(rweet => ({
+            params: {
+                tweet: rweet._id.toString()
+            },
+        }))
+    }
+}
+
+export async function getStaticProps(context) {
+
+    const tweetId = context.params.tweet;
+
+    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+
+    const db = client.db()
+
+    const tweetsCollection = db.collection('rweets');
+
+    const rweet = await tweetsCollection.findOne({ _id: ObjectId(tweetId) })
+
+    client.close()
+    return {
+        props: {
+            rweetData: {
+              author: rweet.author,
+              title: rweet.title,
+              content: rweet.content,
+              description: rweet.description,
+              url: rweet.url,
+              tags: rweet.tags,
+              cats: rweet.cats,
+              date: rweet.date,
+              id: rweet._id.toString(),
+              image: rweet.image
+                        }
+        }
+    }
+
+}
+
+export default Tweet
+/*
 import config from "@config/config.json";
 import NotFound from "@layouts/404";
 import About from "@layouts/About";
@@ -23,7 +91,7 @@ const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
       noindex={noindex}
       canonical={canonical}
     >
-      {/* single post */}
+      {/* single post 
       {postSlug.includes(slug) ? (
         <PostSingle slug={slug} post={data} authors={authors} posts={posts} />
       ) : layout === "404" ? (
@@ -80,3 +148,4 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
+*/
