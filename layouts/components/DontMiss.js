@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 const DontMiss = ({ items, headline }) => {
     return (
       <div className="p-6 md:w-1/2">
@@ -7,15 +8,14 @@ const DontMiss = ({ items, headline }) => {
           <span className="ml-2 text-sm text-gray-500">{items.length} articles</span>
         </div>
         <ul className="mt-4 space-y-4">
-          {items.slice(0, 1).map((item) => (
-            <li key={item.id} className="flex items-start space-x-4">
+          {items.slice(0, 4).map((item) => (
+            <li key={item.id} className="flekx items-start space-x-4">
               <div className="flex-1">
 <Link href={item.url}>
-            <h3 className="text-sm font-medium text-gray-900">{item.description}</h3>
+            <p className="text-sm font-medium text-gray-900">{item.description}</p>
     </Link>
 
-                <h3 className="text-sm font-medium text-gray-900">{item.description}</h3>
-                <p className="mt-2 text-lg text-gray-700 font-bold">{item.title}</p>
+                <h3 className="mt-2 text-lg text-gray-700 font-bold">{item.title}</h3>
                 <p className="mt-1 text-sm text-gray-500">{item.author}</p>
               </div>
               <img className="h-16 w-16 object-cover rounded" src={item.image} alt={item.title} />
@@ -26,4 +26,4 @@ const DontMiss = ({ items, headline }) => {
     );
   };
   
-  export default DontMiss;  
+  export default DontMiss;
