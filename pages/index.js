@@ -261,7 +261,7 @@ const Home = ({ articles }) => {
                 "Anime",
                 "Comics",
                 "Celebrities"
-                ], what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+                ], what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]; if there is none, send an array of ["News"]` }
           ];
       
           const result = await model.generateContent({
