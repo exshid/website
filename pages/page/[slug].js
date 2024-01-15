@@ -32,8 +32,6 @@ const BlogPagination = () => {
       <section className="section">
         <div className="container">
         </div>
-      </section>
-
     </Base>
   );
 };
