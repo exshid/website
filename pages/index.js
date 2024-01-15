@@ -18,11 +18,7 @@ import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 import { categoriesPost } from "@layouts/components/categories.js";
 
-const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
-  const indexOfLastPost = currentPage * pagination;
-  const indexOfFirstPost = indexOfLastPost - pagination;
-  const totalPages = Math.ceil(posts.length / pagination);
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+const Home = ({ categoriesPost, articles }) => {
 
   return (
     <Base>
@@ -44,12 +40,6 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
     <DontMiss items={articles} headline="News"/>
 
     </DontMissContainer>
-      <section className="section">
-        <div className="container">
-          <Posts className="mb-16" posts={currentPosts} authors={authors} />
-          <Pagination totalPages={totalPages} currentPage={currentPage} />
-        </div>
-      </section>
 
     </Base>
   );
@@ -81,4 +71,4 @@ export async function getStaticProps() {
     revalidate: 1
   }
 }
-  export default BlogPagination;
+  export default Home;
