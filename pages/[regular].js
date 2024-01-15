@@ -4,7 +4,7 @@ import { MongoClient, ObjectId } from 'mongodb'
 function Tweet(props) {
 
     return <>
-         <div id={props.rweetData.id}>
+         <div>
             <p>{props.rweetData.title}</p>
 
             <p className='tweet-text'>{props.rweetData.content}</p>
@@ -13,19 +13,20 @@ function Tweet(props) {
 }
 
 export async function getStaticPaths() {
+
     const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
     const db = client.db()
     const tweetsCollection = db.collection('rweets');
 
     const rweets = await tweetsCollection.find({}, {
-        url: 1,
+        _id: 1,
     }).toArray()
     client.close()
     return {
         fallback: 'blocking',
         paths: rweets.map(rweet => ({
             params: {
-              regular: rweet.url
+              regular: rweet._id.toString()
             },
         }))
     }
