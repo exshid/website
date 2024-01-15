@@ -6,7 +6,7 @@ const CategoryLinks = ({ items }) => {
         {items.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (
-            <Link key={Math.random()} href={`/${href}`}>
+            <Link key={Math.random()} href={`/categories/${href}`}>
               <a className="text-xs font-medium text-gray-600 hover:text-gray-900">
                 {item}
               </a>
