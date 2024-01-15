@@ -1,14 +1,13 @@
 export const categoriesPost = [
     "Games", 
     "Movies",
-    "TV Shows",
+    "TV",
     "Music",
     "Books",
-    "Artificial Intelligence", 
-    "Virtual Reality",
+    "AI", 
+    "VR",
     "Animation",
     "Anime",
     "Comics",
-    "Celebrities",
-    "Award Shows"
-  ];
+    "Celebrities"
+    ];

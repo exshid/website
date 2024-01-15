@@ -16,7 +16,6 @@ import LatestPosts from "@layouts/components/LatestPosts";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
-import { articles } from "@layouts/components/articles.js";
 import { categoriesPost } from "@layouts/components/categories.js";
 
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
@@ -27,6 +26,7 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
 
   return (
     <Base>
+    <CategoryLinks items={categoriesPost} />
       <EditorContainer>
     <EditorPickLeft items={articles} />
     <EditorPickCenter items={articles} />
@@ -55,43 +55,30 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
   );
 };
 
-export default BlogPagination;
 
-// get blog pagination slug
-export const getStaticPaths = () => {
-  const getAllSlug = getSinglePage(`content/${blog_folder}`);
-  const allSlug = getAllSlug.map((item) => item.slug);
-  const { pagination } = config.settings;
-  const totalPages = Math.ceil(allSlug.length / pagination);
-  let paths = [];
+export async function getStaticProps() {
 
-  for (let i = 1; i < totalPages; i++) {
-    paths.push({
-      params: {
-        slug: (i + 1).toString(),
-      },
-    });
-  }
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-// get blog pagination content
-export const getStaticProps = async ({ params }) => {
-  const currentPage = parseInt((params && params.slug) || 1);
-  const { pagination } = config.settings;
-  const posts = getSinglePage(`content/${blog_folder}`);
-  const authors = getSinglePage("content/authors");
-
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
+  const tweetsCollection = db.collection('rweets');
+  const rweets = await tweetsCollection.find().toArray()
+  client.close()
   return {
     props: {
-      pagination: pagination,
-      posts: posts,
-      authors: authors,
-      currentPage: currentPage,
+      articles: [...rweets].reverse().map(rweet => ({
+        author: rweet.author,
+        title: rweet.title,
+        content: rweet.content,
+        description: rweet.description,
+        url: rweet.url,
+        tags: rweet.tags,
+        cats: rweet.cats,
+        date: rweet.date,
+        id: rweet._id.toString(),
+        image: rweet.image
+      }))
     },
-  };
-};
+    revalidate: 1
+  }
+}
+  export default BlogPagination;
