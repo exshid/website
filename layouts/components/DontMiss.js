@@ -9,8 +9,8 @@ const DontMiss = ({ items, headline }) => {
         </div>
         <ul className="mt-4 space-y-4">
           {items.slice(0, 4).map((item) => (
-            <li key={item.id} className="flekx items-start space-x-4">
-              <div className="flex-1">
+            <li key={item.id} className="flex items-start space-x-4">
+              <div className="flex">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
 
 <Link href={item.id}>
