@@ -1,4 +1,4 @@
-/*import Pagination from "@components/Pagination";
+import Pagination from "@components/Pagination";
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import MustRead from "@layouts/components/MustRead";
@@ -18,36 +18,19 @@ const { blog_folder } = config.settings;
 import { articles } from "@layouts/components/articles.js";
 import { categoriesPost } from "@layouts/components/categories.js";
 
-const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
-  const indexOfLastPost = currentPage * pagination;
-  const indexOfFirstPost = indexOfLastPost - pagination;
-  const totalPages = Math.ceil(posts.length / pagination);
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+const BlogPagination = () => {
 
   return (
     <Base>
-    <CategoryLinks items={categoriesPost} />
-      <EditorContainer>
-    <EditorPickLeft items={articles} />
-    <EditorPickCenter items={articles} />
-    <EditorPickRight items={articles} />
     </EditorContainer>
 
-<MustRead articles={articles} />
-    <HeadLines items={articles} />
     <LatestPostsContainer>
-    <LatestPosts items={articles} />
-    <Sidebar items={articles} />
       </LatestPostsContainer>
     <DontMissContainer>
-    <DontMiss items={articles} headline="News"/>
-    <DontMiss items={articles} headline="News"/>
-
+  
     </DontMissContainer>
       <section className="section">
         <div className="container">
-          <Posts className="mb-16" posts={currentPosts} authors={authors} />
-          <Pagination totalPages={totalPages} currentPage={currentPage} />
         </div>
       </section>
 
@@ -56,7 +39,7 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
 };
 
 export default BlogPagination;
-
+/*
 // get blog pagination slug
 export const getStaticPaths = () => {
   const getAllSlug = getSinglePage(`content/${blog_folder}`);
