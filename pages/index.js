@@ -128,44 +128,57 @@ const Home = ({ articles }) => {
     }
       useEffect(() => {
         postGet()
+        
         const fetchData = async () => {
-          const response = await fetch('/api/rss');
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const xmlData = await response.text(); 
-      
-          xml2js.parseString(xmlData, (err, result) => {
-            if (err) {
-              throw new Error('Error parsing XML');
+            const urls = ['/api/rss', '/api/rss-verge'];
+            const responses = await Promise.all(urls.map(url => fetch(url)));
+          
+            for (let response of responses) {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
             }
-            const firstItem = result.rss.channel[0].item[0];
-    
-            const title = firstItem.title[0];
-            const intro = firstItem.description[0];
-            const postDescription = firstItem["content:encoded"][0];
-            const imageUrl = firstItem["media:content"][0]["$"]["url"];
-            
-            setFirstImageURL(imageUrl);
-            console.log('g', oldTitle, firstImageURL);
-            if (oldTitle && firstImageURL) {
-    
-            if (oldTitle !== firstImageURL) {
-    
-            run(title);
-            runPost(postDescription);
-            runTags(title);
-            runCats(title);
-            runDescription(intro);
-            runURL(title);
-            } else{
-              console.log('Post exists');
-    
+          
+            const xmlDataArray = await Promise.all(responses.map(response => response.text()));
+          
+            let combinedResult = [];
+          
+            for (let xmlData of xmlDataArray) {
+              xml2js.parseString(xmlData, (err, result) => {
+                if (err) {
+                  throw new Error('Error parsing XML');
+                }
+                combinedResult = [...combinedResult, ...result.rss.channel[0].item];
+              });
             }
-          }
-          });
-        };
-    
+          
+            // Now you can use combinedResult array for further processing
+            console.log('combined', combinedResult);
+
+            for (let item of combinedResult) {
+              const title = item.title[0];
+              const intro = item.description[0];
+              const postDescription = item["content:encoded"][0];
+              const imageUrl = item["media:content"][0]["$"]["url"];
+              
+              setFirstImageURL(imageUrl);
+              console.log('g', oldTitle, firstImageURL);
+              if (oldTitle && firstImageURL) {
+                if (oldTitle !== firstImageURL) {
+                  run(title);
+                  runPost(postDescription);
+                  runTags(title);
+                  runCats(title);
+                  runDescription(intro);
+                  runURL(title);
+                } else {
+                  console.log('Post exists');
+                }
+              }
+            }
+          };
+          
+
         const MODEL_NAME = "gemini-pro";
         const API_KEY = "AIzaSyASVdR_fyNnM8cAhJbTcL0BKbri7HnaNZU";
         const run = async (title) => {
@@ -192,7 +205,7 @@ const Home = ({ articles }) => {
           const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
           const parts = [
-            { text: `sir, rewrite this post intro with a publish-ready quality: ${intro}. do it only once, and send nothing other than the rewritten post intro.` }
+            { text: `sir, rewrite this post intro with a publish-ready quality in less than twenty words: ${intro}. do it only once, and send nothing other than the rewritten post intro.` }
           ];
       
           const result = await model.generateContent({
