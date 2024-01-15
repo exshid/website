@@ -1,7 +1,6 @@
 import Pagination from "@components/Pagination";
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
-import { getSinglePage } from "@lib/contentParser";
 import MustRead from "@layouts/components/MustRead";
 import EditorContainer from "@layouts/components/EditorContainer";
 import EditorPickLeft from "@layouts/components/EditorPickLeft";
