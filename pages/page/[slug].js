@@ -1,4 +1,4 @@
-import Pagination from "@components/Pagination";
+/*import Pagination from "@components/Pagination";
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import MustRead from "@layouts/components/MustRead";
@@ -95,3 +95,4 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
+*/
