@@ -42,7 +42,7 @@ export async function getStaticProps(context) {
 
   const tweetsCollection = db.collection('rweets');
 
-  const rweet = await tweetsCollection.findOne({ _id: ObjectId(tweetId) })
+  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
   client.close()
   return {
