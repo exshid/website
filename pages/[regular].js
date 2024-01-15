@@ -13,27 +13,27 @@ function Tweet(props) {
 }
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
-  const tweetsCollection = db.collection('rweets');
+    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+    const db = client.db()
+    const tweetsCollection = db.collection('rweets');
 
-  const rweets = await tweetsCollection.find({}, {
-      url: 1,
-  }).toArray()
-  client.close()
-  return {
-      fallback: 'blocking',
-      paths: rweets.map(rweet => ({
-          params: {
-            regular: rweet.url
-          },
-      }))
-  }
+    const rweets = await tweetsCollection.find({}, {
+        url: 1,
+    }).toArray()
+    client.close()
+    return {
+        fallback: 'blocking',
+        paths: rweets.map(rweet => ({
+            params: {
+              regular: rweet.url
+            },
+        }))
+    }
 }
 
 
 export async function getStaticProps(context) {
-  const tweetUrl = context.params.regular;
+  const tweetId = context.params.regular;
 
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
 
@@ -41,7 +41,7 @@ export async function getStaticProps(context) {
 
   const tweetsCollection = db.collection('rweets');
 
-  const rweet = await tweetsCollection.findOne({ url: tweetUrl })
+  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
   client.close()
   return {
@@ -60,8 +60,9 @@ export async function getStaticProps(context) {
 }
       }
   }
-}
 
+
+}
 export default Tweet
 /*
 import config from "@config/config.json";
