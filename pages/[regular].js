@@ -34,7 +34,7 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps(context) {
-  const tweetId = context.params.tweet;
+  const tweetId = context.params.regular;
 
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
 
@@ -42,7 +42,7 @@ export async function getStaticProps(context) {
 
   const tweetsCollection = db.collection('rweets');
 
-  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
+  const rweet = await tweetsCollection.findOne({ _id: ObjectId(tweetId) })
 
   client.close()
   return {
