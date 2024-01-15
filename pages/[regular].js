@@ -26,7 +26,7 @@ export async function getStaticPaths() {
         fallback: 'blocking',
         paths: rweets.map(rweet => ({
             params: {
-                tweet: rweet._id.toString()
+              regular: rweet._id.toString()
             },
         }))
     }
