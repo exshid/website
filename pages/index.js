@@ -1,3 +1,4 @@
+import { MongoClient } from 'mongodb'
 import Pagination from "@components/Pagination";
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
