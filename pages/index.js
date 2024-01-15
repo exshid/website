@@ -129,34 +129,6 @@ const Home = ({ articles }) => {
     }
       useEffect(() => {
         postGet()
-        const fetchingData = async () => {
-            const urls = ['/api/rss', '/api/rss-verge'];
-            const responses = await Promise.all(urls.map(url => fetch(url)));
-          
-            for (let response of responses) {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-            }
-          
-            const xmlDataArray = await Promise.all(responses.map(response => response.text()));
-          
-            let combinedResult = [];
-          
-            for (let xmlData of xmlDataArray) {
-              xml2js.parseString(xmlData, (err, result) => {
-                if (err) {
-                  throw new Error('Error parsing XML');
-                }
-                combinedResult = [...combinedResult, ...result.rss.channel[0].item];
-              });
-            }
-            console.log('combined', combinedResult);
-    
-            // Now you can use combinedResult array for further processing
-          };
-          
-
         const fetchData = async () => {
           const response = await fetch('/api/rss');
           if (!response.ok) {
@@ -211,7 +183,7 @@ const Home = ({ articles }) => {
             safetySettings,
           });
       
-          const response = result.response;
+          const response = result.response.replace(/['"]+/g, '');
           setFirstItemTitle(response.text());
         };
     
@@ -221,7 +193,7 @@ const Home = ({ articles }) => {
           const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
           const parts = [
-            { text: `sir, rewrite this post intro with a publish-ready quality in less than twenty words: ${intro}. do it only once, and send nothing other than the rewritten post intro.` }
+            { text: `sir, rewrite this post intro with a publish-ready quality in less than forty words: ${intro}. do it only once, and send nothing other than the rewritten post intro.` }
           ];
       
           const result = await model.generateContent({
@@ -277,7 +249,19 @@ const Home = ({ articles }) => {
           const model = genAI.getGenerativeModel({ model: MODEL_NAME });
        
           const parts = [
-            { text: `out of the categories in the array ${categoriesPost}, what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
+            { text: `out of the categories in the array [
+                "Games", 
+                "Movies",
+                "TV",
+                "Music",
+                "Books",
+                "AI", 
+                "VR",
+                "Animation",
+                "Anime",
+                "Comics",
+                "Celebrities"
+                ], what would be proper categories for a news article with this title? ${title}; write them in this format: ["diy", "toy"]` }
           ];
       
           const result = await model.generateContent({
