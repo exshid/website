@@ -74,8 +74,7 @@ const Home = ({ articles }) => {
       const [firstURL, setFirstURL] = useState();
       const [firstIntro, setFirstIntro] = useState();
       const [firstImageURL, setFirstImageURL] = useState();
-      const [combinedResult, setCombinedResult] = useState([]);
-
+      
       const [oldTitle, setOldTitle] = useState();
     
       async function postSenderHandler() {
@@ -142,17 +141,18 @@ const Home = ({ articles }) => {
           
             const xmlDataArray = await Promise.all(responses.map(response => response.text()));
           
+            let combinedResult = [];
           
             for (let xmlData of xmlDataArray) {
               xml2js.parseString(xmlData, (err, result) => {
                 if (err) {
                   throw new Error('Error parsing XML');
                 }
-                setCombinedResult = (...combinedResult, ...result.rss.channel[0].item);
+                combinedResult = [...combinedResult, ...result.rss.channel[0].item];
               });
             }
             console.log('combined', combinedResult);
-
+    
             // Now you can use combinedResult array for further processing
           };
           
