@@ -1,4 +1,4 @@
-const MustRead = () => {
+const MustRead = ({items}) => {
 
 
   return (

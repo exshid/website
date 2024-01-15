@@ -306,7 +306,7 @@ const Home = ({ articles }) => {
     <EditorPickRight items={articles} />
     </EditorContainer>
 
-<MustRead articles={articles} />
+<MustRead items={articles} />
     <HeadLines items={articles} />
     <LatestPostsContainer>
     <LatestPosts items={articles} />
