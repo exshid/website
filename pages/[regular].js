@@ -34,35 +34,36 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 
-    const tweetId = context.params.tweet;
+  const tweetId = context.params.tweet;
 
-    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
 
-    const db = client.db()
+  const db = client.db()
 
-    const tweetsCollection = db.collection('rweets');
+  const tweetsCollection = db.collection('rweets');
 
-    const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
+  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
+  const rweetData = {
+      author: rweet.author,
+      title: rweet.title,
+      content: rweet.content,
+      description: rweet.description,
+      url: rweet.url,
+      tags: rweet.tags,
+      cats: rweet.cats,
+      date: rweet.date,
+      id: rweet._id.toString(),
+      image: rweet.image
+  }
 
-    client.close()
-    return {
-        props: {
-            rweetData: {
-              author: rweet.author,
-              title: rweet.title,
-              content: rweet.content,
-              description: rweet.description,
-              url: rweet.url,
-              tags: rweet.tags,
-              cats: rweet.cats,
-              date: rweet.date,
-              id: rweet._id.toString(),
-              image: rweet.image
-                        }
-        }
-    }
+  client.close()
 
+  return {
+      props: {
+          rweetData
+      }
+  }
 }
 
 export default Tweet
