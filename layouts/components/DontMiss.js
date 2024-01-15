@@ -11,11 +11,11 @@ const DontMiss = ({ items, headline }) => {
           {items.slice(0, 4).map((item) => (
             <li key={item.id} className="flekx items-start space-x-4">
               <div className="flex-1">
-<Link href={item.url}>
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
-    </Link>
 
+<Link href={item.url}>
                 <h3 className="mt-2 text-lg text-gray-700 font-bold">{item.title}</h3>
+    </Link>
                 <p className="mt-1 text-sm text-gray-500">{item.author}</p>
               </div>
               <img className="h-16 w-16 object-cover rounded" src={item.image} alt={item.title} />

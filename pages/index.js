@@ -46,6 +46,12 @@ const Home = ({ articles }) => {
         topP: 1,
         maxOutputTokens: 2048,
       };
+      const generationConfigURL = {
+        temperature: 0.8,
+        topK: 1,
+        topP: 1,
+        maxOutputTokens: 10,
+      };
     
       const safetySettings = [
         {
@@ -276,14 +282,14 @@ const Home = ({ articles }) => {
         const runURL = async (title) => {
           const genAI = new GoogleGenerativeAI(API_KEY);
           const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-      
+
             const parts = [
-            { text: `what would be proper url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
+            { text: `what would be proper six-word url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
           ];
       
           const result = await model.generateContent({
             contents: [{ role: "user", parts }],
-            generationConfig,
+            generationConfigURL,
             safetySettings,
           });
       
