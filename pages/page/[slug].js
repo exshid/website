@@ -35,14 +35,6 @@ const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
     </EditorContainer>
 
 <MustRead articles={articles} />
-    <HeadLines items={articles} />
-    <LatestPostsContainer>
-    <LatestPosts items={articles} />
-    <Sidebar items={articles} />
-      </LatestPostsContainer>
-    <DontMissContainer>
-    <DontMiss items={articles} headline="News"/>
-    <DontMiss items={articles} headline="News"/>
 
     </DontMissContainer>
       <section className="section">
