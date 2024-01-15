@@ -32,40 +32,37 @@ export async function getStaticPaths() {
     }
 }
 
+
 export async function getStaticProps(context) {
+  const tweetId = context.params.regular;
 
-  const tweetId = context.params.tweet;
-
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-
-  const db = client.db()
-
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority');
+  const db = client.db();
   const tweetsCollection = db.collection('rweets');
 
-  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
+  const tweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) });
 
-  const rweetData = {
-      author: rweet.author,
-      title: rweet.title,
-      content: rweet.content,
-      description: rweet.description,
-      url: rweet.url,
-      tags: rweet.tags,
-      cats: rweet.cats,
-      date: rweet.date,
-      id: rweet._id.toString(),
-      image: rweet.image
-  }
+  const tweetData = {
+    author: tweet.author,
+    title: tweet.title,
+    content: tweet.content,
+    description: tweet.description,
+    url: tweet.url,
+    tags: tweet.tags,
+    cats: tweet.cats,
+    date: tweet.date,
+    id: tweet._id.toString(),
+    image: tweet.image,
+  };
 
-  client.close()
+  client.close();
 
   return {
-      props: {
-          rweetData
-      }
-  }
+    props: {
+      tweetData,
+    },
+  };
 }
-
 export default Tweet
 /*
 import config from "@config/config.json";
