@@ -174,7 +174,7 @@ const Home = ({ articles }) => {
           const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
           const parts = [
-            { text: `sir, rewrite this title with a publish-ready quality: ${title}. do it only once, and send nothing other than the rewritten title.` }
+            { text: `sir, rewrite this title with a publish-ready quality: ${title}. do it only once, and send nothing other than the rewritten title. do not use quotes at the end or beginning of the new title` }
           ];
       
           const result = await model.generateContent({
@@ -183,7 +183,7 @@ const Home = ({ articles }) => {
             safetySettings,
           });
       
-          const response = result.response.replace(/['"]+/g, '');
+          const response = result.response;
           setFirstItemTitle(response.text());
         };
     
