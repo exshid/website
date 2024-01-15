@@ -10,7 +10,7 @@ const DontMiss = ({ items, headline }) => {
         <ul className="mt-4 space-y-4">
           {items.slice(0, 4).map((item) => (
             <li key={item.id} className="flex items-start space-x-4">
-              <div className="flex">
+              <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
 
 <Link href={item.id}>
