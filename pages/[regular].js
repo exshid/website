@@ -5,18 +5,25 @@ import Link from 'next/link';
 function Tweet(props) {
 const myCats = JSON.parse(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
 
     return <>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-row pb-6">
 <div className="w-1/2 flex flex-col justify-center">        
 {myCats.map((item) => (
-  <span key={Math.random()} className="text-pink-800 p-3 text-lg uppercase">{item}</span>
+  <span key={Math.random()} className="text-pink-800 text-lg uppercase">{item}</span>
 ))}
-  <span className="p-3 text-lg uppercase font-bold">By {props.rweetData.author}</span>
-  <span className="p-3 text-lg">{props.rweetData.date}</span>
 
-            <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
+            <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
+            <p className="text-lg">{props.rweetData.description}</p>
+
+  <span className="text-lg uppercase font-bold">By {props.rweetData.author}</span>
+  <span className="text-lg">{formatDate(props.rweetData.date)}</span>
             </div>
         <div className="relative h-calc w-1/2">
         <Image
@@ -28,9 +35,9 @@ const myTags = JSON.parse(props.rweetData.tags);
 
         </div>
             </div>
-            <div className='content-text w-1/2' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
+            <div className='content-text w-1/2 mt-6' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         
-            <div className="flex space-x-4 px-80 py-3 w-full items-center border-y"><span className="mr-3">More:</span> 
+            <div className="flex space-x-4 px-80 py-3 w-full items-center border-y"><span className="mr-1">More:</span> 
         {myTags.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (
