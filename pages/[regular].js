@@ -7,7 +7,7 @@ function Tweet(props) {
          <div>
             <p>{props.rweetData.title}</p>
 
-            <p className='tweet-text'>{props.rweetData.content}</p>
+            <p className='tweettext'>{props.rweetData.content}</p>
         </div>
         </>
 }
