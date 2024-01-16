@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 function Tweet(props, relatedPosts ) {
-
+console.log(relatedPosts);
   const myCats = JSON.parse(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
@@ -47,13 +47,6 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      {relatedPosts.map((post) => (
-        <div key={post.id}>
-          <Link href={`/posts/${post.id}`}>
-            <a>{post.title}</a>
-          </Link>
-        </div>
-      ))}
 
         </div>
 
