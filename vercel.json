@@ -1,8 +1,8 @@
 {
-    "crons": [
-      {
-        "path": "/api/rss",
-        "schedule": "30 2 * * *"
-      }
-    ]
-  }
+  "crons": [
+    {
+      "path": "/api/rss-ign",
+      "schedule": "30 2 * * *"
+    }
+  ]
+}
