@@ -4,6 +4,63 @@ import xml2js from 'xml2js';
 const rssUrl = 'http://feeds.feedburner.com/ign/news';
 
 export default async function handler(req, res) {
+
+
+
+
+
+
+
+
+
+
+
+  async function postSenderHandler() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    
+    const paddedMonth = month.toString().padStart(2, "0");
+    const paddedDay = day.toString().padStart(2, "0");
+    const paddedHour = hour.toString().padStart(2, "0");
+    const paddedMinute = minute.toString().padStart(2, "0");
+    
+    const dateString = `${year}-${paddedMonth}-${paddedDay}`;
+    const timeString = `${paddedHour}:${paddedMinute}`;
+    const names = ['John Williams', 'Jennifer Brown', 'Bob Smith', 'Mary Robert', 'Tom Johnson'];
+
+    const randomName = names[Math.floor(Math.random() * names.length)];
+  
+    let postData = {author: randomName, description: firstIntro,title: firstItemTitle, content: firstItemPost, tags: firstTags, cats: firstCats,  url: firstURL, image:firstImageURL, date: dateString, time: timeString};
+      
+    const response = await fetch('/api/new-tweet', {
+      method: 'POST',
+      body: JSON.stringify(postData),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+      })
+    console.log(response, response.ok)
+    if (!response.ok) {
+        return error()
+    }    
+    }
+
+
+
+
+
+
+
+
+
+
+
+  
+
   const categoriesPost = [
     "Games", 
     "Movies",
@@ -230,14 +287,15 @@ const result = await model.generateContent({
     if (oldTitle !== imageUrl) {
 
       res.status(200).json({
-        title,
-        intro,
-        postDescription,
+        firstItemTitle,
+        firstIntro,
+        firstItemPost,
         imageUrl,
-        tags,
-        cats,
-        url,
+        firstTags,
+        firstCats,
+        firstURL,
       });
+      postSenderHandler()
     }
     });
   } catch (error) {
