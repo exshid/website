@@ -1,19 +1,21 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import Image from 'next/image'
-
+import Link from 'next/link';
 
 function Tweet(props) {
-const array = ["Movies", "News"];
-const myArray = JSON.parse(props.rweetData.cats);
+const myCats = JSON.parse(props.rweetData.cats);
+const myTags = JSON.parse(props.rweetData.tags);
 
     return <>
-         <div id={props.rweetData.id}>
+         <div id={props.rweetData.id} className="flex flex-col items-center">
          <div className="flex flex-row">
 <div className="w-1/2 flex flex-col">        
-          <span className="text-pink-800">{myArray} {array}</span>
+{myCats.map((item) => (
+  <span key={Math.random()} className="text-pink-800 pr-3">{item}</span>
+))}
             <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
             </div>
-        <div className="relative h-[calc(100vh - 108px)] w-1/2">
+        <div className="relative h-calc w-1/2">
         <Image
         src={props.rweetData.image} 
         alt={props.rweetData.image}
@@ -24,6 +26,18 @@ const myArray = JSON.parse(props.rweetData.cats);
         </div>
             </div>
             <div className='content-text w-1/2' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
+        
+            <div className="flex space-x-4 px-80 py-3 w-full justify-between border-y">More: 
+        {myTags.map((item) => {
+          const href = item.toLowerCase().split(' ').join('-');
+          return (
+            <Link key={Math.random()} href={`/tags/${href}`} className="text-xs font-medium text-gray-600 hover:text-gray-900">
+              {item}
+            </Link>
+          );
+        })}
+      </div>
+ 
         </div>
 
         </>
