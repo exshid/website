@@ -15,3 +15,17 @@
 @layer utilities {
   @import "utilities";
 }
+.content-text{
+  text-transform: none;
+    font-feature-settings: normal;
+    font-style: normal;
+    -webkit-letter-spacing: normal;
+    -moz-letter-spacing: normal;
+    -ms-letter-spacing: normal;
+    letter-spacing: normal;
+    line-break: auto;
+    line-height: 1.5em;
+    font-size: 21px;
+    font-weight: 400;
+    overflow-wrap: normal;
+}

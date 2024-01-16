@@ -4,25 +4,26 @@ import Image from 'next/image'
 
 function Tweet(props) {
 const array = ["Movies", "News"];
+const myArray = JSON.parse(props.rweetData.cats);
 
     return <>
          <div id={props.rweetData.id}>
          <div className="flex flex-row">
 <div className="w-1/2 flex flex-col">        
-          <span className="text-pink-800">{props.rweetData.cats} {array}</span>
+          <span className="text-pink-800">{myArray} {array}</span>
             <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
             </div>
-        <div className="relative h-full w-1/2">
+        <div className="relative h-[calc(100vh - 108px)] w-1/2">
         <Image
         src={props.rweetData.image} 
         alt={props.rweetData.image}
-        layout="fill" // This will make the image take up the full width and height of its container
-        objectFit="cover" // This determines how the image should be resized to fit its container
+        layout="fill" 
+        objectFit="cover"
       />
 
         </div>
             </div>
-            <p className='tweettext' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
+            <div className='content-text w-1/2' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         </div>
 
         </>
