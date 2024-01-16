@@ -1,9 +1,33 @@
 import { MongoClient, ObjectId } from 'mongodb'
+import config from "@config/config.json";
+import NotFound from "@layouts/404";
+import About from "@layouts/About";
+import Base from "@layouts/Baseof";
+import Contact from "@layouts/Contact";
+import Default from "@layouts/Default";
+import PostSingle from "@layouts/PostSingle";
+import { getRegularPage, getSinglePage } from "@lib/contentParser";
+const { blog_folder } = config.settings;
 
 
-function Tweet(props) {
+const RegularPages = ({ props }) => {
 
     return <>
+    <Base
+      title={props.rweetData.title}
+      description={props.rweetData.description ? props.rweetData.description : ''}
+      meta_title={props.rweetData.description ? props.rweetData.description : ''}
+      image={props.rweetData.image}
+    >
+         <div>
+            <p>{props.rweetData.title}</p>
+
+            <p className='tweettext'>{props.rweetData.content}</p>
+        </div>
+
+    </Base>
+
+
          <div>
             <p>{props.rweetData.title}</p>
 
@@ -64,17 +88,8 @@ export async function getStaticProps(context) {
 
 
 }
-export default Tweet
+export default RegularPages;
 /*
-import config from "@config/config.json";
-import NotFound from "@layouts/404";
-import About from "@layouts/About";
-import Base from "@layouts/Baseof";
-import Contact from "@layouts/Contact";
-import Default from "@layouts/Default";
-import PostSingle from "@layouts/PostSingle";
-import { getRegularPage, getSinglePage } from "@lib/contentParser";
-const { blog_folder } = config.settings;
 
 // for all regular pages
 const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
