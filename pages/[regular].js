@@ -7,12 +7,15 @@ const myCats = JSON.parse(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
 
     return <>
-         <div id={props.rweetData.id} className="flex flex-col items-center">
-         <div className="flex flex-row">
-<div className="w-1/2 flex flex-col">        
+         <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
+         <div className="flex flex-row pb-6">
+<div className="w-1/2 flex flex-col justify-center">        
 {myCats.map((item) => (
-  <span key={Math.random()} className="text-pink-800 pr-3">{item}</span>
+  <span key={Math.random()} className="text-pink-800 p-3 text-lg uppercase">{item}</span>
 ))}
+  <span className="p-3 text-lg uppercase font-bold">By {props.rweetData.author}</span>
+  <span className="p-3 text-lg">{props.rweetData.date}</span>
+
             <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
             </div>
         <div className="relative h-calc w-1/2">
@@ -27,7 +30,7 @@ const myTags = JSON.parse(props.rweetData.tags);
             </div>
             <div className='content-text w-1/2' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         
-            <div className="flex space-x-4 px-80 py-3 w-full justify-between border-y">More: 
+            <div className="flex space-x-4 px-80 py-3 w-full items-center border-y"><span className="mr-3">More:</span> 
         {myTags.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (
