@@ -94,7 +94,9 @@ export async function getStaticProps(context) {
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
   async function getRelatedPosts(tags, cats) {
-    
+    tags = Array.isArray(tags) ? tags : JSON.parse(tags);
+    cats = Array.isArray(cats) ? cats : JSON.parse(cats);
+  
     // Find posts with at least one matching tag or category
     const relatedPosts = await tweetsCollection.find({
       $or: [
