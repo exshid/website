@@ -4,10 +4,29 @@ import { MongoClient, ObjectId } from 'mongodb'
 function Tweet(props) {
 
     return <>
+         <div id={props.rweetData.id}>
+         <div className="flex flex-row">
+<div className="w-1/2 flex flex-col">        
+          <span className="text-pink-800">{props.rweetData.cats}</span>
+            <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
+            </div>
+        <div className="relative h-full w-1/2">
+        <Image
+        src={props.rweetData.image} 
+        alt={props.rweetData.image}
+        layout="fill" // This will make the image take up the full width and height of its container
+        objectFit="cover" // This determines how the image should be resized to fit its container
+      />
+
+        </div>
+            </div>
+            <p className='tweettext' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
+        </div>
+
          <div>
             <p>{props.rweetData.title}</p>
 
-            <p className='tweet-text'>{props.rweetData.content}</p>
+            <p className='tweettext'>{props.rweetData.content}</p>
         </div>
         </>
 }
