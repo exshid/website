@@ -5,7 +5,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['ignimgs.com'],
+    domains: ['assets-prd.ignimgs.com'],
   },
   webpack5: true,
   webpack: (config) => {

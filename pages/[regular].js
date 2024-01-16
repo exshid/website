@@ -3,12 +3,13 @@ import Image from 'next/image'
 
 
 function Tweet(props) {
+const array = ["Movies", "News"];
 
     return <>
          <div id={props.rweetData.id}>
          <div className="flex flex-row">
 <div className="w-1/2 flex flex-col">        
-          <span className="text-pink-800">{props.rweetData.cats}</span>
+          <span className="text-pink-800">{props.rweetData.cats} {array}</span>
             <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
             </div>
         <div className="relative h-full w-1/2">
@@ -24,11 +25,6 @@ function Tweet(props) {
             <p className='tweettext' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         </div>
 
-         <div>
-            <p>{props.rweetData.title}</p>
-
-            <p className='tweettext'>{props.rweetData.content}</p>
-        </div>
         </>
 }
 
