@@ -16,12 +16,6 @@ const RegularPages = ({ props }) => {
 
     return <>
     
-    <Base
-      title={props.rweetData.title}
-      description={props.rweetData.description ? props.rweetData.description : ''}
-      meta_title={props.rweetData.description ? props.rweetData.description : ''}
-      image={props.rweetData.image}
-    >
          <div id={props.rweetData.id}>
          <div className="flex flex-row">
 <div className="w-1/2 flex flex-col">        
@@ -40,9 +34,6 @@ const RegularPages = ({ props }) => {
             </div>
             <p className='tweettext' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         </div>
-
-    </Base>
-
 
          <div>
             <p>{props.rweetData.title}</p>
