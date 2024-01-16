@@ -4,6 +4,9 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['ignimgs.com'],
+  },
   webpack5: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false };

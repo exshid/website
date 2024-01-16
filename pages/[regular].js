@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import Head from 'next/head'
 import { MongoClient, ObjectId } from 'mongodb'
 import config from "@config/config.json";
 import NotFound from "@layouts/404";
@@ -13,16 +15,30 @@ const { blog_folder } = config.settings;
 const RegularPages = ({ props }) => {
 
     return <>
+    
     <Base
       title={props.rweetData.title}
       description={props.rweetData.description ? props.rweetData.description : ''}
       meta_title={props.rweetData.description ? props.rweetData.description : ''}
       image={props.rweetData.image}
     >
-         <div>
-            <p>{props.rweetData.title}</p>
+         <div id={props.rweetData.id}>
+         <div className="flex flex-row">
+<div className="w-1/2 flex flex-col">        
+          <span className="text-pink-800">{props.rweetData.cats}</span>
+            <h1 className="font-bold p-3 text-black text-4xl">{props.rweetData.title}</h1>
+            </div>
+        <div className="relative h-full w-1/2">
+        <Image
+        src={props.rweetData.image} 
+        alt={props.rweetData.image}
+        layout="fill" // This will make the image take up the full width and height of its container
+        objectFit="cover" // This determines how the image should be resized to fit its container
+      />
 
-            <p className='tweettext'>{props.rweetData.content}</p>
+        </div>
+            </div>
+            <p className='tweettext' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         </div>
 
     </Base>
@@ -161,5 +177,4 @@ export const getStaticProps = async ({ params }) => {
       posts: posts,
     },
   };
-};
-*/
+}*/

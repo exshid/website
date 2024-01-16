@@ -4,7 +4,7 @@ const EditorPickCenter = ({ items }) => {
         {items.slice(0, 1).map((item) => (
           <div key={Math.random()}>
             <img src={item.image} alt={item.title} className="object-cover p-3 w-full h-[26rem] rounded-lg"/>
-            <div className="font-bold p-3 text-black text-3xl">{item.title}</div>
+            <h1 className="font-bold p-3 text-black text-3xl">{item.title}</h1>
             <div className="text-gray-500 p-3">{item.description}</div>
             <div className="text-gray-500 p-3">{item.author}</div>
           </div>
