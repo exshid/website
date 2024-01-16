@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
+import Image from 'next/image'
 
 
 function Tweet(props) {
