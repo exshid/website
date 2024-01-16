@@ -1,15 +1,9 @@
+
+
 import Image from 'next/image'
 import Head from 'next/head'
 import { MongoClient, ObjectId } from 'mongodb'
-import config from "@config/config.json";
-import NotFound from "@layouts/404";
-import About from "@layouts/About";
 import Base from "@layouts/Baseof";
-import Contact from "@layouts/Contact";
-import Default from "@layouts/Default";
-import PostSingle from "@layouts/PostSingle";
-import { getRegularPage, getSinglePage } from "@lib/contentParser";
-const { blog_folder } = config.settings;
 
 
 const RegularPages = ({ props }) => {
