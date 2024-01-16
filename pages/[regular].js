@@ -86,14 +86,12 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
-  async function getRelatedPosts(tags, cats) {
-    tags = Array.isArray(tags) ? tags : JSON.parse(tags);
+  async function getRelatedPosts( cats) {
     cats = Array.isArray(cats) ? cats : JSON.parse(cats);
   
     // Find posts with at least one matching tag or category
     const relatedPosts = await tweetsCollection.find({
       $or: [
-        { tags: { $in: tags } },
         { cats: { $in: cats } }
       ]
     }).toArray()
@@ -107,7 +105,7 @@ export async function getStaticProps(context) {
   }
 
   // Call getRelatedPosts with the tags and cats of the current post
-  const relatedPosts = await getRelatedPosts(rweet.tags, rweet.cats)
+  const relatedPosts = await getRelatedPosts(rweet.cats)
 
   client.close()
   return {
