@@ -26,6 +26,7 @@ const { blog_folder } = config.settings;
 
 const Home = ({ articles }) => {
 
+  
      const categoriesPost = [
         "Games", 
         "Movies",
@@ -280,7 +281,7 @@ const Home = ({ articles }) => {
             { text: `what would be proper six-word url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
           ];
       
-const generationConfigURL = {
+      const generationConfigURL = {
   temperature: 0.8,
   topK: 1,
   topP: 1,
