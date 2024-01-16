@@ -280,18 +280,18 @@ const Home = ({ articles }) => {
             { text: `what would be proper six-word url PermaLink for a news article with this title? ${title}; write it all in lowercase and write - instead of space.` }
           ];
       
-          const generationConfigURL = {
-            temperature: 0.8,
-            topK: 1,
-            topP: 1,
-            maxOutputTokens: 22,
-          };
-        
-          const result = await model.generateContent({
-            contents: [{ role: "user", parts }],
-            generationConfigURL,
-            safetySettings,
-          });
+const generationConfigURL = {
+  temperature: 0.8,
+  topK: 1,
+  topP: 1,
+  maxOutputTokens: 22,
+};
+
+const result = await model.generateContent({
+  contents: [{ role: "user", parts }],
+  generationConfig: generationConfigURL,
+  safetySettings,
+});
       
           const response = result.response;
           setFirstURL(response.text());
