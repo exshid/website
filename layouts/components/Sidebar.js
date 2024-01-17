@@ -7,7 +7,7 @@ const Sidebar = ({ items }) => {
         {items.slice(0, 6).map((article) => (
           <div key={Math.random()} className="flex justify-between items-start p-2">
             <div className="flex-1 space-y-2">
-            <Link href={item.id}>
+            <Link href={article.id}>
 
               <h3 className="font-bold text-lg">{article.title}</h3>
 </Link>
