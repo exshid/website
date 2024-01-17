@@ -16,7 +16,7 @@ function formatDate(dateString) {
     return <>
         <Base>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
-         <div className="flex flex-col lg:flex-row py-5 p-2 w-full md:w-4/5">
+         <div className="flex flex-col lg:flex-row py-5 p-2 w-full md:w-4/5 lg:w-[90%] xl:w-4/5">
 <div className="w-full lg:w-1/2 flex flex-col justify-center p-3">
 <div className="flex">      
 {myCats.map((item, index) => (
