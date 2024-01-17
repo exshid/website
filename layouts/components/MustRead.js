@@ -16,7 +16,7 @@ const MustRead = ({items}) => {
 };
 
 
-const ArticleCard = ({ image, title, description, author }) => {
+const ArticleCard = ({ image, title, description, author, id }) => {
   return (
     <div className="max-w-sm mx-auto bg-white overflow-hidden">
       <div className="flex flex-col">
