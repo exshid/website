@@ -35,7 +35,6 @@ function formatDate(dateString) {
 </div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
-
   <span className="text-lg uppercase font-bold text-black inline-block lg:block w-min lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
   <span className="inline-block lg:hidden	mx-2">•</span>
   <span className="text-lg">{formatDate(props.rweetData.date)}</span>
