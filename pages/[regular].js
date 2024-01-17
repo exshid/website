@@ -62,21 +62,6 @@ function formatDate(dateString) {
         })}
       </div>
       }
-<div className="w-4/5 flex flex-col items-center mb-6">
-  <span className="text-3xl text-black p-3 font-bold">Read More</span>
-      <div className="flex justify-around w-full">
-  {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
-    <div key={index} className="flex flex-col w-96">
-     <div className="h-64 p-3">
-      <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
-   </div>
-      <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-      <p className="text-sm text-gray-700 mb-2">{post.description}</p>
-      <span className="text-sm text-black">By {post.author}</span>
-    </div>
-  ))}
-</div>
-</div>
 
         </div>
         </Base>
