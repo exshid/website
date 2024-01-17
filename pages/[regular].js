@@ -115,7 +115,6 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
-  // Fetch all posts
   const allPosts = await tweetsCollection.find().toArray();
 
   // Filter out the current post and parse the JSON array
