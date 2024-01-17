@@ -97,7 +97,7 @@ export async function getStaticPaths() {
       fallback: 'blocking',
       paths: rweets.map(rweet => ({
           params: {
-            regular: rweet.url  // Use 'url' instead of '_id'
+            regular: rweet.url  
           },
       }))
   }
