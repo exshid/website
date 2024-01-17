@@ -2,8 +2,8 @@ import { MongoClient, ObjectId } from 'mongodb'
 import Image from 'next/image'
 import Link from 'next/link';
 
-function Tweet(props, relatedPosts ) {
-console.log(relatedPosts);
+function Tweet(props ) {
+console.log(props.rweetData.similarPosts);
   const myCats = JSON.parse(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
@@ -110,6 +110,6 @@ export async function getStaticProps(context) {
     }
   }
 }
-}
+
 export default Tweet
 
