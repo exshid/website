@@ -16,7 +16,7 @@ const HeadLines = ({ items }) => {
                 objectFit="cover"/>
                 </div>
                 <div>
-                <Link href={item.id}>
+                <Link href={podcast.id}>
 
                   <h3 className="text-lg font-bold mb-1">{podcast.title}</h3>
 </Link>

@@ -4,9 +4,10 @@ import Link from 'next/link';
 import Base from "@layouts/Baseof";
 
 import {Fragment} from 'react'
-function Tweet(props ) {
+function Tweet(props, relatedPosts ) {
 
   const myCats = JSON.parse(props.rweetData.cats);
+  
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -56,9 +57,8 @@ function formatDate(dateString) {
 <div className="w-4/5 flex flex-col items-center mb-6">
   <span className="text-3xl text-black p-3 font-bold">Read More</span>
       <div className="flex justify-around w-full">
+ </div>
 </div>
-</div>
-
         </div>
         </Base>
 
@@ -118,6 +118,7 @@ return {
           author: rweet.author,
           image: rweet.image
         },
+        relatedPosts: relatedPosts.reverse().slice(0, 15), // Add relatedPosts to props
     }
 }
 }
