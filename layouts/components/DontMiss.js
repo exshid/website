@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image'
 
 const DontMiss = ({ items, headline }) => {
     return (
@@ -13,12 +14,12 @@ const DontMiss = ({ items, headline }) => {
               <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
 
-<Link href={item.url}>
+<Link href={item.id}>
                 <h3 className="mt-2 text-lg text-gray-700 font-bold">{item.title}</h3>
     </Link>
-                <p className="mt-1 text-sm text-gray-500">{item.author}</p>
+                <span className="mt-1 text-sm text-gray-500">{item.author}</span>
               </div>
-              <img className="h-16 w-16 object-cover rounded" src={item.image} alt={item.title} />
+              <Image className="h-16 w-16 object-cover rounded" src={item.image} alt={item.title} />
             </li>
           ))}
         </ul>
