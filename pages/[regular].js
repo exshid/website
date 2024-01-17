@@ -47,8 +47,8 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      {props.relatedPosts.map((post) => (
-  <div >
+      {props.relatedPosts.map((post, index) => (
+  <div key={index}>
     <h2>{post.title}</h2>
     <p>{post.description}</p>
     <img src={post.image} alt={post.title} />
