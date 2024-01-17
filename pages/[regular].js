@@ -75,7 +75,6 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps(context) {
-
   const tweetId = context.params.regular;
 
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
@@ -86,23 +85,31 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
+  // Find other posts with the same cats, excluding the current post
+  const similarPosts = await tweetsCollection.find({ 
+    cats: { $in: rweet.cats }, 
+    _id: { $ne: new ObjectId(tweetId) } 
+  }).limit(3).toArray();
+
   client.close()
   return {
-      props: {
-          rweetData: {
-            title: rweet.title,
-            content: rweet.content,
-            description: rweet.description,
-            url: rweet.url,
-            tags: rweet.tags,
-            cats: rweet.cats,
-            date: rweet.date,
-            id: rweet._id.toString(),
-            author: rweet.author,
-            image: rweet.image
-          },
-      }
+    props: {
+      rweetData: {
+        title: rweet.title,
+        content: rweet.content,
+        description: rweet.description,
+        url: rweet.url,
+        tags: rweet.tags,
+        cats: rweet.cats,
+        date: rweet.date,
+        id: rweet._id.toString(),
+        author: rweet.author,
+        image: rweet.image,
+        similarPosts: similarPosts // Add this line to include the similar posts in the props
+      },
+    }
   }
+}
 }
 export default Tweet
 
