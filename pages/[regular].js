@@ -11,8 +11,8 @@ function Tweet(props, relatedPosts ) {
     let relatedPostsCompleted = array.filter(obj => !relatedPostsFiltered.includes(obj));
     relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
   }
-  console.log(relatedPostsCompleted);
-    
+  console.log(relatedPostsFiltered);
+
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -55,7 +55,7 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      {relatedPostsCompleted.map((post, index) => (
+      {relatedPostsFiltered.map((post, index) => (
   <div key={index}>
     <h2>{post.title}</h2>
     <p>{post.description}</p>
