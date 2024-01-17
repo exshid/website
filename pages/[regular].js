@@ -1,7 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import Image from 'next/image'
 import Link from 'next/link';
-
+import {Fragment} from 'react'
 function Tweet(props, relatedPosts ) {
 
   const myCats = JSON.parse(props.rweetData.cats);
@@ -24,10 +24,10 @@ function formatDate(dateString) {
 <div className="w-1/2 flex flex-col justify-center p-3">
 <div className="flex">      
 {myCats.map((item, index) => (
-  <React.Fragment key={index}>
+  <Fragment key={index}>
     <span className="text-pink-800 text-lg uppercase w-min inline-block">{item}</span>
     {index !== myCats.length - 1 && <span>•</span>}
-  </React.Fragment>
+  </Fragment>
 ))}
 </div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
