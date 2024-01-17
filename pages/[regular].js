@@ -62,27 +62,6 @@ function formatDate(dateString) {
 
         </>
 }
-
-export async function getStaticPaths() {
-
-    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-    const db = client.db()
-    const tweetsCollection = db.collection('rweets');
-
-    const rweets = await tweetsCollection.find({}, {
-        _id: 1,
-    }).toArray()
-    client.close()
-    return {
-        fallback: 'blocking',
-        paths: rweets.map(rweet => ({
-            params: {
-              regular: rweet._id.toString()
-            },
-        }))
-    }
-}
-
 export async function getStaticProps(context) {
   const tweetId = context.params.regular;
 
@@ -94,11 +73,11 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
-  // Fetch all posts
-  const allPosts = await tweetsCollection.find().toArray();
+  // Fetch posts with the same categories
+  const relatedPosts = await tweetsCollection.find({ cats: { $in: rweet.cats } }).limit(3).toArray();
 
   // Filter out the current post and parse the JSON array
-  const relatedPosts = allPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
+  const filteredPosts = relatedPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
 
   client.close()
   return {
@@ -115,7 +94,7 @@ export async function getStaticProps(context) {
             author: rweet.author,
             image: rweet.image
           },
-          relatedPosts: relatedPosts, // Add relatedPosts to props
+          relatedPosts: filteredPosts, // Add relatedPosts to props
       }
   }
 }
