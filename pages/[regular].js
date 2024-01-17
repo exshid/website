@@ -6,12 +6,12 @@ function Tweet(props, relatedPosts ) {
 
   const myCats = JSON.parse(props.rweetData.cats);
   let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
-
+  
   if (relatedPostsFiltered.length < 3) {
-    let relatedPostsCompleted = array.filter(obj => !relatedPostsFiltered.includes(obj));
+    let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
     relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
   }
-  console.log(relatedPostsFiltered);
+    console.log(relatedPostsFiltered);
 
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
@@ -55,7 +55,16 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      
+      {relatedPostsFiltered.map((post, index) => (
+  <div key={index}>
+    <h2>{post.title}</h2>
+    <p>{post.description}</p>
+    <img src={post.image} alt={post.title} />
+    <p>Author: {post.author}</p>
+    <p>Date: {post.date}</p>
+    <a href={post.url}>Read more</a>
+  </div>
+))}
 
         </div>
 
