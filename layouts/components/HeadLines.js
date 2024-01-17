@@ -5,7 +5,7 @@ const HeadLines = ({ items }) => {
     return (
       <div className="flex flex-wrap justify-between p-3 md:py-4 md:px-20">
         <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
-        <div className="flex flex-wrap justify-between flex-row lg:flex-col">
+        <div className="flex flex-wrap justify-between flex-col lg:flex-row">
           {items.slice(0, 3).map((podcast) => (
             <div key={Math.random()} className="w-full lg:w-1/3 py-2">
               <div className="py-4 rounded-lg flex">
