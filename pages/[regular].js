@@ -51,8 +51,7 @@ function formatDate(dateString) {
         </div>
             </div>
             <div className='content-text w-full px-2 md:w-4/5 lg:w-2/3 xl:w-1/2 mt-6 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
-        
-            {myTags && <div className="flex space-x-4 px-80 py-3 w-4/5 items-center border-y"><span className="mr-1">Tags:</span> 
+                    {myTags && <div className="flex space-x-4 px-80 py-3 w-4/5 items-center border-y"><span className="mr-1">Tags:</span> 
         {myTags.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (
@@ -91,7 +90,7 @@ export async function getStaticPaths() {
 
   const rweets = await tweetsCollection.find({}, {
       _id: 1,
-      url: 1  // Fetch the 'url' field
+      url: 1  
   }).toArray()
   client.close()
   return {
