@@ -4,8 +4,23 @@ import SearchModal from "@layouts/partials/SearchModal";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import CategoryLinks from "@layouts/components/CategoryLinks";
 
-const Header = () => {
+const Header = ({items}) => {
+  const categoriesPost = [
+    "Games", 
+    "Movies",
+    "TV",
+    "Music",
+    "Books",
+    "AI", 
+    "VR",
+    "Animation",
+    "Anime",
+    "Comics",
+    "Celebrities"
+    ];
+
   // distructuring the main menu from menu object
   const { main } = menu;
 
@@ -117,6 +132,8 @@ const Header = () => {
           />
         </nav>
       </header>
+      <CategoryLinks items={categoriesPost} />
+
     </>
   );
 };

@@ -26,21 +26,6 @@ const { blog_folder } = config.settings;
 
 const Home = ({ articles }) => {
 
-  
-     const categoriesPost = [
-        "Games", 
-        "Movies",
-        "TV",
-        "Music",
-        "Books",
-        "AI", 
-        "VR",
-        "Animation",
-        "Anime",
-        "Comics",
-        "Celebrities"
-        ];
-          
       const generationConfig = {
         temperature: 0.8,
         topK: 1,
@@ -319,7 +304,6 @@ const result = await model.generateContent({
 
   return (
     <Base>
-    <CategoryLinks items={categoriesPost} />
       <EditorContainer>
     <EditorPickLeft items={articles} />
     <EditorPickCenter items={articles} />
