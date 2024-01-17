@@ -89,14 +89,14 @@ export async function getStaticPaths() {
   const tweetsCollection = db.collection('rweets');
 
   const rweets = await tweetsCollection.find({}, {
-      _id: 1,
+      _id: 1
   }).toArray()
   client.close()
   return {
       fallback: 'blocking',
       paths: rweets.map(rweet => ({
           params: {
-            regular: rweet._id  
+            regular: rweet._id
           },
       }))
   }
