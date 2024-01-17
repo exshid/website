@@ -70,7 +70,6 @@ function formatDate(dateString) {
      <div className="h-64">
       <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
    </div>
-      <span className="text-xs text-gray-500 uppercase">{post.myCats[0]}</span>
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <p className="text-sm text-gray-700 mb-2">{post.description}</p>
       <span className="text-sm text-gray-500">By {post.author}</span>

@@ -5,9 +5,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['ignimgs.com'],
-  },
-  webpack5: true,
+    remotePatterns: [
+    {
+    protocol: "https",
+    hostname: "**",
+    },
+    ],
+    },  webpack5: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false, child_process: false };
 
