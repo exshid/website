@@ -4,17 +4,9 @@ import Link from 'next/link';
 import Base from "@layouts/Baseof";
 
 import {Fragment} from 'react'
-function Tweet(props, relatedPosts ) {
+function Tweet(props ) {
 
   const myCats = JSON.parse(props.rweetData.cats);
-  let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
-  
-  if (relatedPostsFiltered.length < 3) {
-    let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
-    relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
-  }
-    console.log(relatedPostsFiltered);
-
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -23,8 +15,8 @@ function formatDate(dateString) {
     return <>
         <Base>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
-         <div className="flex flex-row py-5 p-2 w-full md:w-4/5">
-<div className="w-full lg:w-1/2 flex flex-row lg:flex-col justify-center p-3">
+         <div className="flex flex-col lg:flex-row py-5 p-2 w-full md:w-4/5">
+<div className="w-full lg:w-1/2 flex flex-col justify-center p-3">
 <div className="flex">      
 {myCats.map((item, index) => (
   <Fragment key={index}>
@@ -35,9 +27,8 @@ function formatDate(dateString) {
 </div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
-
   <span className="text-lg uppercase font-bold text-black inline-block lg:block w-min lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
-  <span className="hidden lg:inline-block	mx-2">•</span>
+  <span className="inline-block lg:hidden	mx-2">•</span>
   <span className="text-lg">{formatDate(props.rweetData.date)}</span>
             </div>
         <div className="relative h-calc w-full lg:w-1/2 p-3">
@@ -62,6 +53,11 @@ function formatDate(dateString) {
         })}
       </div>
       }
+<div className="w-4/5 flex flex-col items-center mb-6">
+  <span className="text-3xl text-black p-3 font-bold">Read More</span>
+      <div className="flex justify-around w-full">
+</div>
+</div>
 
         </div>
         </Base>
@@ -122,7 +118,6 @@ return {
           author: rweet.author,
           image: rweet.image
         },
-        relatedPosts: relatedPosts.reverse().slice(0, 15), // Add relatedPosts to props
     }
 }
 }
