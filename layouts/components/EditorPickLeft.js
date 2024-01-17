@@ -8,7 +8,7 @@ const EditorPickLeft = ({ items }) => {
             <div key={Math.random()} className="bg-white p-4">
                 <Link href={item.id}>
 
-              <h3 className="font-bold text-black">{item.title}</h3>
+              <h3 className="font-bold text-black text-xl">{item.title}</h3>
 </Link>
               <span className="text-gray-500">{item.author}</span>
             </div>

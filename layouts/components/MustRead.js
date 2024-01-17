@@ -22,7 +22,7 @@ const ArticleCard = ({ image, title, description, author, id }) => {
       <div className="flex flex-col">
         <div className="h-72 h-72">
         <Image
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover relative"
           src={image}
           alt={title}
           layout="fill"
