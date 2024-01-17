@@ -83,20 +83,21 @@ function formatDate(dateString) {
 
         </>
 }
+
 export async function getStaticPaths() {
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
   const db = client.db()
   const tweetsCollection = db.collection('rweets');
 
-  const rweets = await tweetsCollection.find({}, {
+  const tweets = await tweetsCollection.find({}, {
       url: 1
   }).toArray()
   client.close()
   return {
       fallback: 'blocking',
-      paths: rweets.map(rweet => ({
+      paths: tweets.map(tweet => ({
           params: {
-            regular: rweet.url  
+            url: rweet.url  
           },
       }))
   }
