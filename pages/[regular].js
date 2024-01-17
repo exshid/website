@@ -11,7 +11,7 @@ function Tweet(props, relatedPosts ) {
   
   if (relatedPostsFiltered.length < 3) {
     let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
-    relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
+    relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 4 - relatedPostsFiltered.length));
   }
     console.log(relatedPostsFiltered);
 
@@ -62,14 +62,15 @@ function formatDate(dateString) {
         })}
       </div>
 
-<div>        <span>Read More</span>
+<div className="w-4/5 flex flex-col items-center">
+  <span className="text-2xl p-3">Read More</span>
       <div className="grid grid-cols-3 gap-4">
-  {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
-    <div key={index} className="flex flex-col">
-     <div className="h-64 w-80">
+  {relatedPostsFiltered.slice(0, 4).map((post, index)  => (
+    <div key={index} className="flex flex-col w-80">
+     <div className="h-64">
       <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
    </div>
-      <span className="text-xs text-gray-500 uppercase">{post.cats[0]}</span>
+      <span className="text-xs text-gray-500 uppercase">{post.myCats[0]}</span>
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <p className="text-sm text-gray-700 mb-2">{post.description}</p>
       <span className="text-sm text-gray-500">By {post.author}</span>
