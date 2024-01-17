@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 function Tweet(props, relatedPosts ) {
 console.log(relatedPosts);
+  const myCats = JSON.parse(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -13,7 +14,7 @@ function formatDate(dateString) {
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-row pb-6 w-4/5">
 <div className="w-1/2 flex flex-col justify-center p-3">        
-{props.rweetData.cats.map((item) => (
+{myCats.map((item) => (
   <span key={Math.random()} className="text-pink-800 text-lg uppercase">{item}</span>
 ))}
 
@@ -46,17 +47,6 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      {props.relatedPosts.map((post, index) => (
-  <div key={index}>
-
-    <h2>{post.title}</h2>
-    <p>{post.description}</p>
-    <img src={post.image} alt={post.title} />
-    <p>Author: {post.author}</p>
-    <p>Date: {post.date}</p>
-    <a href={post.url}>Read more</a>
-  </div>
-))}
 
         </div>
 
@@ -82,7 +72,10 @@ export async function getStaticPaths() {
         }))
     }
 }
+
+
 export async function getStaticProps(context) {
+
   const tweetId = context.params.regular;
 
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
@@ -93,15 +86,6 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
-  // Parse rweet.cats from JSON string to array
-  const catsArray = JSON.parse(rweet.cats);
-
-  // Fetch posts with the same categories
-  const relatedPosts = await tweetsCollection.find({ cats: { $all: catsArray } }).limit(3).toArray();
-
-  // Filter out the current post and parse the JSON array
-  const filteredPosts = relatedPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
-
   client.close()
   return {
       props: {
@@ -111,16 +95,14 @@ export async function getStaticProps(context) {
             description: rweet.description,
             url: rweet.url,
             tags: rweet.tags,
-            cats: catsArray, // Now catsArray is an array
+            cats: rweet.cats,
             date: rweet.date,
             id: rweet._id.toString(),
             author: rweet.author,
             image: rweet.image
           },
-          relatedPosts: filteredPosts, // Add relatedPosts to props
       }
   }
 }
-
 export default Tweet
 
