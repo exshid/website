@@ -1,13 +1,7 @@
-import { ObjectId } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 import Image from 'next/image'
 import Link from 'next/link';
 import Base from "@layouts/Baseof";
-import dynamic from 'next/dynamic';
-
-const MongoClient = dynamic(
-  () => import('mongodb').then((mod) => mod.MongoClient),
-  { ssr: false }
-);
 
 import {Fragment} from 'react'
 function Tweet(props, relatedPosts ) {
@@ -89,46 +83,63 @@ function formatDate(dateString) {
 
         </>
 }
-
 export async function getStaticPaths() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority');
-  const db = client.db();
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
   const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find({}, { url: 1 }).toArray();
-  client.close();
+
+  const rweets = await tweetsCollection.find({}, {
+      _id: 1,
+      url: 1  // Fetch the 'url' field
+  }).toArray()
+  client.close()
   return {
-    fallback: 'blocking',
-    paths: rweets.map(rweet => ({ params: { regular: rweet.url.toString() } }))
+      fallback: 'blocking',
+      paths: rweets.map(rweet => ({
+          params: {
+            regular: rweet.url  // Use 'url' instead of '_id'
+          },
+      }))
   }
 }
+
+
 
 export async function getStaticProps(context) {
-  const tweetUrl = context.params.regular;
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority');
-  const db = client.db();
+  const tweetId = context.params.regular;
+
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+
+  const db = client.db()
+
   const tweetsCollection = db.collection('rweets');
-  const rweet = await tweetsCollection.findOne({ url: tweetUrl });
+
+  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
+
+  // Fetch all posts
   const allPosts = await tweetsCollection.find().toArray();
-  const relatedPosts = allPosts.filter(post => post.url !== tweetUrl).map(post => JSON.parse(JSON.stringify(post)));
-  client.close();
+
+  // Filter out the current post and parse the JSON array
+  const relatedPosts = allPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
+
+  client.close()
   return {
-    props: {
-      rweetData: {
-        title: rweet.title,
-        content: rweet.content,
-        description: rweet.description,
-        url: rweet.url,
-        tags: rweet.tags,
-        cats: rweet.cats,
-        date: rweet.date,
-        id: rweet._id.toString(),
-        author: rweet.author,
-        image: rweet.image
-      },
-      relatedPosts: relatedPosts.reverse().slice(0, 15),
-    }
+      props: {
+          rweetData: {
+            title: rweet.title,
+            content: rweet.content,
+            description: rweet.description,
+            url: rweet.url,
+            tags: rweet.tags,
+            cats: rweet.cats,
+            date: rweet.date,
+            id: rweet._id.toString(),
+            author: rweet.author,
+            image: rweet.image
+          },
+          relatedPosts: relatedPosts.reverse().slice(0, 15), // Add relatedPosts to props
+      }
   }
 }
-
 export default Tweet
 
