@@ -9,9 +9,9 @@ function Tweet(props, relatedPosts ) {
   const myCats = JSON.parse(props.rweetData.cats);
   let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
   
-  if (relatedPostsFiltered.length < 4) {
+  if (relatedPostsFiltered.length < 3) {
     let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
-    relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 4 - relatedPostsFiltered.length));
+    relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
   }
     console.log(relatedPostsFiltered);
 
@@ -65,7 +65,7 @@ function formatDate(dateString) {
 <div className="w-4/5 flex flex-col items-center">
   <span className="text-2xl p-3">Read More</span>
       <div className="grid grid-cols-3 gap-4">
-  {relatedPostsFiltered.slice(0, 4).map((post, index)  => (
+  {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
     <div key={index} className="flex flex-col w-80">
      <div className="h-64">
       <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
