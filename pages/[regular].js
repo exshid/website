@@ -3,8 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 function Tweet(props, relatedPosts ) {
-console.log(relatedPosts);
+
   const myCats = JSON.parse(props.rweetData.cats);
+  let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
+
+  if (relatedPostsFiltered.length < 3) {
+    let relatedPostsCompleted = array.filter(obj => !relatedPostsFiltered.includes(obj));
+    relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
+  }
+  console.log(relatedPostsCompleted);
+    
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -47,7 +55,7 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      {props.relatedPosts.map((post, index) => (
+      {relatedPostsCompleted.map((post, index) => (
   <div key={index}>
     <h2>{post.title}</h2>
     <p>{post.description}</p>
