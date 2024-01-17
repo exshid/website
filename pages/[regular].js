@@ -66,7 +66,9 @@ function formatDate(dateString) {
       <div className="grid grid-cols-3 gap-4">
   {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
     <div key={index} className="flex flex-col">
-      <img src={post.image} alt={post.title} className="w-full h-48 object-cover mb-2"/>
+     <div className="h-64 w-80">
+      <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
+   </div>
       <span className="text-xs text-gray-500 uppercase">{post.cats[0]}</span>
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <p className="text-sm text-gray-700 mb-2">{post.description}</p>
