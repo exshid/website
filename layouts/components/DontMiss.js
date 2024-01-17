@@ -13,7 +13,7 @@ const DontMiss = ({ items, headline }) => {
               <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
 
-<Link href={item.id}>
+<Link href={item.url}>
                 <h3 className="mt-2 text-lg text-gray-700 font-bold">{item.title}</h3>
     </Link>
                 <p className="mt-1 text-sm text-gray-500">{item.author}</p>

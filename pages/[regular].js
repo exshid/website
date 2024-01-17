@@ -1,7 +1,13 @@
-import { MongoClient, ObjectId } from 'mongodb'
+import { ObjectId } from 'mongodb'
 import Image from 'next/image'
 import Link from 'next/link';
 import Base from "@layouts/Baseof";
+import dynamic from 'next/dynamic';
+
+const MongoClient = dynamic(
+  () => import('mongodb').then((mod) => mod.MongoClient),
+  { ssr: false }
+);
 
 import {Fragment} from 'react'
 function Tweet(props, relatedPosts ) {
