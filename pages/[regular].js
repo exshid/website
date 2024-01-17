@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 function Tweet(props ) {
 console.log(props.rweetData.similarPosts);
-  const myCats = JSON.parse(props.rweetData.cats);
+  const myCats = props.rweetData.cats;
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -87,7 +87,7 @@ export async function getStaticProps(context) {
 
   // Find other posts with the same cats, excluding the current post
   const similarPosts = await tweetsCollection.find({ 
-    cats: { $in: rweet.cats }, 
+    cats: { $in: JSON.parse(rweet.cats) }, 
     _id: { $ne: new ObjectId(tweetId) } 
   }).limit(3).toArray();
 
