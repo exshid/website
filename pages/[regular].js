@@ -47,6 +47,16 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
+      {props.relatedPosts.map((post) => (
+  <div >
+    <h2>{post.title}</h2>
+    <p>{post.description}</p>
+    <img src={post.image} alt={post.title} />
+    <p>Author: {post.author}</p>
+    <p>Date: {post.date}</p>
+    <a href={post.url}>Read more</a>
+  </div>
+))}
 
         </div>
 
@@ -73,9 +83,7 @@ export async function getStaticPaths() {
     }
 }
 
-
 export async function getStaticProps(context) {
-
   const tweetId = context.params.regular;
 
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
@@ -86,26 +94,11 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
-  async function getRelatedPosts( cats) {
-    cats = Array.isArray(cats) ? cats : JSON.parse(cats);
-  
-    // Find posts with at least one matching tag or category
-    const relatedPosts = await tweetsCollection.find({
-      $or: [
-        { cats: { $in: cats } }
-      ]
-    }).toArray()
-  
-    // Convert _id to string for each post
-    relatedPosts.forEach(post => {
-      post._id = post._id.toString()
-    })
-  
-    return relatedPosts
-  }
+  // Fetch all posts
+  const allPosts = await tweetsCollection.find().toArray();
 
-  // Call getRelatedPosts with the tags and cats of the current post
-  const relatedPosts = await getRelatedPosts(rweet.cats)
+  // Filter out the current post and parse the JSON array
+  const relatedPosts = allPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
 
   client.close()
   return {
@@ -122,9 +115,10 @@ export async function getStaticProps(context) {
             author: rweet.author,
             image: rweet.image
           },
-          relatedPosts // Include relatedPosts in the props
+          relatedPosts: relatedPosts, // Add relatedPosts to props
       }
   }
 }
+
 export default Tweet
 
