@@ -9,7 +9,7 @@ function Tweet(props, relatedPosts ) {
   const myCats = JSON.parse(props.rweetData.cats);
   let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
   
-  if (relatedPostsFiltered.length < 3) {
+  if (relatedPostsFiltered.length < 4) {
     let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
     relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 4 - relatedPostsFiltered.length));
   }
