@@ -51,7 +51,7 @@ function formatDate(dateString) {
             </div>
             <div className='content-text w-1/2 mt-6 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         
-            <div className="flex space-x-4 px-80 py-3 w-full items-center border-y"><span className="mr-1">More:</span> 
+            {myTags && <div className="flex space-x-4 px-80 py-3 w-4/5 items-center border-y"><span className="mr-1">Tags:</span> 
         {myTags.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (
@@ -61,9 +61,9 @@ function formatDate(dateString) {
           );
         })}
       </div>
-
-<div className="w-4/5 flex flex-col items-center mb-3">
-  <span className="text-2xl p-3 font-bold">Read More</span>
+      }
+<div className="w-4/5 flex flex-col items-center mb-6">
+  <span className="text-3xl text-black p-3 font-bold">Read More</span>
       <div className="flex justify-around w-full">
   {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
     <div key={index} className="flex flex-col w-96">
@@ -85,61 +85,44 @@ function formatDate(dateString) {
 }
 
 export async function getStaticPaths() {
-
-    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-    const db = client.db()
-    const tweetsCollection = db.collection('rweets');
-
-    const rweets = await tweetsCollection.find({}, {
-        _id: 1,
-    }).toArray()
-    client.close()
-    return {
-        fallback: 'blocking',
-        paths: rweets.map(rweet => ({
-            params: {
-              regular: rweet._id.toString()
-            },
-        }))
-    }
-}
-
-
-export async function getStaticProps(context) {
-  const tweetId = context.params.regular;
-
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-
-  const db = client.db()
-
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority');
+  const db = client.db();
   const tweetsCollection = db.collection('rweets');
-
-  const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
-
-  // Fetch all posts
-  const allPosts = await tweetsCollection.find().toArray();
-
-  // Filter out the current post and parse the JSON array
-  const relatedPosts = allPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
-
-  client.close()
+  const rweets = await tweetsCollection.find({}, { url: 1 }).toArray();
+  client.close();
   return {
-      props: {
-          rweetData: {
-            title: rweet.title,
-            content: rweet.content,
-            description: rweet.description,
-            url: rweet.url,
-            tags: rweet.tags,
-            cats: rweet.cats,
-            date: rweet.date,
-            id: rweet._id.toString(),
-            author: rweet.author,
-            image: rweet.image
-          },
-          relatedPosts: relatedPosts.reverse().slice(0, 15), // Add relatedPosts to props
-      }
+    fallback: 'blocking',
+    paths: rweets.map(rweet => ({ params: { regular: rweet.url.toString() } }))
   }
 }
+
+export async function getStaticProps(context) {
+  const tweetUrl = context.params.regular;
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority');
+  const db = client.db();
+  const tweetsCollection = db.collection('rweets');
+  const rweet = await tweetsCollection.findOne({ url: tweetUrl });
+  const allPosts = await tweetsCollection.find().toArray();
+  const relatedPosts = allPosts.filter(post => post.url !== tweetUrl).map(post => JSON.parse(JSON.stringify(post)));
+  client.close();
+  return {
+    props: {
+      rweetData: {
+        title: rweet.title,
+        content: rweet.content,
+        description: rweet.description,
+        url: rweet.url,
+        tags: rweet.tags,
+        cats: rweet.cats,
+        date: rweet.date,
+        id: rweet._id.toString(),
+        author: rweet.author,
+        image: rweet.image
+      },
+      relatedPosts: relatedPosts.reverse().slice(0, 15),
+    }
+  }
+}
+
 export default Tweet
 
