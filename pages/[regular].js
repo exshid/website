@@ -97,7 +97,7 @@ export async function getStaticProps(context) {
   const catsArray = JSON.parse(rweet.cats);
 
   // Fetch posts with the same categories
-  const relatedPosts = await tweetsCollection.find({ cats: { $in: catsArray } }).limit(3).toArray();
+  const relatedPosts = await tweetsCollection.find({ cats: { $all: catsArray } }).limit(3).toArray();
 
   // Filter out the current post and parse the JSON array
   const filteredPosts = relatedPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
