@@ -89,8 +89,7 @@ export async function getStaticPaths() {
   const tweetsCollection = db.collection('rweets');
 
   const rweets = await tweetsCollection.find({}, {
-      _id: 1,
-      url: 1  
+      url: 1
   }).toArray()
   client.close()
   return {
