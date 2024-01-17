@@ -49,7 +49,7 @@ function formatDate(dateString) {
       <h2>Related Posts</h2>
       {props.relatedPosts.map((post, index) => (
   <div key={index}>
-    
+
     <h2>{post.title}</h2>
     <p>{post.description}</p>
     <img src={post.image} alt={post.title} />
@@ -94,8 +94,11 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
+  // Parse rweet.cats from JSON string to array
+  const catsArray = JSON.parse(rweet.cats);
+
   // Fetch posts with the same categories
-  const relatedPosts = await tweetsCollection.find({ cats: { $in: rweet.cats } }).limit(3).toArray();
+  const relatedPosts = await tweetsCollection.find({ cats: { $in: catsArray } }).limit(3).toArray();
 
   // Filter out the current post and parse the JSON array
   const filteredPosts = relatedPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
@@ -109,7 +112,7 @@ export async function getStaticProps(context) {
             description: rweet.description,
             url: rweet.url,
             tags: rweet.tags,
-            cats: rweet.cats,
+            cats: catsArray, // Now catsArray is an array
             date: rweet.date,
             id: rweet._id.toString(),
             author: rweet.author,
