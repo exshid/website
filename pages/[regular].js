@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 function Tweet(props ) {
 console.log(props.rweetData.similarPosts);
-  const myCats = props.rweetData.cats;
+console.log(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -14,9 +14,6 @@ function formatDate(dateString) {
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-row pb-6 w-4/5">
 <div className="w-1/2 flex flex-col justify-center p-3">        
-{myCats.map((item) => (
-  <span key={Math.random()} className="text-pink-800 text-lg uppercase">{item}</span>
-))}
 
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
