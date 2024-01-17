@@ -6,7 +6,7 @@ const LatestPosts = ({ items }) => {
       <div className="w-3/4 pr-20 divide-y">
         {items.map((item) => (
           <div key={Math.random()} className="flex">
-            <div className="w-[320px] h-52">
+            <div className="w-[320px] h-52 relative">
             <Image src={item.image} alt={item.title} className="object-cover relative p-3 h-full w-full rounded-lg"
                     layout="fill"
                     objectFit="cover"/>

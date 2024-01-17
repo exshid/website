@@ -12,7 +12,7 @@ const Sidebar = ({ items }) => {
               <h3 className="font-bold text-lg">{article.title}</h3>
 </Link>
             </div>
-            <div className="w-24 h-20">
+            <div className="w-24 h-20 relative">
             <Image className="w-full h-full object-cover relative" src={article.image} alt={article.title}
             layout="fill"
             objectFit="cover"/>

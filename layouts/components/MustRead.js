@@ -20,7 +20,7 @@ const ArticleCard = ({ image, title, description, author, id }) => {
   return (
     <div className="max-w-sm mx-auto bg-white overflow-hidden">
       <div className="flex flex-col">
-        <div className="h-72 h-72">
+        <div className="h-72 w-72 relative">
         <Image
           className="h-full w-full object-cover relative"
           src={image}
