@@ -2,9 +2,9 @@ import { MongoClient, ObjectId } from 'mongodb'
 import Image from 'next/image'
 import Link from 'next/link';
 
-function Tweet(props ) {
-console.log(props.rweetData.similarPosts);
-console.log(props.rweetData.cats);
+function Tweet(props, relatedPosts ) {
+console.log(relatedPosts);
+  const myCats = JSON.parse(props.rweetData.cats);
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -14,6 +14,9 @@ function formatDate(dateString) {
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-row pb-6 w-4/5">
 <div className="w-1/2 flex flex-col justify-center p-3">        
+{myCats.map((item) => (
+  <span key={Math.random()} className="text-pink-800 text-lg uppercase">{item}</span>
+))}
 
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
@@ -44,6 +47,16 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
+      {props.relatedPosts.map((post, index) => (
+  <div key={index}>
+    <h2>{post.title}</h2>
+    <p>{post.description}</p>
+    <img src={post.image} alt={post.title} />
+    <p>Author: {post.author}</p>
+    <p>Date: {post.date}</p>
+    <a href={post.url}>Read more</a>
+  </div>
+))}
 
         </div>
 
@@ -82,31 +95,30 @@ export async function getStaticProps(context) {
 
   const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
 
-  // Find other posts with the same cats, excluding the current post
-  const similarPosts = await tweetsCollection.find({ 
-    cats: { $in: JSON.parse(rweet.cats) }, 
-    _id: { $ne: new ObjectId(tweetId) } 
-  }).limit(3).toArray();
+  // Fetch all posts
+  const allPosts = await tweetsCollection.find().toArray();
+
+  // Filter out the current post and parse the JSON array
+  const relatedPosts = allPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
 
   client.close()
   return {
-    props: {
-      rweetData: {
-        title: rweet.title,
-        content: rweet.content,
-        description: rweet.description,
-        url: rweet.url,
-        tags: rweet.tags,
-        cats: rweet.cats,
-        date: rweet.date,
-        id: rweet._id.toString(),
-        author: rweet.author,
-        image: rweet.image,
-        similarPosts: similarPosts // Add this line to include the similar posts in the props
-      },
-    }
+      props: {
+          rweetData: {
+            title: rweet.title,
+            content: rweet.content,
+            description: rweet.description,
+            url: rweet.url,
+            tags: rweet.tags,
+            cats: rweet.cats,
+            date: rweet.date,
+            id: rweet._id.toString(),
+            author: rweet.author,
+            image: rweet.image
+          },
+          relatedPosts: relatedPosts, // Add relatedPosts to props
+      }
   }
 }
-
 export default Tweet
 
