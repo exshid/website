@@ -29,7 +29,7 @@ const ArticleCard = ({ image, title, description, author }) => {
           objectFit="cover"/>
       </div>
         <div className="pt-8">
-        <Link href={item.id}>
+        <Link href={id}>
 
           <h3 className="text-lg font-bold text-black">
             {title}
