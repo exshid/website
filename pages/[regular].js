@@ -23,8 +23,8 @@ function formatDate(dateString) {
     return <>
         <Base>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
-         <div className="flex flex-col lg:flex-row py-5 p-2 w-full md:w-4/5">
-<div className="w-full lg:w-1/2 flex flex-col justify-center p-3">
+         <div className="flex flex-row py-5 p-2 w-full md:w-4/5">
+<div className="w-full lg:w-1/2 flex flex-row lg:flex-col justify-center p-3">
 <div className="flex">      
 {myCats.map((item, index) => (
   <Fragment key={index}>
@@ -35,8 +35,9 @@ function formatDate(dateString) {
 </div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
+
   <span className="text-lg uppercase font-bold text-black inline-block lg:block w-min lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
-  <span className="inline-block lg:hidden	mx-2">•</span>
+  <span className="hidden lg:inline-block	mx-2">•</span>
   <span className="text-lg">{formatDate(props.rweetData.date)}</span>
             </div>
         <div className="relative h-calc w-full lg:w-1/2 p-3">
