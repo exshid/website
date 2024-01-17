@@ -23,23 +23,24 @@ function formatDate(dateString) {
     return <>
         <Base>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
-         <div className="flex flex-row py-5 w-4/5">
-<div className="w-1/2 flex flex-col justify-center p-3">
+         <div className="flex flex-row py-5 p-2 w-full md:w-4/5">
+<div className="w-full lg:w-1/2 flex flex-row lg:flex-col justify-center p-3">
 <div className="flex">      
 {myCats.map((item, index) => (
   <Fragment key={index}>
     <span className="text-pink-800 text-lg uppercase w-min inline-block">{item}</span>
-    {index !== myCats.length - 1 && <span>•</span>}
+    {index !== myCats.length - 1 && <span className="mx-2">•</span>}
   </Fragment>
 ))}
 </div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
 
-  <span className="text-lg uppercase font-bold text-black">By {props.rweetData.author}</span>
+  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-min lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
+  <span className="hidden lg:inline-block	mx-2">•</span>
   <span className="text-lg">{formatDate(props.rweetData.date)}</span>
             </div>
-        <div className="relative h-calc w-1/2 p-3">
+        <div className="relative h-calc w-full lg:w-1/2 p-3">
         <Image
         src={props.rweetData.image} 
         alt={props.rweetData.image}
@@ -49,7 +50,7 @@ function formatDate(dateString) {
 
         </div>
             </div>
-            <div className='content-text w-1/2 mt-6 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
+            <div className='content-text w-full px-2 md:w-4/5 lg:w-2/3 xl:w-1/2 mt-6 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
         
             {myTags && <div className="flex space-x-4 px-80 py-3 w-4/5 items-center border-y"><span className="mr-1">Tags:</span> 
         {myTags.map((item) => {
