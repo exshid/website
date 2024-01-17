@@ -21,11 +21,15 @@ function formatDate(dateString) {
     return <>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-row pb-6 w-4/5">
-<div className="w-1/2 flex flex-col justify-center p-3">        
-{myCats.map((item) => (
-  <span key={Math.random()} className="text-pink-800 text-lg uppercase">{item}</span>
+<div className="w-1/2 flex flex-col justify-center p-3">
+<div className="flex">      
+{myCats.map((item, index) => (
+  <React.Fragment key={index}>
+    <span className="text-pink-800 text-lg uppercase w-min inline-block">{item}</span>
+    {index !== myCats.length - 1 && <span>•</span>}
+  </React.Fragment>
 ))}
-
+</div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
 
@@ -55,7 +59,7 @@ function formatDate(dateString) {
         })}
       </div>
       <h2>Related Posts</h2>
-      {relatedPostsFiltered.map((post, index) => (
+      {relatedPostsFiltered.slice(0, 3).map((post, index) => (
   <div key={index}>
     <h2>{post.title}</h2>
     <p>{post.description}</p>
@@ -124,7 +128,7 @@ export async function getStaticProps(context) {
             author: rweet.author,
             image: rweet.image
           },
-          relatedPosts: relatedPosts, // Add relatedPosts to props
+          relatedPosts: relatedPosts.reverse().slice(0, 15), // Add relatedPosts to props
       }
   }
 }
