@@ -49,6 +49,7 @@ function formatDate(dateString) {
       <h2>Related Posts</h2>
       {props.relatedPosts.map((post, index) => (
   <div key={index}>
+    
     <h2>{post.title}</h2>
     <p>{post.description}</p>
     <img src={post.image} alt={post.title} />
@@ -61,6 +62,26 @@ function formatDate(dateString) {
         </div>
 
         </>
+}
+
+export async function getStaticPaths() {
+
+    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+    const db = client.db()
+    const tweetsCollection = db.collection('rweets');
+
+    const rweets = await tweetsCollection.find({}, {
+        _id: 1,
+    }).toArray()
+    client.close()
+    return {
+        fallback: 'blocking',
+        paths: rweets.map(rweet => ({
+            params: {
+              regular: rweet._id.toString()
+            },
+        }))
+    }
 }
 export async function getStaticProps(context) {
   const tweetId = context.params.regular;
