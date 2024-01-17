@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const DontMiss = ({ items, headline }) => {
     return (
-      <div className="p-6 md:w-1/2">
+      <div className="p-6 md:p-12 lg:w-1/2">
         <div className="flex items-baseline">
           <span className="text-gray-600 font-semibold">{headline}</span>
           <span className="ml-2 text-sm text-gray-500">{items.length} articles</span>
