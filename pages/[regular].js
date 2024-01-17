@@ -83,26 +83,26 @@ function formatDate(dateString) {
 
         </>
 }
+
 export async function getStaticPaths() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
-  const tweetsCollection = db.collection('rweets');
 
-  const rweets = await tweetsCollection.find({}, {
-      _id: 1,
-      url: 1  // Fetch the 'url' field
-  }).toArray()
-  client.close()
-  return {
-      fallback: 'blocking',
-      paths: rweets.map(rweet => ({
-          params: {
-            regular: rweet.url  // Use 'url' instead of '_id'
-          },
-      }))
-  }
+    const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+    const db = client.db()
+    const tweetsCollection = db.collection('rweets');
+
+    const rweets = await tweetsCollection.find({}, {
+        _id: 1,
+    }).toArray()
+    client.close()
+    return {
+        fallback: 'blocking',
+        paths: rweets.map(rweet => ({
+            params: {
+              regular: rweet._id.toString()
+            },
+        }))
+    }
 }
-
 
 
 export async function getStaticProps(context) {
