@@ -21,16 +21,18 @@ function formatDate(dateString) {
 <div className="flex">      
 {myCats.map((item, index) => (
   <Fragment key={index}>
-    <span className="text-pink-800 text-lg uppercase w-min inline-block">{item}</span>
+    <span className="text-pink-800 text-lg uppercase w-max inline-block">{item}</span>
     {index !== myCats.length - 1 && <span className="mx-2">•</span>}
   </Fragment>
 ))}
 </div>
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
-  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-min lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
-  <span className="inline-block lg:hidden	mx-2">•</span>
-  <span className="text-lg">{formatDate(props.rweetData.date)}</span>
+  <div className="flex flex-row lg:flex-col">
+  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-max lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
+  <span className="inline-block w-max lg:hidden	mx-2">•</span>
+  <span className="text-lg w-max lg:w-full">{formatDate(props.rweetData.date)}</span>
+            </div>
             </div>
         <div className="relative h-calc w-full lg:w-1/2 p-3">
         <Image
