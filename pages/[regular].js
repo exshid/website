@@ -61,17 +61,20 @@ function formatDate(dateString) {
           );
         })}
       </div>
-      <h2>Related Posts</h2>
-      {relatedPostsFiltered.slice(0, 3).map((post, index) => (
-  <div key={index}>
-    <h2>{post.title}</h2>
-    <p>{post.description}</p>
-    <img src={post.image} alt={post.title} />
-    <p>Author: {post.author}</p>
-    <p>Date: {post.date}</p>
-    <a href={post.url}>Read more</a>
-  </div>
-))}
+
+<div>        <span>Read More</span>
+      <div className="grid grid-cols-3 gap-4">
+  {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
+    <div key={index} className="flex flex-col">
+      <img src={post.image} alt={post.title} className="w-full h-48 object-cover mb-2"/>
+      <span className="text-xs text-gray-500 uppercase">{post.cats[0]}</span>
+      <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+      <p className="text-sm text-gray-700 mb-2">{post.description}</p>
+      <span className="text-sm text-gray-500">By {post.author}</span>
+    </div>
+  ))}
+</div>
+</div>
 
         </div>
         </Base>
