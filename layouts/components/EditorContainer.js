@@ -2,7 +2,7 @@ const EditorContainer = ({children}) => {
 
   return (
     
-<div className="flex lg:px-20 flex-col lg:flex-row">
+<div className="flex lg:px-6 xl:px-20 flex-col lg:flex-row">
     {children}
 </div>
   );
