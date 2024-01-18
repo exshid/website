@@ -24,7 +24,7 @@ const LatestPosts = ({ items }) => {
          <>
                {windowWidth > 1024 ? (
 
-         <div key={Math.random()} className="flex flex-col lg:hidden">
+         <div key={Math.random()} className="flex flex-col">
          <Link href={item.id}>
            <h3 className="font-semibold text-lg md:text-xl lg:text-2xl pt-2">{item.title}</h3>
            </Link>
@@ -46,7 +46,7 @@ const LatestPosts = ({ items }) => {
        </div>
       ) : (
          
-         <div key={Math.random()} className="hidden lg:flex">
+         <div key={Math.random()}>
             <Image src={item.image} alt={item.title}
             className="object-cover !relative lg:px-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
 
