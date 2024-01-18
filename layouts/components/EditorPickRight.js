@@ -11,12 +11,12 @@ const EditorPickRight = ({ items }) => {
       <h3 className="font-bold text-black text-xl">{item.title}</h3>
       </Link>
 
-      <p className="text-gray-500">
+      <p className="text-gray-500 py-1">
         {item.description.length > 131 
           ? `${item.description.substring(0, 131)}...` 
           : item.description}
       </p>
-      <span className="text-gray-500">{item.author}</span>
+      <span className="text-black font-bold">{item.author}</span>
     </div>
   ))}
 </div>
