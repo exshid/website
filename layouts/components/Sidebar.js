@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Sidebar = ({ items }) => {
     return (
-      <div className="flex flex-col w-1/4 divide-y">
+      <div className="flex flex-col p-3 lg:w-1/4 divide-y">
         {items.slice(0, 6).map((article) => (
           <div key={Math.random()} className="flex justify-between items-start p-2">
             <div className="flex-1 space-y-2">
