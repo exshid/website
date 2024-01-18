@@ -340,6 +340,7 @@ const result = await model.generateContent({
     <LatestPosts items={articles} />
     <Sidebar items={articles} />
       </LatestPostsContainer>
+    <button onClick={loadMore}>Load More</button>
     <DontMissContainer>
     <DontMiss items={articles} headline="News"/>
     <DontMiss items={articles} headline="News"/>
@@ -353,6 +354,13 @@ const result = await model.generateContent({
 
 export async function getStaticProps() {
 
+  let loadedPosts = 10;
+
+  function loadMore() {
+    loadedPosts += 10;
+    fetchPosts(loadedPosts);
+  }
+
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
   const db = client.db()
   const tweetsCollection = db.collection('rweets');
@@ -360,7 +368,7 @@ export async function getStaticProps() {
   client.close()
   return {
     props: {
-      articles: [...rweets].reverse().map(rweet => ({
+      articles: [...rweets].reverse().slice(0, numPosts).map(rweet => ({
         author: rweet.author,
         title: rweet.title,
         content: rweet.content,
