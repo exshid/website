@@ -5,7 +5,7 @@ const LatestPosts = ({ items }) => {
     return (
       <div className="w-full lg:w-3/4 lg:pr-20 divide-y">
         {items.map((item) => (
-         
+         <>
          <div key={Math.random()} className="flex flex-col lg:hidden">
          <Link href={item.id}>
            <h3 className="font-semibold text-lg md:text-xl lg:text-2xl pt-2">{item.title}</h3>
@@ -37,6 +37,7 @@ const LatestPosts = ({ items }) => {
               <p className="text-sm font-bold text-black">{item.author}</p>
             </div>
           </div>
+          </>
         ))}
       </div>
     );
