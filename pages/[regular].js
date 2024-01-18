@@ -29,7 +29,7 @@ function formatDate(dateString) {
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
   <div className="flex flex-row lg:flex-col">
-  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-max lg:w-full mr-3 lg:mr-0">By {props.rweetData.author}</span>
+  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-max lg:w-full">By {props.rweetData.author}</span>
   <span className="inline-block w-max lg:hidden	mx-2">•</span>
   <span className="text-lg w-max lg:w-full">{formatDate(props.rweetData.date)}</span>
             </div>
@@ -44,8 +44,8 @@ function formatDate(dateString) {
 
         </div>
             </div>
-            <div className='content-text w-full px-2 md:w-4/5 lg:w-2/3 xl:w-1/2 mt-6 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
-                    {myTags && <div className="flex space-x-4 px-80 py-3 w-4/5 items-center border-y"><span className="mr-1">Tags:</span> 
+            <div className='content-text w-full px-2 md:w-4/5 lg:w-2/3 xl:w-1/2 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
+                    {myTags && <div className="flex space-x-4 px-3 py-2 w-full lg:w-4/5 items-center border-y"><span className="mr-1 font-bold">Tags:</span> 
         {myTags.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (

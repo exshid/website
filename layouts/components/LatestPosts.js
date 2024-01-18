@@ -25,7 +25,7 @@ const LatestPosts = ({ items }) => {
                {windowWidth > 1024 ? (
 <div key={Math.random()} className="flex">
             <Image src={item.image} alt={item.title}
-            className="object-cover !relative lg:px-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
+            className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
                     objectFit="cover"/>
             <div>
             <Link href={item.id}>

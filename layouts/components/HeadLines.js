@@ -9,7 +9,7 @@ const HeadLines = ({ items }) => {
           {items.slice(0, 3).map((podcast) => (
             <div key={Math.random()} className="w-full lg:w-1/3 lg:py-2">
               <div className="py-2 lg:py-4 rounded-lg flex">
-                <div className="px-5 w-1/3">
+                <div className="pl-3 pr-5 w-1/3">
                 <Image src={podcast.image} alt={podcast.title}
                 className="w-full	h-28 relative rounded-sm object-cover mb-2"
                 objectFit="cover"/>
