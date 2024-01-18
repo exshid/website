@@ -368,7 +368,7 @@ export async function getStaticProps() {
   client.close()
   return {
     props: {
-      articles: [...rweets].reverse().slice(0, numPosts).map(rweet => ({
+      articles: [...rweets].reverse().slice(0, loadedPosts).map(rweet => ({
         author: rweet.author,
         title: rweet.title,
         content: rweet.content,
