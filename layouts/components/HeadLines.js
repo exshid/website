@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const HeadLines = ({ items }) => {
     return (
-      <div className="flex flex-wrap justify-between p-3 md:py-4 lg:py-10 xl:px-6 2xl:px-20">
+      <div className="flex flex-wrap justify-between p-3 md:py-4 xl:px-6 2xl:px-20">
         <h2 className="w-full text-2xl font-bold mb-4">PODCASTS</h2>
         <div className="flex flex-wrap justify-between flex-col lg:flex-row">
           {items.slice(0, 3).map((podcast) => (
