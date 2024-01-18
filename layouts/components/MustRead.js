@@ -5,7 +5,7 @@ const MustRead = ({items}) => {
 
 
   return (
-<div className="flex flex-wrap divide-x px-20">
+<div className="flex divide-x p-3 md:py-4 xl:px-6 2xl:px-20 overflow-x-hidden	overflow-y-scroll lg:overflow-y-hidden">
                   {items.slice(0, 4).map((article) => (
         <div className="w-full md:w-1/4 p-4">
           <ArticleCard {...article} />
