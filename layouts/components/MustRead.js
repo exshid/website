@@ -20,18 +20,17 @@ const ArticleCard = ({ image, title, description, author, id }) => {
   return (
     <div className="max-w-sm mx-auto bg-white overflow-hidden">
       <div className="flex flex-col">
-        <div className="h-72 w-full relative">
+        <div className="h-72 w-80 relative">
         <Image
           className="h-full w-full object-cover relative"
           src={image}
           alt={title}
           layout="fill"
           objectFit="cover"/>
-      </div>
-        <div className="pt-8">
-        <Link href={id}>
-
-          <h3 className="text-lg font-bold text-black">
+            </div>
+          <div className="pt-8">
+          <Link href={id}>
+           <h3 className="text-lg font-bold text-black">
             {title}
           </h3>
           </Link >

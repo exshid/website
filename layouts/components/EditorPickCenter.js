@@ -5,13 +5,15 @@ const EditorPickCenter = ({ items }) => {
     return (
       <div className="bg-white lg:p-4 w-full lg:w-2/4">
         {items.slice(0, 1).map((item) => (
-          <div key={Math.random()}>
+          <div key={item.id} className="flex flex-col-reverse lg:flex-col">
             <Image src={item.image} alt={item.title} className="object-cover p-4 w-full h-[26rem] rounded-lg relative"/>
+           <div className="flex flex-col"> 
             <Link href={item.id}>
             <h1 className="font-bold p-4 text-black text-2xl md:text-3xl lg:text-4xl">{item.title}</h1>
-</Link>
+            </Link>
             <div className="text-gray-500 text-lg px-4">{item.description}</div>
-            <div className="text-black font-bold text-lg p-4">{item.author}</div>
+            <div className="text-black font-bold hidden lg:block text-lg p-4">{item.author}</div>
+            </div>
           </div>
         ))}
       </div>
