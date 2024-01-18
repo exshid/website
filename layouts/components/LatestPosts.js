@@ -23,7 +23,7 @@ const LatestPosts = ({ items }) => {
         {items.map((item) => (
          <>
                {windowWidth > 1024 ? (
-<div key={Math.random()}>
+<div key={Math.random()} className="flex">
             <Image src={item.image} alt={item.title}
             className="object-cover !relative lg:px-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
                     objectFit="cover"/>

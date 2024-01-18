@@ -2,7 +2,8 @@ import Link from 'next/link';
 
 const CategoryLinks = ({ items }) => {
     return (
-      <div className="flex space-x-4 px-80 py-3 w-full justify-between border-y">
+      <div className="w-full flex items-center border-y">
+      <div className="flex space-x-4 py-3 w-3/4 justify-between">
         {items.map((item) => {
           const href = item.toLowerCase().split(' ').join('-');
           return (
@@ -11,6 +12,7 @@ const CategoryLinks = ({ items }) => {
             </Link>
           );
         })}
+      </div>
       </div>
     );
   };
