@@ -26,6 +26,21 @@ const { blog_folder } = config.settings;
 
 const Home = ({ articles }) => {
 
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); 
+
+
       const generationConfig = {
         temperature: 0.8,
         topK: 1,
@@ -301,14 +316,24 @@ const result = await model.generateContent({
         
     }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro, oldTitle]);
       
-
   return (
     <Base>
       <EditorContainer>
+      {windowWidth > 1024 ? (
+<>
     <EditorPickLeft items={articles} />
     <EditorPickCenter items={articles} />
     <EditorPickRight items={articles} />
-    </EditorContainer>
+    </>
+    ) : (
+<>
+    <EditorPickCenter items={articles} />
+    <EditorPickRight items={articles} />
+<EditorPickLeft items={articles} />
+
+</>
+      )}
+</EditorContainer>
 <MustRead items={articles} />
     <HeadLines items={articles} />
     <LatestPostsContainer>
