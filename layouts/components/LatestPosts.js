@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const LatestPosts = ({ items }) => {
     return (
-      <div className="w-full lg:w-3/4 lg:pr-20 divide-y">
+      <div className="w-full lg:w-3/4 xl:pr-20 divide-y">
         {items.map((item) => (
          <>
          <div key={Math.random()} className="flex flex-col lg:hidden">
@@ -22,11 +22,10 @@ const LatestPosts = ({ items }) => {
          </div>
          </div>
        </div>
- 
          
          <div key={Math.random()} className="hidden lg:flex">
             <Image src={item.image} alt={item.title}
-            className="object-cover !relative lg:p-4 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
+            className="object-cover !relative lg:px-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
 
                     objectFit="cover"/>
             <div>
