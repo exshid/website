@@ -15,7 +15,11 @@ const LatestPosts = ({ items }) => {
          className="object-cover !relative lg:p-4 ml-2 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
           objectFit="cover"/>
           <div>
-           <p className="py-2 text-black">{item.description}</p>
+          <p className="py-2 text-black">
+        {item.description.length > 81 
+          ? `${item.description.substring(0, 81)}...` 
+          : item.description}
+            </p>
          <div>
            <span className="font-bold text-black pb-2">{item.author}</span>
          </div>
@@ -32,8 +36,8 @@ const LatestPosts = ({ items }) => {
             <Link href={item.id}>
               <h3 className="font-semibold text-lg md:text-xl lg:text-2xl pt-2">{item.title}</h3>
       </Link>
-              <p className="py-2 text-black text-sm">{item.description}</p>
-              <p className="text-sm font-bold text-black">{item.author}</p>
+              <p className="py-2 text-black">{item.description}</p>
+              <p className="font-bold text-black">{item.author}</p>
             </div>
           </div>
           </>
