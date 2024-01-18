@@ -10,7 +10,7 @@ const EditorPickCenter = ({ items }) => {
             <Link href={item.id}>
             <h1 className="font-bold p-4 text-black text-2xl md:text-3xl lg:text-4xl">{item.title}</h1>
 </Link>
-            <div className="text-gray-500 text-lg p-4">{item.description}</div>
+            <div className="text-gray-500 text-lg px-4">{item.description}</div>
             <div className="text-black font-bold text-lg p-4">{item.author}</div>
           </div>
         ))}

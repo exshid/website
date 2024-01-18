@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const EditorPickRight = ({ items }) => {
     return (
-<div className="w-1/4 pt-4 divide-y">
+<div className="w-full lg:w-1/4 lg:pt-4 divide-y">
   {items.slice(0, 3).map((item, index) => (
     <div key={index} className="bg-white p-4">
       <Link href={item.id}>

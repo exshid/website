@@ -18,7 +18,6 @@
   <a href="https://github.com/themefisher/bookworm-light-nextjs/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/themefisher/bigspring-light-nextjs" alt="contributors"></a>
 </p>
-
 ![bookworm-light](https://demo.gethugothemes.com/thumbnails/bookworm-light.png)
 
 ## 🔑 Key Features

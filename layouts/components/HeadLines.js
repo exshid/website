@@ -11,7 +11,7 @@ const HeadLines = ({ items }) => {
               <div className="py-2 lg:py-4 rounded-lg flex">
                 <div className="px-5">
                 <Image src={podcast.image} alt={podcast.title}
-                className="h-24	h-28 relative rounded-sm object-cover mb-2"
+                className="w-28	h-28 relative rounded-sm object-cover mb-2"
                 objectFit="cover"/>
                 </div>
                 <div>
