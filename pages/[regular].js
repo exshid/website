@@ -45,7 +45,7 @@ function formatDate(dateString) {
         </div>
             </div>
             <div className='content-text w-full px-2 md:w-4/5 lg:w-2/3 xl:w-1/2 text-black' dangerouslySetInnerHTML={{ __html: props.rweetData.content }}/>
-                    {!myTags.length[0] && <div className="flex space-x-4 px-3 pt-3 pb-2 w-full lg:w-4/5 items-center border-y">
+                    {!myTags.length === 0 && <div className="flex space-x-4 px-3 pt-3 pb-2 w-full lg:w-4/5 items-center border-y">
                       <span className="mr-1 text-black font-bold">Tags:</span> 
                         {myTags.map((item) => {
                              const href = item.toLowerCase().split(' ').join('-');
