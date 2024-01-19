@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/rss-ign",
+      "path": "/pages/index.js",
       "schedule": "30 7 * * *"
     }
   ]
