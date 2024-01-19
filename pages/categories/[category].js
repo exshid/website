@@ -21,7 +21,6 @@ const Category = ({ category, posts }) => {
             category
           </h1>
           <LatestPostsContainer>
-          {posts.length > 0 && <LatestPosts items={posts} />}
     
     </LatestPostsContainer>
         </div>
