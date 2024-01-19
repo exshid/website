@@ -76,7 +76,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { 
-      posts: filterPosts, 
+      posts: filteredPost, 
       category: params.category, 
       raw: posts,
       param: params
