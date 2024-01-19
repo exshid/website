@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const EditorPickLeft = ({ items }) => {
     return (
-      <div className="w-full lg:w-1/4 pt-4 divide-y">
+      <div className="w-full lg:w-1/4 lg:pt-4 divide-y">
         {items.slice(0, 5).map((item) => {
           return (
             <div key={Math.random()} className="bg-white p-4">

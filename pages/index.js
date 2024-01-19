@@ -319,20 +319,9 @@ const result = await model.generateContent({
   return (
     <Base>
       <EditorContainer>
-      {windowWidth > 1024 ? (
-<>
-    <EditorPickLeft items={articles} />
-    <EditorPickCenter items={articles} />
-    <EditorPickRight items={articles} />
-    </>
-    ) : (
-<>
     <EditorPickCenter items={articles} />
     <EditorPickRight items={articles} />
 <EditorPickLeft items={articles} />
-
-</>
-      )}
 </EditorContainer>
 <MustRead items={articles} />
     <HeadLines items={articles} />
@@ -341,8 +330,11 @@ const result = await model.generateContent({
     <Sidebar items={articles} />
       </LatestPostsContainer>
     <DontMissContainer>
-    <DontMiss items={articles} headline="News"/>
-    <DontMiss items={articles} headline="News"/>
+    <DontMiss items={articles} headline="News" length={rweetsLength}/>
+    <DontMiss items={articles} headline="AI"/>
+    <div class="transition-colors duration-1000 hover:text-red-500">
+  Hover over me
+</div>
 
     </DontMissContainer>
 
@@ -357,22 +349,25 @@ export async function getStaticProps() {
   const tweetsCollection = db.collection('rweets');
   const rweets = await tweetsCollection.find().toArray()
   client.close()
+  const rweetsLength = [...rweets].length;
   return {
-    props: {
-      articles: [...rweets].reverse().slice(0, 20).map(rweet => ({
-        author: rweet.author,
-        title: rweet.title,
-        content: rweet.content,
-        description: rweet.description,
-        url: rweet.url,
-        tags: rweet.tags,
-        cats: rweet.cats,
-        date: rweet.date,
-        id: rweet._id.toString(),
-        image: rweet.image
-      }))
-    },
-    revalidate: 1
-  }
+      props: {
+        articles: [...rweets].reverse().slice(0, 20).map(rweet => ({
+          author: rweet.author,
+          title: rweet.title,
+          content: rweet.content,
+          description: rweet.description,
+          url: rweet.url,
+          tags: rweet.tags,
+          cats: rweet.cats,
+          date: rweet.date,
+          id: rweet._id.toString(),
+          image: rweet.image
+        })),
+        rweetsLength: rweetsLength
+      },
+      revalidate: 1
+    }
+    
 }
   export default Home;

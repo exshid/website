@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image'
 
-const DontMiss = ({ items, headline }) => {
+const DontMiss = ({ items, headline,length }) => {
     return (
       <div className="p-6 lg:w-1/2">
         <div className="flex items-baseline">
           <span className="text-gray-600 font-semibold">{headline}</span>
-          <span className="ml-2 text-sm text-gray-500">{items.length} articles</span>
+          <span className="ml-2 text-sm text-gray-500">{length} articles</span>
         </div>
         <ul className="mt-4 space-y-4">
           {items.slice(0, 4).map((item) => (
