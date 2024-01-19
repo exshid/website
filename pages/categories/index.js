@@ -16,10 +16,10 @@ const Categories = ({ categories }) => {
             {categories.map((category, i) => (
               <li key={`category-${i}`} className="inline-block">
                 <Link
-                  href={`/categories/${category.href}`}
+                  href={`/categories/${category}`}
                   className="rounded-lg bg-theme-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white"
                 >
-                  {category.label}
+                  {category}
                 </Link>
               </li>
             ))}
@@ -44,17 +44,11 @@ export async function getStaticProps() {
   }, []);
   const categories = [...new Set(allCategories)]; // Extract unique categories
   
-  // Slugify the categories
-  const slugifiedCategories = categories.map(category => ({
-    label: category,
-    href: slugify(category)
-  }));
-  
   client.close()
   
   return {
     props: {
-      categories: slugifiedCategories,
+      categories: categories,
     },
   };
   };
