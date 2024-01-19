@@ -18,7 +18,7 @@ const Categories = ({ categories }) => {
                   href={`/categories/${category}`}
                   className="rounded-lg bg-theme-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white"
                 >
-                  &#8226; {category}
+                  {category}
                 </Link>
               </li>
             ))}
@@ -38,9 +38,9 @@ export async function getStaticProps() {
   const tweetsCollection = db.collection('rweets');
   const rweets = await tweetsCollection.find().toArray()
   
-  const allCategories = rweets.flatMap((tweet) => tweet.cats);
+  const allCategories = rweets.reduce((acc, tweet) => acc.concat(tweet.cats), []);
   const categories = [...new Set(allCategories)]; // Extract unique categories
-
+  
   client.close()
 
   return {
