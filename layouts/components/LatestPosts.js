@@ -29,7 +29,7 @@ const LatestPosts = ({ items }) => {
                     objectFit="cover"/>
             <div>
             <Link href={item.id}>
-              <h3 className="font-semibold text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
+              <h3 className="font-semibold underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
       </Link>
               <p className="py-2 text-black">{item.description}</p>
               <p className="font-bold text-black">{item.author}</p>
@@ -38,7 +38,7 @@ const LatestPosts = ({ items }) => {
        ) : (
         <div key={Math.random()} className="flex flex-col">
         <Link href={item.id}>
-          <h3 className="font-semibold text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
+          <h3 className="font-semibold underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
           </Link>
             <div className="flex flex-row-reverse justify-between">
         <Image src={item.image} alt={item.title}

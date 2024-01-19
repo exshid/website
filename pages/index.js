@@ -317,10 +317,6 @@ const result = await model.generateContent({
     <DontMissContainer>
     <DontMiss items={articles} headline="News" length={rweetsLength}/>
     <DontMiss items={articles} headline="AI"/>
-    <div class="transition-colors duration-1000 hover:text-red-500">
-  Hover over me
-</div>
-
     </DontMissContainer>
 
     </Base>
