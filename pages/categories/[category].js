@@ -5,6 +5,7 @@ import { getTaxonomy } from "@lib/taxonomyParser";
 import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
+import { MongoClient } from 'mongodb'
 
 // category page
 const Category = ({ category, posts, authors }) => {
