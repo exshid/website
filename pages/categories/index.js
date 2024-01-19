@@ -1,3 +1,4 @@
+import { slugify } from "@lib/utils/textConverter";
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import { getTaxonomy } from "@lib/taxonomyParser";
