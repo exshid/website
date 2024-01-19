@@ -56,8 +56,10 @@ export async function getStaticProps({ params }) {
   const tweetsCollection = db.collection('rweets');
   const posts = await tweetsCollection.find().toArray()
   
+
+
   const filterPosts = posts.filter((post) =>
-    post.categories.find((category) =>
+    post.JSON.parse(cats).find((category) =>
       slugify(category).includes(params.category)
     )
   );
