@@ -24,22 +24,7 @@ import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 
-const Home = ({ articles }) => {
-
-  const [windowWidth, setWindowWidth] = useState(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []); 
-
+const Home = ({ articles, rweetsLength }) => {
 
       const generationConfig = {
         temperature: 0.8,
