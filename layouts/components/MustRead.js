@@ -30,7 +30,7 @@ const ArticleCard = ({ image, title, description, author, id }) => {
             </div>
           <div className="pt-8">
           <Link href={id}>
-           <h3 className="text-lg underline font-bold text-black">
+           <h3 className="text-lg hover:underline font-bold text-black">
             {title}
           </h3>
           </Link >
