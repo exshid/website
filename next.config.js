@@ -13,7 +13,7 @@ const nextConfig = {
     ],
     },  webpack5: true,
   webpack: (config) => {
-    config.resolve.fallback = { fs: false, child_process: false };
+    config.resolve.fallback = { fs: false, child_process: false, worker_threads: false };
 
     return config;
   },
