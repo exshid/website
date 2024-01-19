@@ -11,7 +11,7 @@ import LatestPosts from "@layouts/components/LatestPosts";
 
 // category page
 const Category = ({ category, posts, raw, param }) => {
-  console.log( category, posts, raw, param )
+  console.log( category, posts, raw, params )
   return (
     <Base title={category}>
       <div className="section">
@@ -68,10 +68,10 @@ export async function getStaticProps({ params }) {
     _id: post._id.toString(),
   }));
 
-  posts = JSON.parse(posts);
   const filterPosts = posts.filter((post) => {
-    return post.cats.find((category) =>
-      category.includes(params)
+    const cats = JSON.parse(post.cats);
+    return cats.find((category) =>
+      slugify(category).includes(params)
     );
   });
 
