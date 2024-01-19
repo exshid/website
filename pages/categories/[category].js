@@ -49,8 +49,7 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 };
 
-// category page data
-export const getStaticProps = ({ params }) => {
+export async function getStaticProps({ params }) {
 
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
   const db = client.db()
