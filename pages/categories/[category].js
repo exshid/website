@@ -8,7 +8,7 @@ const { blog_folder } = config.settings;
 import { MongoClient } from 'mongodb'
 
 // category page
-const Category = ({ category, posts, authors }) => {
+const Category = ({ category, posts }) => {
   return (
     <Base title={category}>
       <div className="section">
@@ -17,7 +17,7 @@ const Category = ({ category, posts, authors }) => {
             Showing posts from <span className="text-primary">{category}</span>{" "}
             category
           </h1>
-          <Posts posts={posts} authors={authors} />
+          <Posts posts={posts} authors={'king'} />
         </div>
       </div>
     </Base>
@@ -66,10 +66,8 @@ export async function getStaticProps({ params }) {
   });
   
 
-  const authors = getSinglePage("content/authors");
-
   return {
-    props: { posts: filterPosts, category: params.category, authors: authors },
+    props: { posts: filterPosts, category: params.category, },
   };
 };
 
