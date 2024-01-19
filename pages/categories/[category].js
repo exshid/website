@@ -55,24 +55,30 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 };
 
-export async function getStaticProps({ params }) {
 
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
+export async function getStaticProps({ params }) {
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
+  const db = client.db() 
   const tweetsCollection = db.collection('rweets');
-  const posts = await tweetsCollection.find().toArray()
-  
+  let posts = await tweetsCollection.find().toArray();
+
+  // Convert _id to string
+  posts = posts.map(post => ({
+    ...post,
+    _id: post._id.toString(),
+  }));
+
   const filterPosts = posts.filter((post) => {
     const cats = JSON.parse(post.cats);
     return cats.find((category) =>
-      category.includes(params.category)
+      slugify(category).includes(params.category)
     );
   });
-  
 
   return {
-    props: { posts: filterPosts, category: params.category, },
+    props: { 
+      posts: filterPosts, 
+      category: params.category, 
+    },
   };
 };
-
-
