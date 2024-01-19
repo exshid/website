@@ -27,7 +27,18 @@ export default Category;
 
 // category page routes
 export const getStaticPaths = () => {
-  const allCategories = getTaxonomy(`content/${blog_folder}`, "categories");
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
+  const tweetsCollection = db.collection('rweets');
+  const rweets = await tweetsCollection.find().toArray()
+  
+  const allCategories = rweets.reduce((acc, tweet) => {
+    const cats = JSON.parse(tweet.cats); // Parse the JSON string into a JavaScript array
+    return acc.concat(cats);
+  }, []);
+  const categories = [...new Set(allCategories)]; // Extract unique categories
+  
+  client.close()
 
   const paths = allCategories.map((category) => ({
     params: {
