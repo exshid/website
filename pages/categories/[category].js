@@ -68,12 +68,11 @@ export async function getStaticProps({ params }) {
     _id: post._id.toString(),
   }));
 
-  const filterPosts = posts.filter((post) => {
-    const cats = JSON.parse(post.cats);
-    return cats.find((category) =>
-      slugify(category).includes(params)
-    );
+  const filteredPost = posts.filter(item => {
+      const catsArray = JSON.parse(item.cats);
+      return catsArray.includes(params.category);
   });
+  
 
   return {
     props: { 
