@@ -10,8 +10,8 @@ import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestPosts from "@layouts/components/LatestPosts";
 
 // category page
-const Category = ({ category, posts, raw }) => {
-  console.log( category, posts, raw )
+const Category = ({ category, posts, raw, param }) => {
+  console.log( category, posts, raw, param )
   return (
     <Base title={category}>
       <div className="section">
@@ -80,6 +80,7 @@ export async function getStaticProps({ params }) {
       posts: filterPosts, 
       category: params.category, 
       raw: posts,
+      param: params
     },
   };
 };
