@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
