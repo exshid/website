@@ -12,6 +12,10 @@ import LatestPosts from "@layouts/components/LatestPosts";
 // category page
 const Category = ({ category, posts }) => {
   console.log( category, posts )
+  if (!posts) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Base title={category}>
       <div className="section">
@@ -21,6 +25,7 @@ const Category = ({ category, posts }) => {
             category
           </h1>
           <LatestPostsContainer>
+          {posts.length > 0 && <LatestPosts items={posts} />}
     
     </LatestPostsContainer>
         </div>
