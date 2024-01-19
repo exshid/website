@@ -37,7 +37,7 @@ export async function getStaticProps() {
   const db = client.db()
   const tweetsCollection = db.collection('rweets');
   const rawTweets = await tweetsCollection.find().toArray();
-  const rweets = rawTweets.map((tweet) => JSON.parse(tweet.content));
+  const rweets = rawTweets.map((tweet) => JSON.parse(tweet.cats));
 
   const allCategories = rweets.flatMap((tweet) => tweet.cats);
   const categories = [...new Set(allCategories)]; // Extract unique categories
