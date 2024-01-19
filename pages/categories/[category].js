@@ -36,7 +36,6 @@ const Category = ({ category, posts }) => {
   return (
     <Base title={category}>
       <div className="section">
-        <div className="container">
           <h1 className="h2 mb-8 text-center">
             Showing posts from <span className="text-primary">{category}</span>{" "}
             category
@@ -44,6 +43,9 @@ const Category = ({ category, posts }) => {
          <LatestPostsContainer>
     <div className="w-full lg:w-3/4 xl:pr-20 divide-y p-3">
       {posts.map((item) => (
+  <>
+  {windowWidth > 1024 ? (
+
 <div key={item.id} className="flex">
 <Image src={item.image} alt={item.title}
             className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
@@ -55,15 +57,30 @@ const Category = ({ category, posts }) => {
       </div>      
           </div>
      
+     ) : (
+      <div key={Math.random()} className="flex flex-col">
+        <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
+          <div className="flex flex-row-reverse justify-between">
+      <Image src={item.image} alt={item.title}
+      className="object-cover !relative lg:p-4 ml-2 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
+       objectFit="cover"/>
+       <div>
+       <p className="py-2 text-black">
+     {item.description.length > 81 
+       ? `${item.description.substring(0, 81)}...` 
+       : item.description}
+         </p>
+      <div>
+        <span className="font-bold text-black pb-2">{item.author}</span>
+      </div>
+      </div>
+      </div>
+    </div> )}
+</>
       ))}
-    </div>
-<p>
-{posts[0].author}
-
-  </p>    
+  </div>
     </LatestPostsContainer>
         </div>
-      </div>
     </Base>
   );
 };
