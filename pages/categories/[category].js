@@ -6,10 +6,12 @@ import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 import { MongoClient } from 'mongodb'
+import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
+import LatestPosts from "@layouts/components/LatestPosts";
 
 // category page
 const Category = ({ category, posts }) => {
-  console.log(posts )
+  console.log( category, posts )
   return (
     <Base title={category}>
       <div className="section">
@@ -18,7 +20,10 @@ const Category = ({ category, posts }) => {
             Showing posts from <span className="text-primary">{category}</span>{" "}
             category
           </h1>
-          <Posts posts={posts} authors={'king'} />
+          <LatestPostsContainer>
+    <LatestPosts items={posts} />
+    
+    </LatestPostsContainer>
         </div>
       </div>
     </Base>
@@ -26,19 +31,6 @@ const Category = ({ category, posts }) => {
 };
 
 export default Category;
-
-export const getStaticPaths = () => {
-  const allCategories = getTaxonomy(`content/${blog_folder}`, "categories");
-
-  const paths = allCategories.map((category) => ({
-    params: {
-      category: category,
-    },
-  }));
-
-  return { paths, fallback: false };
-};
-
 
 export async function getStaticPaths() {
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
@@ -50,10 +42,10 @@ export async function getStaticPaths() {
     const cats = JSON.parse(tweet.cats); // Parse the JSON string into a JavaScript array
     return acc.concat(cats);
   }, []);
+  const categories = [...new Set(allCategories)]; // Extract unique categories
   
   client.close()
 
-  
   const paths = allCategories.map((category) => ({
     params: {
       category: category,
@@ -69,6 +61,8 @@ export async function getStaticProps({ params }) {
   const db = client.db()
   const tweetsCollection = db.collection('rweets');
   const posts = await tweetsCollection.find().toArray()
+  
+
 
   const filterPosts = posts.filter((post) => {
     const cats = JSON.parse(post.cats);
@@ -82,4 +76,5 @@ export async function getStaticProps({ params }) {
     props: { posts: filterPosts, category: params.category, },
   };
 };
+
 
