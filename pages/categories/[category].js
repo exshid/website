@@ -59,7 +59,7 @@ export async function getStaticProps({ params }) {
 
 
   const filterPosts = posts.filter((post) =>
-    post.JSON.parse(cats).find((category) =>
+    post.cats.find((category) =>
       slugify(category).includes(params.category)
     )
   );
