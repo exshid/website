@@ -51,15 +51,24 @@ export async function getStaticPaths() {
 
 // category page data
 export const getStaticProps = ({ params }) => {
-  const posts = getSinglePage(`content/${blog_folder}`);
+
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
+  const tweetsCollection = db.collection('rweets');
+  const posts = await tweetsCollection.find().toArray()
+  
   const filterPosts = posts.filter((post) =>
-    post.frontmatter.categories.find((category) =>
+    post.categories.find((category) =>
       slugify(category).includes(params.category)
     )
   );
+
+
   const authors = getSinglePage("content/authors");
 
   return {
     props: { posts: filterPosts, category: params.category, authors: authors },
   };
 };
+
+
