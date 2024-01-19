@@ -58,12 +58,13 @@ export async function getStaticProps({ params }) {
   
 
 
-  const filterPosts = posts.filter((post) =>
-    post.cats.find((category) =>
+  const filterPosts = posts.filter((post) => {
+    const cats = JSON.parse(post.cats);
+    return cats.find((category) =>
       slugify(category).includes(params.category)
-    )
-  );
-
+    );
+  });
+  
 
   const authors = getSinglePage("content/authors");
 
