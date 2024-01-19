@@ -38,7 +38,10 @@ export async function getStaticProps() {
   const tweetsCollection = db.collection('rweets');
   const rweets = await tweetsCollection.find().toArray()
   
-  const allCategories = rweets.reduce((acc, tweet) => acc.concat(tweet.cats), []);
+  const allCategories = rweets.reduce((acc, tweet) => {
+    const cats = JSON.parse(tweet.cats); // Parse the JSON string into a JavaScript array
+    return acc.concat(cats);
+  }, []);
   const categories = [...new Set(allCategories)]; // Extract unique categories
   
   client.close()
