@@ -25,8 +25,7 @@ const Category = ({ category, posts, authors }) => {
 
 export default Category;
 
-// category page routes
-export async function getStaticProps() {
+export async function getStaticPaths() {
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
   const db = client.db()
   const tweetsCollection = db.collection('rweets');
