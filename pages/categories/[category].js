@@ -45,7 +45,14 @@ const Category = ({ category, posts }) => {
     <div className="w-full lg:w-3/4 xl:pr-20 divide-y p-3">
       {posts.map((item) => (
 <div key={item.id} className="flex">
+<Image src={item.image} alt={item.title}
+            className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
+                    objectFit="cover"/>
+ <div>
             <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
+            <p className="py-2 text-black">{item.description}</p>
+              <p className="font-bold text-black">{item.author}</p>
+      </div>      
           </div>
      
       ))}
