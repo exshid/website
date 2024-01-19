@@ -9,7 +9,7 @@ const Sidebar = ({ items }) => {
             <div className="flex-1 space-y-2">
             <Link href={article.id}>
 
-              <h3 className="font-bold underline text-lg mr-2">{article.title}</h3>
+              <h3 className="font-bold transition hover:underline text-lg mr-2">{article.title}</h3>
 </Link>
             </div>
           </div>
