@@ -42,7 +42,7 @@ const LatestTags = ({ items }) => {
 <div className="flex flex-row">
               <span className="text-lg uppercase font-bold text-black inline-block">{item.author}</span>
               <span className="inline-block w-max lg:hidden	mx-2">•</span>
-  <span className="text-lg w-max lg:w-full">{formatDate(props.rweetData.date)}</span>
+  <span className="text-lg w-max lg:w-full">{formatDate(item.date)}</span>
   </div>
       </div>      
           </div>
