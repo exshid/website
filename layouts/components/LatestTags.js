@@ -22,13 +22,10 @@ const LatestTags = ({ items }) => {
   window.removeEventListener('resize', handleResize);
   };
   }, []); 
-  if (!posts) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div className="w-full xl:px-20 divide-y p-3">
-      {posts.map((item) => (
+      {items.map((item) => (
   <>
   {windowWidth > 1024 ? (
 
