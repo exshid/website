@@ -115,11 +115,11 @@ const Header = ({items}) => {
                 )}
               </React.Fragment>
             ))}
-            <div className="w-full flex md:hidden justify-center border-y">
+            <div className="w-full flex md:hidden p-2 justify-center border-y">
       <div className="flex space-x-5 w-full flex-wrap justify-center">
         {categoriesPost.map((item) => {
           return (
-               <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-900">
+               <Link key={Math.random()} href={`/categories/${item}`} className="text-base font-bold text-black hover:text-gray-900">
               {item}             
             </Link>
           );
