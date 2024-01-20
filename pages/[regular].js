@@ -75,7 +75,7 @@ return <>
 
   <div className="max-w-sm mx-auto bg-white overflow-hidden">
   {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
-      <div className="flex flex-col">
+      <div key={index} className="flex flex-col">
         <div className="h-72 w-80 relative">
         <Image
           className="h-full w-full object-cover relative"
