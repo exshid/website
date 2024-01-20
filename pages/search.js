@@ -27,7 +27,7 @@ const SearchPage = ({ authors, rweets }) => {
       return product;
     }
   });
-
+console.log(searchResults, rweets)
   return (
     <Base title={`Search results for ${query.key}`}>
       <div className="section">
@@ -37,7 +37,6 @@ const SearchPage = ({ authors, rweets }) => {
           </h1>
           {searchResults.length > 0 ? (
           <LatestPostsContainer>
-          <LatestTags items={searchResults} />
              </LatestPostsContainer>
            ) : (
             <div className="py-24 text-center text-h3 shadow">
