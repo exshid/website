@@ -45,7 +45,7 @@ export async function getStaticPaths() {
   const authors = [...new Set(allAuthors)];  
   client.close()
 
-  const paths = allAuthors.map((author) => ({
+  const paths = authors.map((author) => ({ // change here
     params: {
       author: author,
     },
