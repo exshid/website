@@ -4,6 +4,8 @@ import { getSinglePage } from "@lib/contentParser";
 import { slugify } from "@lib/utils/textConverter";
 import { useSearchContext } from "context/state";
 import { useRouter } from "next/router";
+import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
+import LatestTags from "@layouts/components/LatestTags";
 
 
 const SearchPage = ({ authors, rweets }) => {
@@ -34,8 +36,10 @@ const SearchPage = ({ authors, rweets }) => {
             Search results for <span className="text-primary">{query.key}</span>
           </h1>
           {searchResults.length > 0 ? (
-            <Posts posts={searchResults} authors={authors} />
-          ) : (
+          <LatestPostsContainer>
+          <LatestTags items={searchResults} />
+             </LatestPostsContainer>
+           ) : (
             <div className="py-24 text-center text-h3 shadow">
               No Search Found
             </div>
