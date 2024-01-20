@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import SearchBar from './SearchBar';
+import SearchBar from "@layouts/components/SearchBar";
 
 const SearchPage = () => {
   const [results, setResults] = useState([]);
