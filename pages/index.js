@@ -321,6 +321,8 @@ const result = await model.generateContent({
     <DontMiss items={articles} headline="News" length={rweetsLength}/>
     <DontMiss items={articles} headline="AI" length={rweetsLength}/>
     </DontMissContainer>
+    <SearchBar/>
+
 <SearchPage/>
     </Base>
   );
