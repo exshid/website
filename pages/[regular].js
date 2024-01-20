@@ -73,9 +73,13 @@ return <>
 <div className="w-full lg:w-4/5 flex flex-col items-center mb-6">
   <span className="text-3xl text-black p-3 font-bold">Read More</span>
 
-  <div className="max-w-sm mx-auto bg-white overflow-hidden">
+  <div className="flex divide-x p-3 md:py-4 xl:px-6 2xl:px-20 overflow-y-hidden	overflow-x-scroll lg:overflow-x-hidden">
+
   {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
-      <div key={index} className="flex flex-col">
+          <div key={index} className="w-full md:w-1/4 p-4">
+
+  <div className="max-w-sm mx-auto bg-white overflow-hidden">
+      <div className="flex flex-col">
         <div className="h-72 w-80 relative">
         <Image
           className="h-full w-full object-cover relative"
@@ -85,14 +89,19 @@ return <>
           objectFit="cover"/>
             </div>
           <div className="pt-8">
+          <Link href={post._id}>
            <h3 className="text-lg transition hover:underline font-bold text-black">
             {post.title}
           </h3>
+          </Link >
 
               <p className="my-2 text-gray-500">{post.description}</p>
           <span className="mt-2 text-gray-700">By {post.author}</span>
         </div>
       </div>
+    </div>
+    </div>
+
     ))}
     </div>
   
