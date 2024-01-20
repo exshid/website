@@ -85,7 +85,7 @@ return <>
           objectFit="cover"/>
             </div>
           <div className="pt-8">
-          <Link href={id}>
+          <Link href={_id}>
            <h3 className="text-lg transition hover:underline font-bold text-black">
             {title}
           </h3>
