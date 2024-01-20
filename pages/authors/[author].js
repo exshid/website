@@ -57,23 +57,19 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
-  const db = client.db() 
+  const db = client.db();
   const tweetsCollection = db.collection('rweets');
   let posts = await tweetsCollection.find().toArray();
 
-    posts = posts.reverse().slice(0, 20).map(post => ({
-    ...post,
-    _id: post._id.toString(),
-  }));
-  const filteredPost = posts.filter(item => {
-    const authorString = item.author.toLowerCase(); 
-    return authorString === params.author.toLowerCase(); 
-  });
-  
+  // Parse JSON data
+  posts = JSON.parse(JSON.stringify(posts));
+
+  // Filter posts by author
+  const filteredPosts = posts.filter(post => post.author === params.author);
+
   return {
-    props: { 
-      posts: filteredPost, 
-      author: params.author, 
+    props: {
+      posts: filteredPosts,
     },
   };
-  };
+}
