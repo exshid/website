@@ -26,7 +26,7 @@ const Category = ({ category, posts }) => {
             Showing posts from <span className="text-primary">{category}</span>{" "}
             category
           </h1>
-         <LatestTags items={posts}>
+         <LatestTags items={posts} />
             </LatestPostsContainer>
         </div>
     </Base>
