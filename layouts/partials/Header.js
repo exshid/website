@@ -105,7 +105,7 @@ const Header = ({items}) => {
                       ))}
                             <div className="w-full hidden md:flex justify-center border-y">
       <div className="flex space-x-5 w-full flex-wrap justify-center">
-        {items.map((item) => {
+        {categoriesPost.map((item) => {
           return (
                <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-900">
               {item}             
