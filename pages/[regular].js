@@ -13,6 +13,8 @@ function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
+
+console.log(myTags)
     return <>
         <Base>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
@@ -21,7 +23,9 @@ function formatDate(dateString) {
 <div className="flex">      
 {myCats.map((item, index) => (
   <Fragment key={index}>
+<Link key={Math.random()} href={`/categories/${item}`}>
     <span className="text-pink-800 text-lg uppercase w-max inline-block">{item}</span>
+    </Link>
     {index !== myCats.length - 1 && <span className="mx-2">•</span>}
   </Fragment>
 ))}
@@ -48,9 +52,8 @@ function formatDate(dateString) {
                     {!myTags.length === 0 && <div className="flex space-x-4 px-3 pt-3 pb-2 w-full lg:w-4/5 items-center border-y">
                       <span className="mr-1 text-black font-bold">Tags:</span> 
                         {myTags.map((item) => {
-                             const href = item.toLowerCase().split(' ').join('-');
                           return (
-                          <Link key={Math.random()} href={`/tags/${href}`} className="text-xs font-medium text-gray-600 hover:text-gray-900">
+                          <Link key={Math.random()} href={`/tags/${item}`} className="text-xs font-medium text-gray-600 hover:text-gray-900">
                               {item}
                             </Link>
                             );
