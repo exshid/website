@@ -85,9 +85,9 @@ return <>
           objectFit="cover"/>
             </div>
           <div className="pt-8">
-          <Link href={_id}>
+          <Link href={post.id}>
            <h3 className="text-lg transition hover:underline font-bold text-black">
-            {title}
+            {post.title}
           </h3>
           </Link >
 
