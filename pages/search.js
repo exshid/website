@@ -1,34 +1,61 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import SearchBar from "@layouts/components/SearchBar";
+import { MongoClient } from 'mongodb';
+import slugify from 'slugify';
 
-const SearchPage = () => {
-  const [results, setResults] = useState([]);
+const SearchPage = ({ authors, rweets }) => {
   const router = useRouter();
-  const { query } = router.query;
+  const { query } = router;
+  const keyword = slugify(query.key);
 
-  useEffect(() => {
-    if (query) {
-      fetch(`/api/search?q=${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('Search results:', data);
-          setResults(data);
-        });
+  const searchResults = rweets.filter((product) => {
+    if (product.frontmatter.draft) {
+      return !product.frontmatter.draft;
     }
-  }, [query]);
+    if (slugify(product.frontmatter.title).includes(keyword)) {
+      return product;
+    } else if (product.frontmatter.categories.find((category) => slugify(category).includes(keyword))) {
+      return product;
+    } else if (product.frontmatter.tags.find((tag) => slugify(tag).includes(keyword))) {
+      return product;
+    } else if (slugify(product.content).includes(keyword)) {
+      return product;
+    }
+  });
 
   return (
-    <div>
-      <h1>Search</h1>
-      <SearchBar onSearch={(q) => router.push(`/search?q=${q}`)} />
-      <ul>
-        {results.map((result) => (
-          <li key={result._id}>{result.text}</li>
-        ))}
-      </ul>
-    </div>
+    <Base title={`Search results for ${query.key}`}>
+      <div className="section">
+        <div className="container">
+          <h1 className="h2 mb-8 text-center">
+            Search results for <span className="text-primary">{query.key}</span>
+          </h1>
+          {searchResults.length > 0 ? (
+            <Posts posts={searchResults} authors={authors} />
+          ) : (
+            <div className="py-24 text-center text-h3 shadow">
+              No Search Found
+            </div>
+          )}
+        </div>
+      </div>
+    </Base>
   );
 };
 
 export default SearchPage;
+
+export async function getStaticProps() {
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
+  const tweetsCollection = db.collection('rweets');
+  const rweets = await tweetsCollection.find().toArray();
+  client.close();
+
+  const authors = getSinglePage("content/authors");
+
+  return {
+    props: {
+      authors: authors,
+      rweets: rweets,
+    },
+  };
+};
