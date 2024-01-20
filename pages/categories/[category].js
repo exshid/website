@@ -48,15 +48,15 @@ const Category = ({ category, posts }) => {
 
 <div key={item.id} className="flex">
 <Image src={item.image} alt={item.title}
-            className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
+            className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 first:lg:w-[500px] first:lg:h-[400px] rounded-m"
                     objectFit="cover"/>
  <div>
  <Link href={`/${item._id}`}>
 
-            <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
+            <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl first:lg:text-4xl pt-2">{item.title}</h3>
 </Link>
-            <p className="py-2 text-black">{item.description}</p>
-              <p className="font-bold text-black">{item.author}</p>
+            <p className="py-2 text-black first:text-lg">{item.description}</p>
+              <p className="font-bold text-black first:text-lg">{item.author}</p>
       </div>      
           </div>
      
@@ -123,8 +123,7 @@ export async function getStaticProps({ params }) {
   const tweetsCollection = db.collection('rweets');
   let posts = await tweetsCollection.find().toArray();
 
-  // Convert _id to string
-  posts = posts.reverse().slice(0, 20).map(post => ({
+    posts = posts.reverse().slice(0, 20).map(post => ({
     ...post,
     _id: post._id.toString(),
   }));
