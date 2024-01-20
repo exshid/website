@@ -103,18 +103,7 @@ const Header = ({items}) => {
                           </Link>
                         </li>
                       ))}
-                            <div className="w-full hidden md:flex justify-center border-y">
-      <div className="flex space-x-5 w-full flex-wrap justify-center">
-        {categoriesPost.map((item) => {
-          return (
-               <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-900">
-              {item}             
-            </Link>
-          );
-        })}
-      </div>
-      </div>
-
+                            
                     </ul>
                   </li>
                 ) : (
@@ -126,6 +115,17 @@ const Header = ({items}) => {
                 )}
               </React.Fragment>
             ))}
+            <div className="w-full flex md:hidden justify-center border-y">
+      <div className="flex space-x-5 w-full flex-wrap justify-center">
+        {categoriesPost.map((item) => {
+          return (
+               <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-900">
+              {item}             
+            </Link>
+          );
+        })}
+      </div>
+      </div>
           </ul>
           <div className="order-1 ml-auto md:order-2 md:ml-0">
             <div
