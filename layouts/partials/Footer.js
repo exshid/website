@@ -8,7 +8,7 @@ import Link from "next/link";
 const Footer = () => {
   const { copyright } = config.params;
   return (
-    <footer className="border-t">
+    <footer className="border-t p-6">
       <div className="flex justify-between items-center">
         {/* social icons */}
         <Social source={social} className="social-icons" />
@@ -16,14 +16,14 @@ const Footer = () => {
         <ul className="space-x-4">
           {menu.footer.map((menu) => (
             <li className="inline-block" key={menu.name}>
-              <Link href={menu.url} className="p-4 text-black hover:text-[gray]">
+              <Link href={menu.url} className="p-4 text-[.9rem] font-bold text-black hover:text-gray-500">
                 {menu.name}
               </Link>
             </li>
           ))}
         </ul>
         {/* copyright */}
-        {markdownify(copyright, "p", "text-black")}
+        {markdownify(copyright, "p", "text-[.9rem] font-bold text-black hover:text-gray-900")}
       </div>
     </footer>
   );

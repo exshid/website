@@ -145,11 +145,8 @@ const db = client.db()
 const tweetsCollection = db.collection('rweets');
 
 const rweet = await tweetsCollection.findOne({ _id: new ObjectId(tweetId) })
-
-// Fetch all posts
 const allPosts = await tweetsCollection.find().toArray();
 
-// Filter out the current post and parse the JSON array
 const relatedPosts = allPosts.filter(post => post._id.toString() !== tweetId).map(post => JSON.parse(JSON.stringify(post)));
 
 client.close()
@@ -167,7 +164,7 @@ return {
           author: rweet.author,
           image: rweet.image
         },
-        relatedPosts: relatedPosts.reverse().slice(0, 15), // Add relatedPosts to props
+        relatedPosts: relatedPosts.reverse().slice(0, 15), 
     }
 }
 }
