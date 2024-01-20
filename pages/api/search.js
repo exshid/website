@@ -2,13 +2,16 @@ import { MongoClient } from 'mongodb';
 
 async function handler(req, res) {
   if (req.method === 'GET') {
+    const { q } = req.query;
+
+    console.log('Search query:', q);
+
     const client = await MongoClient.connect(
       'mongodb+srv://alan:LSbsBY8HmkN1DoUg@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'
     );
     const db = client.db();
     const tweetsCollection = db.collection('tweets');
 
-    const { q } = req.query;
     let results;
 
     if (q) {
@@ -23,6 +26,8 @@ async function handler(req, res) {
     } else {
       results = await tweetsCollection.find().toArray();
     }
+
+    console.log('Search results:', results);
 
     client.close();
     res.status(200).json(results);

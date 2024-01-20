@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import SearchBar from "@layouts/components/SearchBar";
+import SearchBar from './SearchBar';
 
 const SearchPage = () => {
   const [results, setResults] = useState([]);
@@ -11,7 +11,10 @@ const SearchPage = () => {
     if (query) {
       fetch(`/api/search?q=${query}`)
         .then((res) => res.json())
-        .then((data) => setResults(data));
+        .then((data) => {
+          console.log('Search results:', data);
+          setResults(data);
+        });
     }
   }, [query]);
 
