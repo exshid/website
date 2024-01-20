@@ -14,7 +14,7 @@ function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
 let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
-
+console.log(relatedPostsFiltered)
 
 if (relatedPostsFiltered.length < 3) {
   let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
@@ -85,11 +85,9 @@ return <>
           objectFit="cover"/>
             </div>
           <div className="pt-8">
-          <Link href={post.id}>
            <h3 className="text-lg transition hover:underline font-bold text-black">
             {post.title}
           </h3>
-          </Link >
 
               <p className="my-2 text-gray-500">{post.description}</p>
           <span className="mt-2 text-gray-700">By {post.author}</span>
