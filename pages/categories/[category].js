@@ -41,7 +41,7 @@ const Category = ({ category, posts }) => {
             category
           </h1>
          <LatestPostsContainer>
-    <div className="w-full lg:w-3/4 xl:pr-20 divide-y p-3">
+    <div className="w-full xl:px-20 divide-y p-3">
       {posts.map((item) => (
   <>
   {windowWidth > 1024 ? (
@@ -51,7 +51,7 @@ const Category = ({ category, posts }) => {
             className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
                     objectFit="cover"/>
  <div>
- <Link href={item._id}>
+ <Link href={`/${item._id}`}>
 
             <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
 </Link>
@@ -62,7 +62,10 @@ const Category = ({ category, posts }) => {
      
      ) : (
       <div key={Math.random()} className="flex flex-col">
+         <Link href={`/${item._id}`}>
+
         <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
+</Link>
           <div className="flex flex-row-reverse justify-between">
       <Image src={item.image} alt={item.title}
       className="object-cover !relative lg:p-4 ml-2 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
@@ -121,7 +124,7 @@ export async function getStaticProps({ params }) {
   let posts = await tweetsCollection.find().toArray();
 
   // Convert _id to string
-  posts = posts.map(post => ({
+  posts = posts.reverse().slice(0, 20).map(post => ({
     ...post,
     _id: post._id.toString(),
   }));
