@@ -70,7 +70,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      posts: filteredPosts,
+      posts: filteredPosts.reverse().slice(0, 15),
     },
   };
 }

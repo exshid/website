@@ -72,20 +72,34 @@ return <>
 
 <div className="w-full lg:w-4/5 flex flex-col items-center mb-6">
   <span className="text-3xl text-black p-3 font-bold">Read More</span>
-      <div className="flex justify-around w-full">
-      <div className="flex justify-around w-full">
+
+  <div className="max-w-sm mx-auto bg-white overflow-hidden">
   {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
-    <div key={index} className="flex flex-col w-96">
-     <div className="h-64 p-3">
-      <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
-   </div>
-      <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-      <p className="text-sm text-gray-700 mb-2">{post.description}</p>
-      <span className="text-sm text-black">By {post.author}</span>
+      <div className="flex flex-col">
+        <div className="h-72 w-80 relative">
+        <Image
+          className="h-full w-full object-cover relative"
+          src={post.image}
+          alt={post.title}
+          layout="fill"
+          objectFit="cover"/>
+            </div>
+          <div className="pt-8">
+          <Link href={id}>
+           <h3 className="text-lg transition hover:underline font-bold text-black">
+            {title}
+          </h3>
+          </Link >
+
+              <p className="my-2 text-gray-500">{post.description}</p>
+          <span className="mt-2 text-gray-700">By {post.author}</span>
+        </div>
+      </div>
+    ))}
     </div>
-  ))}
-</div>
- </div>
+  
+
+
 </div>
         </div>
         </Base>
