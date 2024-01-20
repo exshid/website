@@ -33,26 +33,27 @@ const Author = ({ author, posts }) => {
 export default Author;
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
+  const db = client.db();
   const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find().toArray()
-  
-  const allAuthors = rweets.reduce((acc, tweet) => {
-    const authors = tweet.authors; 
-    return acc.concat(authors);
-  }, []);
-  const authors = [...new Set(allAuthors)];  
-  client.close()
+  let posts = await tweetsCollection.find().toArray();
 
-  const paths = authors.map((author) => ({ // change here
-    params: {
-      author: author,
-    },
+  // Parse JSON data
+  posts = JSON.parse(JSON.stringify(posts));
+
+  // Get all authors
+  const authors = posts.map(post => post.author);
+
+  // Remove duplicates
+  const uniqueAuthors = [...new Set(authors)];
+
+  // Generate paths
+  const paths = uniqueAuthors.map(author => ({
+    params: { author: author.toString() },
   }));
 
   return { paths, fallback: false };
-};
+}
 
 
 export async function getStaticProps({ params }) {
