@@ -66,15 +66,14 @@ export async function getStaticProps({ params }) {
     _id: post._id.toString(),
   }));
   const filteredPost = posts.filter(item => {
-    const authorsArray = item.authors.map(author => author.toLowerCase()); 
-    return authorsArray.includes(params.author.toLowerCase()); 
+    const authorString = item.author.toLowerCase(); 
+    return authorString === params.author.toLowerCase(); 
   });
-    
-
+  
   return {
     props: { 
       posts: filteredPost, 
       author: params.author, 
     },
   };
-};
+  };
