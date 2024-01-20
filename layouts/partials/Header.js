@@ -58,7 +58,7 @@ const Header = ({items}) => {
             htmlFor="nav-toggle"
             className="order-2 flex cursor-pointer items-center md:order-1 md:hidden"
           >
-            <svg className="h-6 fill-current" viewBox="0 0 20 20">
+            <svg className="h-6 fill-black" viewBox="0 0 20 20">
               <title>Menu Open</title>
               <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z" />
             </svg>
@@ -68,7 +68,7 @@ const Header = ({items}) => {
             htmlFor="nav-toggle"
             className="order-2 hidden cursor-pointer items-center md:order-1"
           >
-            <svg className="h-6 fill-current" viewBox="0 0 20 20">
+            <svg className="h-6 fill-black" viewBox="0 0 20 20">
               <title>Menu Close</title>
               <polygon
                 points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
@@ -88,7 +88,7 @@ const Header = ({items}) => {
                   <li className="nav-item nav-dropdown group relative">
                     <span className="nav-link inline-flex items-center">
                       {menu.name}
-                      <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                      <svg className="h-4 w-4 fill-black" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                       </svg>
                     </span>
@@ -103,6 +103,18 @@ const Header = ({items}) => {
                           </Link>
                         </li>
                       ))}
+                            <div className="w-full hidden md:flex justify-center border-y">
+      <div className="flex space-x-5 w-full flex-wrap justify-center">
+        {items.map((item) => {
+          return (
+               <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-900">
+              {item}             
+            </Link>
+          );
+        })}
+      </div>
+      </div>
+
                     </ul>
                   </li>
                 ) : (

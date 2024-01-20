@@ -71,7 +71,7 @@ return <>
               </div>}
 
 <div className="w-full lg:w-4/5 flex flex-col items-center mb-6">
-  <span className="text-3xl text-black p-3 font-bold">Read More</span>
+  <span className="text-3xl text-black pt-4 font-bold">Read More</span>
 
   <div className="flex divide-x w-full p-3 md:py-4 xl:px-6 2xl:px-20 overflow-y-hidden	overflow-x-scroll lg:overflow-x-hidden">
 

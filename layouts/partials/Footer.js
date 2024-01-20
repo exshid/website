@@ -8,7 +8,7 @@ import Link from "next/link";
 const Footer = () => {
   const { copyright } = config.params;
   return (
-    <footer className="border-t p-6">
+    <footer className="border-t px-6">
       <div className="flex justify-between items-center">
         {/* social icons */}
         <Social source={social} className="social-icons" />
