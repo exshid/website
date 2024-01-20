@@ -22,6 +22,7 @@ import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestPosts from "@layouts/components/LatestPosts";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
+import SearchPage from "@layouts/components/Search";
 const { blog_folder } = config.settings;
 
 const Home = ({ articles, rweetsLength }) => {
@@ -318,7 +319,7 @@ const result = await model.generateContent({
     <DontMiss items={articles} headline="News" length={rweetsLength}/>
     <DontMiss items={articles} headline="AI" length={rweetsLength}/>
     </DontMissContainer>
-
+<SearchPage/>
     </Base>
   );
 };

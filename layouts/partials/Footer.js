@@ -9,7 +9,7 @@ const Footer = () => {
   const { copyright } = config.params;
   return (
     <footer className="border-t px-6">
-      <div className="flex justify-between items-center">
+      <div className="py-3 lg:py-0 flex justify-between items-center flex-col lg:flex-row">
         {/* social icons */}
         <Social source={social} className="social-icons" />
         {/* footer menu */}
