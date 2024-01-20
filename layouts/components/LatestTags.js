@@ -40,9 +40,9 @@ const LatestTags = ({ items }) => {
 </Link>
             <p className="py-2 text-black text-lg">{item.description}</p>
 <div className="flex flex-row">
-              <span className="text-lg uppercase font-bold text-black inline-block">{item.author}</span>
-              <span className="inline-block w-max lg:hidden	mx-2">•</span>
-  <span className="text-lg w-max lg:w-full">{formatDate(item.date)}</span>
+              <span className="text-lg uppercase w-max font-bold text-black">{item.author}</span>
+              <span className="inline-block w-max mx-2">•</span>
+  <span className="text-lg w-max">{formatDate(item.date)}</span>
   </div>
       </div>      
           </div>

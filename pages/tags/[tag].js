@@ -1,3 +1,7 @@
+import Image from 'next/image'
+import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
+
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import { getSinglePage } from "@lib/contentParser";
@@ -5,30 +9,43 @@ import { getTaxonomy } from "@lib/taxonomyParser";
 import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
+import { MongoClient } from 'mongodb'
+import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
+import LatestTags from "@layouts/components/LatestTags";
 
-// tag page
-const Tag = ({ tag, posts, authors }) => {
+const Tag = ({ tag, posts }) => {
+  
   return (
     <Base title={tag}>
       <div className="section">
-        <div className="container">
           <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{tag}</span> tag
+            Showing posts from <span className="text-primary">{tag}</span>{" "}
+            category
           </h1>
-          <Posts posts={posts} authors={authors} />
+          <LatestPostsContainer>
+         <LatestTags items={posts} />
+            </LatestPostsContainer>
         </div>
-      </div>
     </Base>
   );
 };
 
 export default Tag;
 
-// tag page routes
-export const getStaticPaths = () => {
-  const allCategories = getTaxonomy(`content/${blog_folder}`, "tags");
+export async function getStaticPaths() {
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
+  const tweetsCollection = db.collection('rweets');
+  const rweets = await tweetsCollection.find().toArray()
+  
+  const allTags = rweets.reduce((acc, tweet) => {
+    const tags = JSON.parse(tweet.tags); 
+    return acc.concat(tags);
+  }, []);
+  const tags = [...new Set(allTags)];  
+  client.close()
 
-  const paths = allCategories.map((tag) => ({
+  const paths = allTags.map((tag) => ({
     params: {
       tag: tag,
     },
@@ -37,15 +54,27 @@ export const getStaticPaths = () => {
   return { paths, fallback: false };
 };
 
-// tag page data
-export const getStaticProps = ({ params }) => {
-  const posts = getSinglePage(`content/${blog_folder}`);
-  const filterPosts = posts.filter((post) =>
-    post.frontmatter.tags.find((tag) => slugify(tag).includes(params.tag))
-  );
-  const authors = getSinglePage("content/authors");
+
+export async function getStaticProps({ params }) {
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
+  const db = client.db() 
+  const tweetsCollection = db.collection('rweets');
+  let posts = await tweetsCollection.find().toArray();
+
+    posts = posts.reverse().slice(0, 20).map(post => ({
+    ...post,
+    _id: post._id.toString(),
+  }));
+  const filteredPost = posts.filter(item => {
+    const tagsArray = JSON.parse(item.tags).map(tag => tag.toLowerCase()); 
+    return tagsArray.includes(params.tag.toLowerCase()); 
+  });
+    
 
   return {
-    props: { posts: filterPosts, tag: params.tag, authors: authors },
+    props: { 
+      posts: filteredPost, 
+      tag: params.tag, 
+    },
   };
 };
