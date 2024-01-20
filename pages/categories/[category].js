@@ -127,12 +127,11 @@ export async function getStaticProps({ params }) {
     ...post,
     _id: post._id.toString(),
   }));
-const lowerParam = params.category.toLowerCase()
   const filteredPost = posts.filter(item => {
-      const catsArray = JSON.parse(item.cats);
-      return catsArray.toLowerCase().includes(lowerParam);
+    const catsArray = JSON.parse(item.cats).map(cat => cat.toLowerCase()); 
+    return catsArray.includes(params.category.toLowerCase()); 
   });
-  
+    
 
   return {
     props: { 
