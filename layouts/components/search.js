@@ -1,24 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import SearchBar from './SearchBar';
 
-export default function SearchPage() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [results, setResults] = useState([])
+const SearchPage = () => {
+  const [results, setResults] = useState([]);
+  const router = useRouter();
+  const { query } = router.query;
 
-    const search = async () => {
-        const res = await fetch(`/api/search?search=${searchTerm}`)
-        const data = await res.json()
-        setResults(data)
+  useEffect(() => {
+    if (query) {
+      fetch(`/api/search?q=${query}`)
+        .then((res) => res.json())
+        .then((data) => setResults(data));
     }
+  }, [query]);
 
-    return (
-        <div>
-            <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-            <button onClick={search}>Search</button>
-            <ul>
-                {results.map((result, index) => (
-                    <li key={index}>{result.title}</li>
-                ))}
-            </ul>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1>Search</h1>
+      <SearchBar onSearch={(q) => router.push(`/search?q=${q}`)} />
+      <ul>
+        {results.map((result) => (
+          <li key={result._id}>{result.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SearchPage;

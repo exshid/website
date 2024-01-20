@@ -23,6 +23,8 @@ import LatestPosts from "@layouts/components/LatestPosts";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 import SearchPage from "@layouts/components/search";
+import SearchBar from "@layouts/components/SearchBar";
+
 const { blog_folder } = config.settings;
 
 const Home = ({ articles, rweetsLength }) => {

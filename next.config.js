@@ -4,6 +4,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  
   images: {
     remotePatterns: [
     {
@@ -16,6 +17,18 @@ const nextConfig = {
     config.resolve.fallback = { fs: false, child_process: false, worker_threads: false };
 
     return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/posts',
+        destination: '/api/posts/:path*',
+      },
+      {
+        source: '/api/search',
+        destination: '/api/search/:path*',
+      },
+    ];
   },
 };
 
