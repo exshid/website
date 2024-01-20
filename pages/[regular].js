@@ -13,6 +13,7 @@ function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
+let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
 
 
 if (relatedPostsFiltered.length < 3) {

@@ -14,7 +14,7 @@ import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
 const Author = ({ author, posts }) => {
-  
+  console.log( author, posts)
   return (
     <Base title={author}>
       <div className="section">
