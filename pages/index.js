@@ -316,7 +316,7 @@ const result = await model.generateContent({
       </LatestPostsContainer>
     <DontMissContainer>
     <DontMiss items={articles} headline="News" length={rweetsLength}/>
-    <DontMiss items={articles} headline="AI"/>
+    <DontMiss items={articles} headline="AI" length={rweetsLength}/>
     </DontMissContainer>
 
     </Base>
