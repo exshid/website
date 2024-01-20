@@ -320,7 +320,6 @@ const result = await model.generateContent({
     <DontMiss items={articles} headline="AI" length={rweetsLength}/>
     </DontMissContainer>
 
-<SearchPage/>
     </Base>
   );
 };

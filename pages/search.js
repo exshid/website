@@ -1,5 +1,10 @@
-import { MongoClient } from 'mongodb';
-import slugify from 'slugify';
+import Base from "@layouts/Baseof";
+import Posts from "@layouts/partials/Posts";
+import { getSinglePage } from "@lib/contentParser";
+import { slugify } from "@lib/utils/textConverter";
+import { useSearchContext } from "context/state";
+import { useRouter } from "next/router";
+
 
 const SearchPage = ({ authors, rweets }) => {
   const router = useRouter();
