@@ -14,8 +14,13 @@ function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
-console.log(myTags)
-    return <>
+
+if (relatedPostsFiltered.length < 3) {
+  let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
+  relatedPostsFiltered = relatedPostsFiltered.concat(relatedPostsCompleted.slice(0, 3 - relatedPostsFiltered.length));
+}
+
+return <>
         <Base>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-col lg:flex-row py-5 p-2 w-full md:w-4/5 lg:w-[90%] xl:w-4/5">
@@ -33,7 +38,11 @@ console.log(myTags)
             <h1 className="font-bold text-black text-4xl">{props.rweetData.title}</h1>
             <p className="text-lg py-3">{props.rweetData.description}</p>
   <div className="flex flex-row lg:flex-col">
-  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-max lg:w-full">By {props.rweetData.author}</span>
+
+    <Link key={Math.random()} href={`/authors/${props.rweetData.author}`}>
+  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-max lg:w-full">
+    By {props.rweetData.author}</span>
+</Link>
   <span className="inline-block w-max lg:hidden	mx-2">•</span>
   <span className="text-lg w-max lg:w-full">{formatDate(props.rweetData.date)}</span>
             </div>
@@ -63,6 +72,18 @@ console.log(myTags)
 <div className="w-full lg:w-4/5 flex flex-col items-center mb-6">
   <span className="text-3xl text-black p-3 font-bold">Read More</span>
       <div className="flex justify-around w-full">
+      <div className="flex justify-around w-full">
+  {relatedPostsFiltered.slice(0, 3).map((post, index)  => (
+    <div key={index} className="flex flex-col w-96">
+     <div className="h-64 p-3">
+      <img src={post.image} alt={post.title} className="w-full h-full object-cover mb-2"/>
+   </div>
+      <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+      <p className="text-sm text-gray-700 mb-2">{post.description}</p>
+      <span className="text-sm text-black">By {post.author}</span>
+    </div>
+  ))}
+</div>
  </div>
 </div>
         </div>
