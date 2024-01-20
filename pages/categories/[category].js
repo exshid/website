@@ -130,7 +130,7 @@ export async function getStaticProps({ params }) {
 
   const filteredPost = posts.filter(item => {
       const catsArray = JSON.parse(item.cats);
-      return catsArray.includes(params.category);
+      return catsArray.includes(params.category.toLowerCase());
   });
   
 
