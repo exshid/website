@@ -32,8 +32,8 @@ const LatestTags = ({ items }) => {
   <>
   {windowWidth > 1024 ? (
 
-<div key={item.id} className="flex">
-<Image src={item.image} alt={item.title}
+<div key={item._id} className="flex">
+  <Image src={item.image} alt={item.title}
             className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-[450px] lg:h-[350px] rounded-m"
                     objectFit="cover"/>
  <div>
