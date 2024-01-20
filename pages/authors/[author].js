@@ -39,7 +39,7 @@ export async function getStaticPaths() {
   const rweets = await tweetsCollection.find().toArray()
   
   const allAuthors = rweets.reduce((acc, tweet) => {
-    const authors = JSON.parse(tweet.authors); 
+    const authors = tweet.authors; 
     return acc.concat(authors);
   }, []);
   const authors = [...new Set(allAuthors)];  
@@ -66,7 +66,7 @@ export async function getStaticProps({ params }) {
     _id: post._id.toString(),
   }));
   const filteredPost = posts.filter(item => {
-    const authorsArray = JSON.parse(item.authors).map(author => author.toLowerCase()); 
+    const authorsArray = item.authors.map(author => author.toLowerCase()); 
     return authorsArray.includes(params.author.toLowerCase()); 
   });
     
