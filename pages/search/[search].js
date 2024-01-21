@@ -39,12 +39,6 @@ const Search = ({ search}) => {
                 console.log(data);
                 setMydata(data);
                 setIsLoading(false);
-                let filteredPosts = JSON.parse(mydata).filter(post => 
-                    (post.title && post.title.includes(search)) || 
-                    (post.content && post.content.includes(search)) || 
-                    (post.description && post.description.includes(search))
-                  );
-                  setFiltered(filteredPosts)
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -53,6 +47,17 @@ const Search = ({ search}) => {
             });
     }, []);
     console.log(filtered); 
+    useEffect(() => {
+        if (mydata) {
+
+    let filteredPosts = mydata.filter(post => 
+        (post.title && post.title.includes(search)) || 
+        (post.content && post.content.includes(search)) || 
+        (post.description && post.description.includes(search))
+      );
+      setFiltered(filteredPosts)
+    }
+    }, [mydata]);
 
 
     if (isLoading) {
@@ -77,7 +82,7 @@ const Search = ({ search}) => {
     <Base title={search}>
       <div className="section">
           <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{search}</span>{" "}
+            Showing posts from <span className="text-primary">{search.reverse().slice(0, 20)}</span>{" "}
             search
 
          </h1>
