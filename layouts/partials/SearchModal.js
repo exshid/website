@@ -27,9 +27,11 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
   });
   return (
     <div className={`search-modal ${searchModal ? "open" : ""}`}>
+<Link href={`/${input}`}>
             <button className="search-close">
         <IoArrowForward />
       </button>
+      </Link>
       <input
         type="text"
         className="form-input"
