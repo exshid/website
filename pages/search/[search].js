@@ -39,21 +39,15 @@ const Search = ({ search, posts }) => {
 
 export default Search;
 
-export async function getStaticPaths() {
-    const files = fs.readdirSync(path.join('pages/search'));
+export async function getServerSideProps(context) {
+    const { search } = context.params;
 
-    // Remove ".js" from file names to get the paths
-    const paths = files.map(filename => ({
-      params: {
-        search: filename.replace('.js', '')
-      }
-    }));
-  
     return {
-      paths,
-      fallback: false // See the "fallback" section below for more details
+        props: {
+          search: search
+        },
+      };
     };
-};
 
 
 export async function getStaticProps({ params }) {
