@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
@@ -14,7 +17,7 @@ import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
 // category page
-const Category = ({ search, posts }) => {
+const Search = ({ search, posts }) => {
   if (!posts) {
     return <p>Loading...</p>;
   }
@@ -34,29 +37,22 @@ const Category = ({ search, posts }) => {
   );
 };
 
-export default Category;
+export default Search;
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
-  const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find().toArray()
-  
-  const allCategories = rweets.reduce((acc, tweet) => {
-    const cats = JSON.parse(tweet.cats); // Parse the JSON string into a JavaScript array
-    return acc.concat(cats);
-  }, []);
-  const categories = [...new Set(allCategories)]; // Extract unique categories
-  
-  client.close()
+    const files = fs.readdirSync(path.join('pages/search'));
 
-  const paths = rweets.map((search) => ({
-    params: {
-      search: search,
-    },
-  }));
-
-  return { paths, fallback: false };
+    // Remove ".js" from file names to get the paths
+    const paths = files.map(filename => ({
+      params: {
+        search: filename.replace('.js', '')
+      }
+    }));
+  
+    return {
+      paths,
+      fallback: false // See the "fallback" section below for more details
+    };
 };
 
 
