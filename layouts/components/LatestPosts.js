@@ -33,7 +33,7 @@ const LatestPosts = ({ items }) => {
               <h3 className="font-semibold transition text-black hover:text-gray-500 hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
       </Link>
               <p className="py-2 text-black">{item.description}</p>
-              <Link href={`authors/${item.author}`}>
+              <Link href={`/authors/${item.author}`}>
               <p className="font-bold text-black hover:text-gray-500 hover:underline">{item.author}</p>
       </Link>
 
@@ -55,9 +55,9 @@ const LatestPosts = ({ items }) => {
          : item.description}
            </p>
         <div>
-        <Link href={`authors/${item.author}`}>
+        <Link href={`/authors/${item.author}`}>
 
-          <span className="font-bold text-black pb-2">{item.author}</span>
+          <span className="font-bold text-black hover:underline hover:text-gray-500 pb-2">{item.author}</span>
 </Link>
         </div>
         </div>
