@@ -16,9 +16,12 @@ const HeadLines = ({ items }) => {
                 </div>
                 <div className="w-2/3">
                 <Link href={podcast.id}>
-                  <h3 className="text-lg transition hover:underline font-bold mb-1">{podcast.title}</h3>
+                  <h3 className="text-lg transition hover:underline font-bold text-black hover:text-gray-500 hover:underline mb-1">{podcast.title}</h3>
                 </Link>
-                  <span className="text-xs text-gray-400 mt-2">{podcast.author}</span>
+                <Link href={podcast.author}>
+                  <span className="text-xs mt-2 text-black hover:text-gray-500 hover:underline">{podcast.author}</span>
+                  </Link>
+
                 </div>
               </div>
             </div>

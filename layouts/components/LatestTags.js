@@ -36,11 +36,14 @@ const LatestTags = ({ items }) => {
  <div>
  <Link href={`/${item._id}`}>
 
-            <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-4xl pt-2">{item.title}</h3>
+            <h3 className="font-semibold transition text-black hover:underline hover:text-gray-500 text-lg md:text-xl lg:text-4xl pt-2">{item.title}</h3>
 </Link>
             <p className="py-2 text-black text-lg">{item.description}</p>
 <div className="flex flex-row">
-              <span className="text-lg uppercase w-max font-bold text-black">{item.author}</span>
+<Link href={`/${item.author}`}>
+
+              <span className="text-lg uppercase w-max font-bold text-black hover:underline hover:text-gray-500">{item.author}</span>
+</Link>
               <span className="inline-block w-max mx-2">•</span>
   <span className="text-lg w-max">{formatDate(item.date)}</span>
   </div>

@@ -30,7 +30,7 @@ return <>
 {myCats.map((item, index) => (
   <Fragment key={index}>
 <Link key={Math.random()} href={`/categories/${item}`}>
-    <span className="text-pink-800 text-lg uppercase w-max inline-block">{item}</span>
+    <span className="text-pink-800 hover:underline text-lg uppercase w-max inline-block">{item}</span>
     </Link>
     {index !== myCats.length - 1 && <span className="mx-2">•</span>}
   </Fragment>
@@ -41,7 +41,7 @@ return <>
   <div className="flex flex-row lg:flex-col">
 
     <Link key={Math.random()} href={`/authors/${props.rweetData.author}`}>
-  <span className="text-lg uppercase font-bold text-black inline-block lg:block w-max lg:w-full">
+  <span className="text-lg uppercase font-bold text-black hover:underline hover:text-gray-500 inline-block lg:block w-max lg:w-full">
     By {props.rweetData.author}</span>
 </Link>
   <span className="inline-block w-max lg:hidden	mx-2">•</span>
@@ -90,13 +90,16 @@ return <>
             </div>
           <div className="pt-8">
           <Link href={post._id}>
-           <h3 className="text-lg transition hover:underline font-bold text-black">
+           <h3 className="text-lg font-bold hover:underline text-black hover:text-gray-500">
             {post.title}
           </h3>
           </Link >
 
               <p className="my-2 text-gray-500">{post.description}</p>
-          <span className="mt-2 text-gray-700">By {post.author}</span>
+              <Link href={post.author}>
+
+          <span className="mt-2 text-gray-700 hover:underline hover:text-black">By {post.author}</span>
+       </Link>
         </div>
       </div>
     </div>

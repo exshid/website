@@ -16,14 +16,14 @@ const Footer = () => {
         <ul className="space-x-4">
           {menu.footer.map((menu) => (
             <li className="inline-block" key={menu.name}>
-              <Link href={menu.url} className="p-4 text-[.9rem] font-bold text-black hover:text-gray-500">
+              <Link href={menu.url} className="p-4 text-[.9rem] font-bold text-black hover:text-gray-500 hover:underline">
                 {menu.name}
               </Link>
             </li>
           ))}
         </ul>
         {/* copyright */}
-        {markdownify(copyright, "p", "text-[.9rem] font-bold text-black hover:text-gray-900")}
+        {markdownify(copyright, "p", "text-[.9rem] font-bold text-black")}
       </div>
     </footer>
   );

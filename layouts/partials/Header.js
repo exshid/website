@@ -97,7 +97,7 @@ const Header = ({items}) => {
                         <li className="nav-dropdown-item" key={`children-${i}`}>
                           <Link
                             href={child.url}
-                            className="nav-dropdown-link block"
+                            className="nav-dropdown-link block hover:underline text-black hover:text-gray-500"
                           >
                             {child.name}
                           </Link>
@@ -108,7 +108,7 @@ const Header = ({items}) => {
                   </li>
                 ) : (
                   <li className="nav-item">
-                    <Link href={menu.url} className="nav-link block">
+                    <Link href={menu.url} className="nav-link block hover:underline text-black hover:text-gray-500">
                       {menu.name}
                     </Link>
                   </li>
@@ -119,7 +119,8 @@ const Header = ({items}) => {
       <div className="flex space-x-5 w-full flex-wrap justify-center">
         {categoriesPost.map((item) => {
           return (
-               <Link key={Math.random()} href={`/categories/${item}`} className="text-base font-bold text-black hover:text-gray-900">
+               <Link key={Math.random()} href={`/categories/${item}`}
+               className="text-base font-bold text-black hover:text-gray-500 hover:underline">
               {item}             
             </Link>
           );

@@ -6,7 +6,7 @@ const CategoryLinks = ({ items }) => {
       <div className="flex space-x-5 py-3 w-3/4 justify-center">
         {items.map((item) => {
           return (
-            <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-900">
+            <Link key={Math.random()} href={`/categories/${item}`} className="text-[.9rem] font-bold text-black hover:text-gray-500 hover:underline">
               {item}             
             </Link>
           );
