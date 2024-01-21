@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image'
 
-const DontMiss = ({ items, headline,length }) => {
+const DontMiss = ({ items, category }) => {
     return (
       <div className="px-4 py-3 lg:p-6 lg:w-1/2">
         <div className="flex items-baseline">
-          <span className="text-gray-600 font-semibold">{headline}</span>
-          <span className="ml-2 text-sm text-gray-500">{length} articles</span>
+          <span className="text-gray-600 font-semibold uppercase">{category}</span>
         </div>
         <ul className="mt-4 space-y-4">
-          {items.slice(0, 4).map((item) => (
+        {items.filter(item => item.cats.includes(category)).slice(0, 4).map((item) => (
             <li key={item.id} className="flex items-start justify-between space-x-4">
               <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>

@@ -25,7 +25,7 @@ import Posts from "@partials/Posts";
 
 const { blog_folder } = config.settings;
 
-const Home = ({ articles, rweetsLength }) => {
+const Home = ({ articles }) => {
 
       const generationConfig = {
         temperature: 0.8,
@@ -306,18 +306,18 @@ const result = await model.generateContent({
     <Base>
       <EditorContainer>
     <EditorPickCenter items={articles} />
-    <EditorPickRight items={articles} />
-<EditorPickLeft items={articles} />
+    <EditorPickRight items={articles} category="Games" />
+<EditorPickLeft items={articles} category="Movies" />
 </EditorContainer>
 <MustRead items={articles} />
-    <HeadLines items={articles} />
+    <HeadLines items={articles} category="TV" />
     <LatestPostsContainer>
     <LatestPosts items={articles} />
-    <Sidebar items={articles} />
+    <Sidebar items={articles} category="TV" />
       </LatestPostsContainer>
     <DontMissContainer>
-    <DontMiss items={articles} headline="News" length={rweetsLength}/>
-    <DontMiss items={articles} headline="AI" length={rweetsLength}/>
+    <DontMiss items={articles} category="Games"/>
+    <DontMiss items={articles} category="Movies" />
     </DontMissContainer>
 
     </Base>
@@ -332,7 +332,6 @@ export async function getStaticProps() {
   const tweetsCollection = db.collection('rweets');
   const rweets = await tweetsCollection.find().toArray()
   client.close()
-  const rweetsLength = [...rweets].length;
   return {
       props: {
         articles: [...rweets].reverse().slice(0, 20).map(rweet => ({
@@ -347,7 +346,6 @@ export async function getStaticProps() {
           id: rweet._id.toString(),
           image: rweet.image
         })),
-        rweetsLength: rweetsLength
       },
       revalidate: 1
     }
