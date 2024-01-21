@@ -30,7 +30,6 @@ const Search = ({ search, posts }) => {
             search
           </h1>
           <LatestPostsContainer>
-         <LatestTags items={posts} />
             </LatestPostsContainer>
         </div>
     </Base>
@@ -48,24 +47,3 @@ export async function getServerSideProps(context) {
         },
       };
     };
-
-
-export async function getStaticProps({ params }) {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
-  const db = client.db() 
-  const tweetsCollection = db.collection('rweets');
-  let posts = await tweetsCollection.find().toArray();
-
-    posts = posts.reverse().slice(0, 20).map(post => ({
-    ...post,
-    _id: post._id.toString(),
-  }));
-    
-
-  return {
-    props: { 
-      posts: posts, 
-      search: params.search, 
-    },
-  };
-};
