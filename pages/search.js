@@ -1,5 +1,5 @@
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
-import LatestTags from "@layouts/components/LatestTags";
+import LatestPosts from "@layouts/components/LatestPosts";
 import Base from "@layouts/Baseof";
 import Posts from "@layouts/partials/Posts";
 import { getSinglePage } from "@lib/contentParser";
@@ -7,11 +7,11 @@ import { slugify } from "@lib/utils/textConverter";
 import { useSearchContext } from "context/state";
 import { useRouter } from "next/router";
 
-const SearchPage = ({ posts }) => {
+const SearchPage = ({ articles }) => {
   const router = useRouter();
   const { query } = router;
   const keyword = slugify(query.key);
-  let filteredPosts = posts.filter(post => 
+  let filteredPosts = articles.filter(post => 
     (post.title && post.title.includes(query.key)) || 
     (post.content && post.content.includes(query.key)) || 
     (post.description && post.description.includes(query.key))
@@ -28,7 +28,7 @@ console.log(filteredPosts)
           <LatestPostsContainer>
           {searchResults.length > 0 ? (
 
-         <LatestTags items={posts} />
+         <LatestPosts items={articles} />
          ) : (
           <div className="py-24 text-center text-h3 shadow">
           No Search Found
@@ -46,20 +46,27 @@ export default SearchPage;
 
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
-  const db = client.db() 
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
+  const db = client.db()
   const tweetsCollection = db.collection('rweets');
-  let posts = await tweetsCollection.find().toArray();
-
-    posts = posts.reverse().map(post => ({
-    ...post,
-    _id: post._id.toString(),
-  }));
-    
-
+  const rweets = await tweetsCollection.find().toArray()
+  client.close()
   return {
-    props: { 
-      posts: posts, 
-    },
-  };
-};
+      props: {
+        articles: [...rweets].reverse().map(rweet => ({
+          author: rweet.author,
+          title: rweet.title,
+          content: rweet.content,
+          description: rweet.description,
+          url: rweet.url,
+          tags: rweet.tags,
+          cats: rweet.cats,
+          date: rweet.date,
+          id: rweet._id.toString(),
+          image: rweet.image
+        })),
+        rweetsLength: rweetsLength
+      },
+      revalidate: 1
+    }
+ };
