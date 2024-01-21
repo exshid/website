@@ -36,7 +36,7 @@ const SearchPage = ({ articles }) => {
     );
   };
   
-  export default Home;
+  export default SearchPage;
   
   export async function getStaticProps() {
     const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
