@@ -11,14 +11,6 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
     if (searchModal) {
       document.getElementById("searchModal").focus();
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          setSearchModal(false);
-          return (
-            <Link href={`/search/${input}`}>
-              <a>Search</a>
-            </Link>
-          );
-        }
         if (e.key === "Escape") {
           setSearchModal(false);
         }
@@ -26,8 +18,8 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
     }    
   });
   return (
-    <div className={`search-modal px-3 w-full h-full ${searchModal ? "open" : ""}`}>
-<Link href={`/search/${input}`} className="relative w-[15%] flex items-center">
+    <div className={`search-modal px-3 w-full flex flex-row-reverse h-full ${searchModal ? "open" : ""}`}>
+<Link href={`/search/${input}`} className="relative w-max flex items-center">
             <button className="search-close flex items-center align-center">
         <IoArrowForward />
       </button>
