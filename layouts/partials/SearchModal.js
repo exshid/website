@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoCloseCircleOutline, IoArrowForward } from "react-icons/io5";
 
 const SearchModal = ({ searchModal, setSearchModal }) => {
   const router = useRouter();
@@ -11,19 +12,23 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
       document.getElementById("searchModal").focus();
       document.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-          router.push({ pathname: "/search", query: { key: input } });
           setSearchModal(false);
+          return (
+            <Link href={`/search/${input}`}>
+              <a>Search</a>
+            </Link>
+          );
         }
         if (e.key === "Escape") {
           setSearchModal(false);
         }
       });
-    }
+    }    
   });
   return (
     <div className={`search-modal ${searchModal ? "open" : ""}`}>
-      <button onClick={() => setSearchModal(false)} className="search-close">
-        <IoCloseCircleOutline />
+            <button className="search-close">
+        <IoArrowForward />
       </button>
       <input
         type="text"
@@ -32,6 +37,9 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
         placeholder="Type and hit enter..."
         onChange={(e) => setInput(e.target.value)}
       />
+      <button onClick={() => setSearchModal(false)} className="search-close">
+        <IoCloseCircleOutline />
+      </button>
     </div>
   );
 };
