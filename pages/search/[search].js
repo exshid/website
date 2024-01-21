@@ -50,9 +50,9 @@ export async function getStaticPaths() {
   
   client.close()
 
-  const paths = allCategories.map((category) => ({
+  const paths = rweets.map((search) => ({
     params: {
-      category: category,
+      search: search,
     },
   }));
 
