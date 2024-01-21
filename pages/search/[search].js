@@ -9,7 +9,21 @@ import LatestTags from "@layouts/components/LatestTags";
 
 // category page
 const Search = ({ search}) => {
-  
+    const [mydata, setMydata] = useState(null);
+
+    useEffect(() => {
+        fetch('/api/get-data')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // This will log the 'result' from your API
+                setMydata(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }, []);
+    console.log(mydata); // This will log the 'result' from your API
+
   return (
     <Base title={search}>
       <div className="section">
