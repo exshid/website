@@ -1,3 +1,5 @@
+import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
+import LatestTags from "@layouts/components/LatestTags";
 import Base from "@layouts/Baseof";
 import Posts from "@layouts/partials/Posts";
 import { getSinglePage } from "@lib/contentParser";
