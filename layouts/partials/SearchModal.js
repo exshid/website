@@ -11,14 +11,16 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
       document.getElementById("searchModal").focus();
       document.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-          router.push(`/search/${input}`);
-          setSearchModal(false);
+          router.replace(`/search/${input}`)
+            .then(() => setSearchModal(false))
+            .catch((err) => console.error(err));
         }
         if (e.key === "Escape") {
           setSearchModal(false);
         }
       });
     }
+    
 
   });
   return (
