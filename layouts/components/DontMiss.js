@@ -15,9 +15,9 @@ const DontMiss = ({ items, headline,length }) => {
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
 
 <Link href={item.id}>
-                <h3 className="mt-2 text-lg transition font-bold text-black hover:text-gray-500 hover:underline">{item.title}</h3>
+                <h3 className="mt-2 text-lg font-bold text-black hover:text-gray-500 hover:underline">{item.title}</h3>
     </Link>
-    <Link href={item.author}>
+    <Link href={`authors/${item.author}`}>
                 <span className="mt-1 text-sm text-gray-500 hover:text-black hover:underline">{item.author}</span>
     </Link>
               </div>

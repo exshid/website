@@ -6,7 +6,7 @@ const EditorPickLeft = ({ items }) => {
         {items.slice(0, 5).map((item) => {
           return (
             <div key={Math.random()} className="bg-white p-4 lg:p-1 xl:p-4">
-                <Link href={item.id}>
+                <Link href={`authors/${item.author}`}>
 
               <h3 className="font-bold text-black text-xl hover:underline hover:text-gray-500">{item.title}</h3>
 </Link>

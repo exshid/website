@@ -13,7 +13,6 @@ import LatestTags from "@layouts/components/LatestTags";
 const Search = ({ search}) => {
   const router = useRouter();
   const { query } = router;
-  const keyword = slugify(search);
 
     function formatDate(dateString) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -56,9 +55,9 @@ const Search = ({ search}) => {
         if (mydata) {
             
             let filteredPosts = mydata.filter(post => 
-                (post.title && post.title.includes(keyword)) || 
-                (post.content && post.content.includes(keyword)) || 
-                (post.description && post.description.includes(keyword))
+                (post.title && post.title.includes(search)) || 
+                (post.content && post.content.includes(search)) || 
+                (post.description && post.description.includes(search))
                 );
                 setFiltered(filteredPosts)
                 console.log(filtered); 
@@ -68,10 +67,10 @@ const Search = ({ search}) => {
 
     if (!filtered) {
         return
-        <Base title={keyword}>
+        <Base title={search}>
         <div className="section">
             <h1 className="h2 mb-8 text-center">
-              Showing posts from <span className="text-primary">{keyword}</span>{" "}
+              Showing posts from <span className="text-primary">{search}</span>{" "}
               category
             </h1>
   
@@ -85,10 +84,10 @@ const Search = ({ search}) => {
 
 
   return (
-    <Base title={keyword}>
+    <Base title={search}>
       <div className="section">
           <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{keyword}</span>{" "}
+            Showing posts from <span className="text-primary">{search}</span>{" "}
             search
 
          </h1>

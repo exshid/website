@@ -40,7 +40,7 @@ const LatestTags = ({ items }) => {
 </Link>
             <p className="py-2 text-black text-lg">{item.description}</p>
 <div className="flex flex-row">
-<Link href={`/${item.author}`}>
+<Link href={`authors/${item.author}`}>
 
               <span className="text-lg uppercase w-max font-bold text-black hover:underline hover:text-gray-500">{item.author}</span>
 </Link>
