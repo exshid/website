@@ -59,7 +59,7 @@ export async function getStaticProps() {
           description: rweet.description,
           url: rweet.url,
           date: rweet.date,
-          id: rweet._id.toString(),
+          _id: rweet._id.toString(),
           image: rweet.image
         })),
       },
