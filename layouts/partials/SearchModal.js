@@ -9,11 +9,11 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
   useEffect(() => {
     if (searchModal) {
       document.getElementById("searchModal").focus();
-      document.addEventListener("keydown", (e) => {
+      document.addEventListener("keydown", async (e) => {
         if (e.key === "Enter") {
-          router.replace(`/search/${input}`)
-            .then(() => setSearchModal(false))
-            .catch((err) => console.error(err));
+          e.preventDefault();
+          await router.push(`/search/${input}`);
+          setSearchModal(false);
         }
         if (e.key === "Escape") {
           setSearchModal(false);
@@ -21,7 +21,6 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
       });
     }
     
-
   });
   return (
     <div className={`search-modal ${searchModal ? "open" : ""}`}>
