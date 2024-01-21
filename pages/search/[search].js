@@ -4,16 +4,12 @@ import React, { useState, useEffect } from 'react';
 
 import Base from "@layouts/Baseof";
 import Posts from "@partials/Posts";
-const { blog_folder } = config.settings;
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
 // category page
-const Search = ({ search, posts }) => {
-  if (!posts) {
-    return <p>Loading...</p>;
-  }
-
+const Search = ({ search}) => {
+  
   return (
     <Base title={search}>
       <div className="section">
