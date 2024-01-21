@@ -14,9 +14,10 @@ import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
 const Tag = ({ tag, posts }) => {
-  
+  const { title } = config.site;
+
   return (
-    <Base title={tag}>
+    <Base title={`${tag} - ${title} `} >
       <div className="section">
           <h1 className="h2 mb-8 text-center">
             Showing posts from <span className="text-primary">{tag}</span>{" "}

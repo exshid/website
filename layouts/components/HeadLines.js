@@ -5,7 +5,7 @@ const HeadLines = ({ items, category }) => {
     return (
       <div className="flex flex-wrap justify-between p-3 md:py-4 xl:px-6 2xl:px-20">
         <Link className="w-full" href={category}>
-        <h2 className="w-full text-3xl font-italic text-black hover:text-gray-500 hover:underline mb-3 uppercase pl-3">
+        <h2 className="w-full text-3xl italic text-black hover:text-gray-500 hover:underline mb-3 uppercase pl-3">
           {category}
           </h2>
           </Link>

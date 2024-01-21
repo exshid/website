@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import { getSinglePage } from "@lib/contentParser";
@@ -15,17 +14,16 @@ import LatestTags from "@layouts/components/LatestTags";
 
 // category page
 const Category = ({ category, posts }) => {
+  const { title } = config.site;
+
   if (!posts) {
     return <p>Loading...</p>;
   }
 
   return (
-    <Base title={category}>
+    <Base title={`${category} - ${title} `} >
       <div className="section">
-          <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{category}</span>{" "}
-            category
-          </h1>
+      <h1 className="pt-3 md:px-6 lg:p-6 xl:px-20 text-black italic px-4 text-3xl font-semibold uppercase">{category}</h1>
           <LatestPostsContainer>
          <LatestTags items={posts} />
             </LatestPostsContainer>

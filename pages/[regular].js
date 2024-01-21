@@ -2,11 +2,13 @@ import { MongoClient, ObjectId } from 'mongodb'
 import Image from 'next/image'
 import Link from 'next/link';
 import Base from "@layouts/Baseof";
+import config from "@config/config.json";
 
 import {Fragment} from 'react'
 function Tweet(props, relatedPosts ) {
 
   const myCats = JSON.parse(props.rweetData.cats);
+  const { title } = config.site;
   
 const myTags = JSON.parse(props.rweetData.tags);
 function formatDate(dateString) {
@@ -22,7 +24,7 @@ if (relatedPostsFiltered.length < 3) {
 }
 
 return <>
-        <Base>
+        <Base title={`${props.rweetData.title} - ${title} `}>
          <div id={props.rweetData.id} className="flex flex-col items-center divide-y">
          <div className="flex flex-col lg:flex-row py-5 p-2 w-full md:w-4/5 lg:w-[90%] xl:w-4/5">
 <div className="w-full lg:w-1/2 flex flex-col justify-center p-3">

@@ -14,9 +14,9 @@ import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
 const Author = ({ author, posts }) => {
-  console.log( author, posts)
+  const { title } = config.site;
   return (
-    <Base title={author}>
+    <Base title={`${author} - ${title} `} >
       <div className="section">
           <h1 className="h2 mb-8 text-center">
             Showing posts from <span className="text-primary">{author}</span>{" "}
