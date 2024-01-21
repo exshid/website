@@ -15,7 +15,7 @@ const Search = ({ search}) => {
         fetch('/api/get-data')
             .then(response => response.json())
             .then(data => {
-                console.log(data); // This will log the 'result' from your API
+                console.log(data); // This  log the 'result' from your API
                 setMydata(data);
             })
             .catch((error) => {
