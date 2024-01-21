@@ -11,7 +11,7 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
       document.getElementById("searchModal").focus();
       document.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-          router.push({ pathname: "/search", query: { key: input } });
+          router.push(`/search/${input}`);
           setSearchModal(false);
         }
         if (e.key === "Escape") {
@@ -19,6 +19,7 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
         }
       });
     }
+
   });
   return (
     <div className={`search-modal ${searchModal ? "open" : ""}`}>
