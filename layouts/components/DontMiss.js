@@ -5,10 +5,12 @@ const DontMiss = ({ items, category }) => {
     return (
       <div className="px-4 py-3 lg:p-6 lg:w-1/2">
         <div className="flex items-baseline">
-          <span className="text-gray-600 font-semibold uppercase">{category}</span>
+          <span className="text-black hover:text-gray-500 hover:underline font-semibold uppercase"><Link href={category}>
+{category}
+</Link></span>
         </div>
         <ul className="mt-4 space-y-4">
-        {items.filter(item => item.cats.includes(category)).slice(0, 4).map((item) => (
+        {items.filter(item => item.cats.includes(category)).slice(0, 3).map((item) => (
             <li key={item.id} className="flex items-start justify-between space-x-4">
               <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
