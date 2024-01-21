@@ -7,11 +7,11 @@ import { slugify } from "@lib/utils/textConverter";
 import { useSearchContext } from "context/state";
 import { useRouter } from "next/router";
 
-const SearchPage = ({ articles }) => {
+const SearchPage = ({ posts }) => {
   const router = useRouter();
   const { query } = router;
   const keyword = slugify(query.key);
-  let filteredPosts = articles.filter(post => 
+  let filteredPosts = posts.filter(post => 
     (post.title && post.title.includes(query.key)) || 
     (post.content && post.content.includes(query.key)) || 
     (post.description && post.description.includes(query.key))
@@ -43,26 +43,23 @@ const SearchPage = ({ articles }) => {
 
 export default SearchPage;
 
+
+
 export async function getStaticProps() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
+  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
+  const db = client.db() 
   const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find().toArray()
-  client.close()
-  const rweetsLength = [...rweets].length;
-  return {
-      props: {
-        articles: [...rweets].reverse().map(rweet => ({
-          author: rweet.author,
-          title: rweet.title,
-          content: rweet.content,
-          description: rweet.description,
-          url: rweet.url,
-          date: rweet.date,
-          _id: rweet._id.toString(),
-          image: rweet.image
-        })),
-      },
-    }
+  let posts = await tweetsCollection.find().toArray();
+
+    posts = posts.reverse().map(post => ({
+    ...post,
+    _id: post._id.toString(),
+  }));
     
-}
+
+  return {
+    props: { 
+      posts: posts, 
+    },
+  };
+};
