@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { slugify } from "@lib/utils/textConverter";
+import { useRouter } from "next/router";
 
 import Base from "@layouts/Baseof";
 import Posts from "@partials/Posts";
@@ -9,6 +11,10 @@ import LatestTags from "@layouts/components/LatestTags";
 
 // category page
 const Search = ({ search}) => {
+  const router = useRouter();
+  const { query } = router;
+  const keyword = slugify(search);
+
     function formatDate(dateString) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
@@ -50,9 +56,9 @@ const Search = ({ search}) => {
         if (mydata) {
             
             let filteredPosts = mydata.filter(post => 
-                (post.title && post.title.includes(search)) || 
-                (post.content && post.content.includes(search)) || 
-                (post.description && post.description.includes(search))
+                (post.title && post.title.includes(keyword)) || 
+                (post.content && post.content.includes(keyword)) || 
+                (post.description && post.description.includes(keyword))
                 );
                 setFiltered(filteredPosts)
                 console.log(filtered); 
@@ -62,10 +68,10 @@ const Search = ({ search}) => {
 
     if (!filtered) {
         return
-        <Base title={search}>
+        <Base title={keyword}>
         <div className="section">
             <h1 className="h2 mb-8 text-center">
-              Showing posts from <span className="text-primary">{search}</span>{" "}
+              Showing posts from <span className="text-primary">{keyword}</span>{" "}
               category
             </h1>
   
@@ -79,10 +85,10 @@ const Search = ({ search}) => {
 
 
   return (
-    <Base title={search}>
+    <Base title={keyword}>
       <div className="section">
           <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{search}</span>{" "}
+            Showing posts from <span className="text-primary">{keyword}</span>{" "}
             search
 
          </h1>
