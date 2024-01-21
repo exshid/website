@@ -324,6 +324,7 @@ const result = await model.generateContent({
   );
 };
 
+export default Home;
 
 export async function getStaticProps() {
   const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
@@ -352,4 +353,3 @@ export async function getStaticProps() {
     }
     
 }
-  export default Home;
