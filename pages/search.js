@@ -9,7 +9,7 @@ import CategoryLinks from "@layouts/components/CategoryLinks";
 import DontMissContainer from "@layouts/components/DontMissContainer";
 import DontMiss from "@layouts/components/DontMiss";
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
-import LatestPosts from "@layouts/components/LatestPosts";
+import LatestTags from "@layouts/components/LatestTags";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 
