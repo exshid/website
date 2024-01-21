@@ -55,7 +55,7 @@ input#nav-toggle:checked ~ #nav-menu {
     @apply h-full w-full border-0 text-lg;
   }
   .search-close {
-    @apply absolute top-1/2 right-2 -translate-y-1/2 p-3 text-h4;
+    @apply right-2 text-h4;
   }
   &.open {
     @apply visible opacity-100;

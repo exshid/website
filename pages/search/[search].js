@@ -55,12 +55,12 @@ const Search = ({ search}) => {
     useEffect(() => {
         if (mydata) {
             
-            let filteredPosts = mydata.filter(post => 
-                (post.title && post.title.includes(keyword)) || 
-                (post.content && post.content.includes(keyword)) || 
-                (post.description && post.description.includes(keyword))
-                );
-                setFiltered(filteredPosts)
+          let filteredPosts = mydata.filter(post => 
+            (post.title && new RegExp("\\b" + keyword + "\\b").test(post.title)) || 
+            (post.content && new RegExp("\\b" + keyword + "\\b").test(post.content)) || 
+            (post.description && new RegExp("\\b" + keyword + "\\b").test(post.description))
+        );
+              setFiltered(filteredPosts)
                 console.log(filtered); 
     }
     }, [mydata]);

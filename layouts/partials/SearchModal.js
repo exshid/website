@@ -26,9 +26,9 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
     }    
   });
   return (
-    <div className={`search-modal ${searchModal ? "open" : ""}`}>
-<Link href={`/search/${input}`}>
-            <button className="search-close">
+    <div className={`search-modal px-3 w-full h-full ${searchModal ? "open" : ""}`}>
+<Link href={`/search/${input}`} className="relative w-[15%] flex items-center">
+            <button className="search-close flex items-center align-center">
         <IoArrowForward />
       </button>
       </Link>
@@ -36,10 +36,10 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
         type="text"
         className="form-input"
         id="searchModal"
-        placeholder="Type and hit enter..."
+        placeholder="Search something..."
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={() => setSearchModal(false)} className="search-close">
+      <button onClick={() => setSearchModal(false)} className="search-close relative w-max flex items-center justify-center align-center">
         <IoCloseCircleOutline />
       </button>
     </div>
