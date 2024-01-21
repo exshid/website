@@ -1,18 +1,10 @@
-import fs from 'fs';
-import path from 'path';
-
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
-import config from "@config/config.json";
 import Base from "@layouts/Baseof";
-import { getSinglePage } from "@lib/contentParser";
-import { getTaxonomy } from "@lib/taxonomyParser";
-import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
-import { MongoClient } from 'mongodb'
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
