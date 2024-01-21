@@ -7,7 +7,7 @@ const Logo = ({ src }) => {
   const { logo, logo_width, logo_height, logo_text, title } = config.site;
 
   return (
-    <Link href="/" className="navbar-brand block">
+    <Link href="/" className="navbar-brand block font-bold text-3xl	text-black hover:underline hover:text-gray-500">
       {src || logo ? (
         <Image
           width={logo_width.replace("px", "") * 2}

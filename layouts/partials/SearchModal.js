@@ -18,7 +18,7 @@ const SearchModal = ({ searchModal, setSearchModal }) => {
     }    
   });
   return (
-    <div className={`search-modal px-3 w-full flex flex-row-reverse h-full ${searchModal ? "open" : ""}`}>
+    <div className={`search-modal px-3 w-full flex flex-row-reverse ${searchModal ? "open" : ""}`}>
 <Link href={`/search/${input}`} className="relative w-max flex items-center">
             <button className="search-close flex items-center align-center">
         <IoArrowForward />
