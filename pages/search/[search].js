@@ -39,10 +39,10 @@ const Search = ({ search}) => {
                 console.log(data);
                 setMydata(data);
                 setIsLoading(false);
-                let filteredPosts = mydata.filter(post => 
-                    (post.title && post.title.includes('king')) || 
-                    (post.content && post.content.includes('king')) || 
-                    (post.description && post.description.includes('king'))
+                let filteredPosts = JSON.parse(mydata).filter(post => 
+                    (post.title && post.title.includes(search)) || 
+                    (post.content && post.content.includes(search)) || 
+                    (post.description && post.description.includes(search))
                   );
                   setFiltered(filteredPosts)
             })
@@ -57,10 +57,10 @@ const Search = ({ search}) => {
 
     if (isLoading) {
         return
-        <Base title={category}>
+        <Base title={search}>
         <div className="section">
             <h1 className="h2 mb-8 text-center">
-              Showing posts from <span className="text-primary">{category}</span>{" "}
+              Showing posts from <span className="text-primary">{search}</span>{" "}
               category
             </h1>
   
