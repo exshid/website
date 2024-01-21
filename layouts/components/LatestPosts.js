@@ -20,8 +20,6 @@ const LatestPosts = ({ items }) => {
 
   return (
 <>
-<span className="text-black font-italic text-3xl font-semibold uppercase">Latest</span>
-
 <div className="w-full lg:w-3/4 xl:pr-20 divide-y px-4 py-3">
         {items.map((item) => (
          <>
