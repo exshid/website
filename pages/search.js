@@ -1,39 +1,21 @@
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestPosts from "@layouts/components/LatestPosts";
 import Base from "@layouts/Baseof";
-import Posts from "@layouts/partials/Posts";
-import { getSinglePage } from "@lib/contentParser";
-import { slugify } from "@lib/utils/textConverter";
-import { useSearchContext } from "context/state";
-import { useRouter } from "next/router";
 
 const SearchPage = ({ articles }) => {
-  const router = useRouter();
-  const { query } = router;
-  const keyword = slugify(query.key);
-  let filteredPosts = articles.filter(post => 
-    (post.title && post.title.includes(query.key)) || 
-    (post.content && post.content.includes(query.key)) || 
-    (post.description && post.description.includes(query.key))
-  );
-
-console.log(filteredPosts)
   return (
 
-    <Base title={`Search results for ${query.key}`}>
+    <Base title={`Search results for key}`}>
       <div className="section">
       <h1 className="h2 mb-8 text-center">
-            Search results for <span className="text-primary">{query.key}</span>
+            Search results for <span className="text-primary"></span>
           </h1>
           <LatestPostsContainer>
-          {searchResults.length > 0 ? (
 
          <LatestPosts items={articles} />
-         ) : (
           <div className="py-24 text-center text-h3 shadow">
           No Search Found
         </div>
-          )}
          </LatestPostsContainer>
         </div>
     </Base>
