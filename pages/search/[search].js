@@ -82,14 +82,14 @@ const Search = ({ search}) => {
     <Base title={search}>
       <div className="section">
           <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{search.reverse().slice(0, 20)}</span>{" "}
+            Showing posts from <span className="text-primary">{search}</span>{" "}
             search
 
          </h1>
          <LatestPostsContainer>
 
           <div className="w-full xl:px-20 divide-y p-3">
-      {filtered.map((item) => (
+      {filtered.reverse().slice(0, 20).map((item) => (
   <>
   {windowWidth > 1024 ? (
 
