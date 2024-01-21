@@ -46,21 +46,21 @@ const Search = ({ search}) => {
 
             });
     }, []);
-    console.log(filtered); 
     useEffect(() => {
         if (mydata) {
-
-    let filteredPosts = mydata.filter(post => 
-        (post.title && post.title.includes(search)) || 
-        (post.content && post.content.includes(search)) || 
-        (post.description && post.description.includes(search))
-      );
-      setFiltered(filteredPosts)
+            
+            let filteredPosts = mydata.filter(post => 
+                (post.title && post.title.includes(search)) || 
+                (post.content && post.content.includes(search)) || 
+                (post.description && post.description.includes(search))
+                );
+                setFiltered(filteredPosts)
+                console.log(filtered); 
     }
     }, [mydata]);
 
 
-    if (isLoading) {
+    if (!filtered) {
         return
         <Base title={search}>
         <div className="section">
