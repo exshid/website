@@ -17,7 +17,7 @@ const SearchPage = ({ posts }) => {
     (post.description && post.description.includes(query.key))
   );
 
-
+console.log(filteredPosts)
   return (
 
     <Base title={`Search results for ${query.key}`}>
@@ -28,7 +28,7 @@ const SearchPage = ({ posts }) => {
           <LatestPostsContainer>
           {searchResults.length > 0 ? (
 
-         <LatestTags items={filteredPosts} />
+         <LatestTags items={posts} />
          ) : (
           <div className="py-24 text-center text-h3 shadow">
           No Search Found
