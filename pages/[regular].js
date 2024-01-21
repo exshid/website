@@ -96,11 +96,10 @@ return <>
           </Link >
 
               <p className="my-2 text-gray-500">{post.description}</p>
-          <span className="mt-2 text-gray-700 hover:underline hover:text-black">By 
           <Link href={`authors/${post.author}`}>
-          {post.author}
-       </Link>
+          <span className="mt-2 text-gray-700 hover:underline hover:text-black">{post.author}
           </span>
+       </Link>
         </div>
       </div>
     </div>

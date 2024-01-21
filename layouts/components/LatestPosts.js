@@ -19,7 +19,7 @@ const LatestPosts = ({ items }) => {
   }, []); 
 
   return (
-      <div className="w-full lg:w-3/4 xl:pr-20 divide-y p-3">
+      <div className="w-full lg:w-3/4 xl:pr-20 divide-y px-4 py-3">
         {items.map((item) => (
          <>
                {windowWidth > 1024 ? (
