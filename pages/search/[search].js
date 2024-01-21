@@ -30,6 +30,7 @@ const Search = ({ search}) => {
       }, []); 
     
     const [mydata, setMydata] = useState(null);
+    const [filtered, setFiltered] = useState(null);
 
     useEffect(() => {
         fetch('/api/get-data')
@@ -38,7 +39,12 @@ const Search = ({ search}) => {
                 console.log(data);
                 setMydata(data);
                 setIsLoading(false);
-
+                let filteredPosts = mydata.filter(post => 
+                    (post.title && post.title.includes('king')) || 
+                    (post.content && post.content.includes('king')) || 
+                    (post.description && post.description.includes('king'))
+                  );
+                  setFiltered(filteredPosts)
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -46,11 +52,24 @@ const Search = ({ search}) => {
 
             });
     }, []);
-    console.log(mydata); 
+    console.log(filtered); 
 
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return
+        <Base title={category}>
+        <div className="section">
+            <h1 className="h2 mb-8 text-center">
+              Showing posts from <span className="text-primary">{category}</span>{" "}
+              category
+            </h1>
+  
+        <LatestPostsContainer>
+        <div>Loading...</div>;
+            </LatestPostsContainer>
+        </div>
+    </Base>
+
     }
 
 
@@ -60,9 +79,12 @@ const Search = ({ search}) => {
           <h1 className="h2 mb-8 text-center">
             Showing posts from <span className="text-primary">{search}</span>{" "}
             search
-          </h1>
+
+         </h1>
+         <LatestPostsContainer>
+
           <div className="w-full xl:px-20 divide-y p-3">
-      {mydata.map((item) => (
+      {filtered.map((item) => (
   <>
   {windowWidth > 1024 ? (
 
@@ -112,7 +134,10 @@ const Search = ({ search}) => {
     </div> )}
 </>
       ))}
+
   </div>
+  </LatestPostsContainer>
+
           </div>
     </Base>
   );
