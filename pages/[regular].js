@@ -16,7 +16,6 @@ function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
 let relatedPostsFiltered = props.relatedPosts.filter(obj => obj.cats.includes(myCats[0]));
-console.log(relatedPostsFiltered)
 
 if (relatedPostsFiltered.length < 3) {
   let relatedPostsCompleted = props.relatedPosts.filter(obj => !relatedPostsFiltered.includes(obj));
@@ -44,7 +43,7 @@ return <>
 
     <Link key={Math.random()} href={`/authors/${props.rweetData.author}`}>
   <span className="text-lg uppercase font-bold text-black hover:underline hover:text-gray-500 inline-block lg:block w-max lg:w-full">
-    By {props.rweetData.author}</span>
+    {props.rweetData.author}</span>
 </Link>
   <span className="inline-block w-max lg:hidden	mx-2">•</span>
   <span className="text-lg w-max lg:w-full">{formatDate(props.rweetData.date)}</span>

@@ -18,10 +18,7 @@ const Author = ({ author, posts }) => {
   return (
     <Base title={`${author} - ${title} `} >
       <div className="section">
-          <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{author}</span>{" "}
-            category
-          </h1>
+      <h1 className="pt-3 md:px-6 lg:p-6 xl:px-20 text-black italic px-4 text-3xl font-semibold uppercase">{author}</h1>
           <LatestPostsContainer>
          <LatestTags items={posts} />
             </LatestPostsContainer>
@@ -71,6 +68,8 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       posts: filteredPosts.reverse().slice(0, 15),
+      author: params.author, 
+  
     },
   };
 }

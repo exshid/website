@@ -91,7 +91,6 @@ const Home = ({ articles }) => {
               'Content-Type': 'application/json'
           }
           })
-        console.log(response, response.ok)
         if (!response.ok) {
             return error()
         }    
@@ -134,7 +133,6 @@ const Home = ({ articles }) => {
             const imageUrl = firstItem["media:content"][0]["$"]["url"];
             
             setFirstImageURL(imageUrl);
-            console.log('g', oldTitle, firstImageURL);
             if (oldTitle && firstImageURL) {
     
             if (oldTitle !== firstImageURL) {
@@ -146,7 +144,6 @@ const Home = ({ articles }) => {
             runDescription(intro);
             runURL(title);
             } else{
-              console.log('Post exists');
     
             }
           }
@@ -291,13 +288,9 @@ const result = await model.generateContent({
       }, [oldTitle, firstImageURL]);
     
       useEffect(() => {
-        console.log('title: ', firstItemTitle, 'content: ',
-         firstItemPost, 'tags: ', firstTags, 'cats: ', firstCats, 'url: ', firstURL, 'image: ', firstImageURL
-        );
         if (firstItemTitle && firstItemPost && firstTags && firstCats && firstURL && firstImageURL && firstIntro && oldTitle !== firstImageURL) {
         
           postSenderHandler()
-          console.log('done');
       }
         
     }, [firstItemTitle, firstItemPost, firstTags, firstCats, firstURL, firstImageURL,firstIntro, oldTitle]);
@@ -312,6 +305,7 @@ const result = await model.generateContent({
 <MustRead items={articles} />
     <HeadLines items={articles} category="TV" />
     <LatestPostsContainer>
+    <span className="pt-3 md:px-6 lg:p-6 xl:px-20 text-black italic px-4 text-3xl font-semibold uppercase">Latest</span>
     <LatestPosts items={articles} />
     <Sidebar items={articles} category="TV" />
       </LatestPostsContainer>

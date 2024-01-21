@@ -68,7 +68,10 @@ const LatestTags = ({ items }) => {
        : item.description}
          </p>
       <div>
+      <Link href={`authors/${item.author}`}>
+
         <span className="font-bold text-black pb-2">{item.author}</span>
+</Link>
       </div>
       </div>
       </div>
