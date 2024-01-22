@@ -343,7 +343,7 @@ export async function getStaticProps() {
         id: rweet._id.toString(),
         image: rweet.image
       })),
-      tvPosts: filteredRweets.map(rweet => ({
+      tvPosts: tvPosts.map(rweet => ({
         author: rweet.author,
         title: rweet.title,
         description: rweet.description,
