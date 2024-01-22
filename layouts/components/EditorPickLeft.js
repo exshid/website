@@ -3,7 +3,7 @@ import Link from 'next/link';
 const EditorPickLeft = ({ items, category }) => {
     return (
       <div className="w-full lg:w-1/4 lg:pt-4 divide-y">
-        {items.filter(item => item.cats.includes(category)).slice(0, 5).map((item) => {
+        {items.map((item) => {
           return (
             <div key={Math.random()} className="bg-white p-4 lg:p-1 xl:p-4">
                 <Link href={`authors/${item.author}`}>

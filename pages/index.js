@@ -23,7 +23,7 @@ import LatestPosts from "@layouts/components/LatestPosts";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 
-const Home = ({ articles, tv, tvPosts }) => {
+const Home = ({ articles, tv, games, movies,news, tvPosts, moviesPosts, newsPosts, gamesPosts }) => {
 
       const generationConfig = {
         temperature: 0.8,
@@ -297,21 +297,21 @@ const result = await model.generateContent({
     <Base>
       <EditorContainer>
     <EditorPickCenter items={articles} />
-    <EditorPickRight items={articles} category="Games" />
-<EditorPickLeft items={articles} category="Movies" />
+    <EditorPickRight items={tvPosts} category={tv} />
+<EditorPickLeft items={moviesPosts} category={movies} />
 </EditorContainer>
-<MustRead items={articles} />
+<MustRead items={gamesPosts} />
     <HeadLines items={tvPosts} category={tv} />
     <div className="px-4 pt-3 md:px-6 lg:p-6 xl:px-20">
     <span className="text-black text-3xl font-semibold uppercase pl-3">Latest</span>
     </div>
     <LatestPostsContainer>
     <LatestPosts items={articles} />
-    <Sidebar items={articles} category="TV" />
+    <Sidebar items={moviesPosts} category={movies} />
       </LatestPostsContainer>
     <DontMissContainer>
-    <DontMiss items={articles} category="Games"/>
-    <DontMiss items={articles} category="Movies" />
+    <DontMiss items={gamesPosts} category={games}/>
+    <DontMiss items={newsPosts} category={news} />
     </DontMissContainer>
 
     </Base>
@@ -328,7 +328,15 @@ export async function getStaticProps() {
   client.close()
   let reversedRweets = [...rweets].reverse();
   let tv = 'TV'
+  let movies = 'Movies'
+  let news = 'News'
+  let games = 'News'
   let tvPosts = reversedRweets.filter(item => item.cats.includes(tv)).slice(0, 3);
+  let moviesPosts = reversedRweets.filter(item => item.cats.includes(movies)).slice(0, 5);
+  let gamesPosts = reversedRweets.filter(item => item.cats.includes(games)).slice(0, 4);
+  let newsPosts = reversedRweets.filter(item => item.cats.includes(news)).slice(0, 4);
+
+
   return {
     props: {
       articles: reversedRweets.slice(0, 20).map(rweet => ({
@@ -351,7 +359,36 @@ export async function getStaticProps() {
         id: rweet._id.toString(),
         image: rweet.image
       })),
+      moviesPosts: moviesPosts.map(rweet => ({
+        author: rweet.author,
+        title: rweet.title,
+        description: rweet.description,
+        url: rweet.url,
+        id: rweet._id.toString(),
+        image: rweet.image
+      })),
+      gamesPosts: gamesPosts.map(rweet => ({
+        author: rweet.author,
+        title: rweet.title,
+        description: rweet.description,
+        url: rweet.url,
+        id: rweet._id.toString(),
+        image: rweet.image
+      })),
+      newsPosts: newsPosts.map(rweet => ({
+        author: rweet.author,
+        title: rweet.title,
+        description: rweet.description,
+        url: rweet.url,
+        id: rweet._id.toString(),
+        image: rweet.image
+      })),
+
+      movies: movies,
+      news: news,
+      games: games,
       tv: tv,
+
     },
     revalidate: 1
   }

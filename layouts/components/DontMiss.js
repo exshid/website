@@ -10,7 +10,7 @@ const DontMiss = ({ items, category }) => {
 </Link></span>
         </div>
         <ul className="mt-4 space-y-4">
-        {items.filter(item => item.cats.includes(category)).slice(0, 3).map((item) => (
+        {items.map((item) => (
             <li key={item.id} className="flex items-start justify-between space-x-4">
               <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
