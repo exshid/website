@@ -8,7 +8,6 @@ import { getSinglePage } from "@lib/contentParser";
 import { getTaxonomy } from "@lib/taxonomyParser";
 import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
-const { blog_folder } = config.settings;
 import { MongoClient } from 'mongodb'
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";

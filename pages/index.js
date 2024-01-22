@@ -23,8 +23,6 @@ import LatestPosts from "@layouts/components/LatestPosts";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 
-const { blog_folder } = config.settings;
-
 const Home = ({ articles }) => {
 
       const generationConfig = {
