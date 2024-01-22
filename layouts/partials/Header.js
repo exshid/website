@@ -12,10 +12,6 @@ const Header = ({items}) => {
     "Movies",
     "TV",
     "Music",
-    "Books",
-    "AI", 
-    "VR",
-    "Animation",
     "Anime",
     "Comics",
     "Celebrities"

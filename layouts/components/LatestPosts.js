@@ -41,7 +41,7 @@ const LatestPosts = ({ items }) => {
           </div>
        ) : (
         <div key={Math.random()} className="flex flex-col">
-        <Link href={item.id}>
+            <Link href={`/posts/${item.id}`}>
           <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
           </Link>
             <div className="flex flex-row-reverse justify-between">
