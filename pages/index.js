@@ -302,8 +302,8 @@ const result = await model.generateContent({
 </EditorContainer>
 <MustRead items={articles} />
     <HeadLines items={articles} category="TV" />
-    <LatestPostsContainer>
     <span className="pt-3 md:px-6 lg:p-6 xl:px-20 text-black italic px-4 text-3xl font-semibold uppercase">Latest</span>
+    <LatestPostsContainer>
     <LatestPosts items={articles} />
     <Sidebar items={articles} category="TV" />
       </LatestPostsContainer>

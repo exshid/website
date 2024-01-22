@@ -5,7 +5,7 @@ const DontMiss = ({ items, category }) => {
     return (
       <div className="px-4 py-3 lg:p-6 lg:w-1/2">
         <div className="flex items-baseline">
-          <span className="text-black hover:text-gray-500 hover:underline font-semibold uppercase"><Link href={category}>
+          <span className="text-black hover:text-gray-500 hover:underline font-semibold uppercase"><Link href={`/categories/${category}`}>
 {category}
 </Link></span>
         </div>
@@ -18,7 +18,7 @@ const DontMiss = ({ items, category }) => {
 <Link href={item.id}>
                 <h3 className="mt-2 text-lg font-bold text-black hover:text-gray-500 hover:underline">{item.title}</h3>
     </Link>
-    <Link href={`authors/${item.author}`}>
+    <Link href={`/authors/${item.author}`}>
                 <span className="mt-1 text-sm text-gray-500 hover:text-black hover:underline">{item.author}</span>
     </Link>
               </div>

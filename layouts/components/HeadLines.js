@@ -4,8 +4,8 @@ import Link from 'next/link';
 const HeadLines = ({ items, category }) => {
     return (
       <div className="flex flex-wrap justify-between p-3 md:py-4 xl:px-6 2xl:px-20">
-        <Link className="w-full" href={category}>
-        <h2 className="w-full text-3xl italic text-black hover:text-gray-500 hover:underline mb-3 uppercase pl-3">
+        <Link className="w-full" href={`/categories/${category}`}>
+        <h2 className="w-full text-3xl text-black hover:text-gray-500 hover:underline mb-3 uppercase pl-3">
           {category}
           </h2>
           </Link>
@@ -24,7 +24,7 @@ const HeadLines = ({ items, category }) => {
                   
                   <h3 className="text-lg font-bold text-black hover:text-gray-500 hover:underline mb-1">{item.title}</h3>
                 </Link>
-                <Link href={`authors/${item.author}`}>
+                <Link href={`/authors/${item.author}`}>
                   <span className="text-xs mt-2 text-black hover:text-gray-500 hover:underline">{item.author}</span>
                   </Link>
 
