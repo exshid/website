@@ -20,7 +20,9 @@ const Category = ({ category, posts }) => {
   return (
     <Base title={`${category} - ${title} `} >
       <div className="section">
-      <h1 className="pt-3 md:px-6 lg:p-6 xl:px-20 text-black italic px-4 text-3xl font-semibold uppercase">{category}</h1>
+      <div className="pt-3 md:px-6 lg:p-6 xl:px-20 px-4">
+      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold uppercase">{category}</h1>
+      </div>
           <LatestPostsContainer>
          <LatestTags items={posts} />
             </LatestPostsContainer>

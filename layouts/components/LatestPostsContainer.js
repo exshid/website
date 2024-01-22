@@ -1,7 +1,7 @@
 const LatestPostsContainer = ({ children }) => {
     return (
 <>
-<div className="pb-3 md:px-6 lg:p-6 flex xl:px-20 flex-col lg:flex-row">
+<div className="pb-3 md:px-6 lg:pb-6 flex xl:px-20 flex-col lg:flex-row">
 
 {children}
 </div>
