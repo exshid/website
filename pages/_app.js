@@ -30,7 +30,7 @@ const App = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <JsonContext>
+    <>
       <Head>
         {/* google font css */}
         <link
@@ -50,8 +50,8 @@ const App = ({ Component, pageProps }) => {
         />
       </Head>
       <Component {...pageProps} />
-    </JsonContext>
-  );
+</>
+      );
 };
 
 export default App;
