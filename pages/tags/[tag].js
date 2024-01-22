@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
-import { getSinglePage } from "@lib/contentParser";
-import { getTaxonomy } from "@lib/taxonomyParser";
 import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
 import { MongoClient } from 'mongodb'
