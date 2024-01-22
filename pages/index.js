@@ -330,7 +330,7 @@ export async function getStaticProps() {
   let tv = 'TV'
   let movies = 'Movies'
   let news = 'News'
-  let games = 'News'
+  let games = 'Games'
   let tvPosts = reversedRweets.filter(item => item.cats.includes(tv)).slice(0, 3);
   let moviesPosts = reversedRweets.filter(item => item.cats.includes(movies)).slice(0, 5);
   let gamesPosts = reversedRweets.filter(item => item.cats.includes(games)).slice(0, 4);

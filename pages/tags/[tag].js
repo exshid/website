@@ -58,7 +58,7 @@ export async function getStaticProps({ params }) {
   const tweetsCollection = db.collection('rweets');
   let posts = await tweetsCollection.find().toArray();
 
-    posts = posts.reverse().slice(0, 20).map(post => ({
+    posts = posts.reverse().map(post => ({
     ...post,
     _id: post._id.toString(),
   }));
@@ -70,7 +70,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { 
-      posts: filteredPost, 
+      posts: filteredPost.slice(0, 20), 
       tag: params.tag, 
     },
   };

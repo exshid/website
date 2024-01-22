@@ -62,7 +62,7 @@ const Search = ({ search}) => {
                 setFiltered(filteredPosts)
                 console.log(filtered); 
     }
-    }, [mydata]);
+    }, [mydata, search]);
 
 
     if (!filtered) {

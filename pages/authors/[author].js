@@ -66,7 +66,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      posts: filteredPosts.reverse().slice(0, 15),
+      posts: filteredPosts.reverse().slice(0, 20),
       author: params.author, 
   
     },

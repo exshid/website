@@ -2,9 +2,9 @@
 const NotFound = () => {
 
   return (
-    <section className="section">
+    <section>
       <div className="container">
-        <div className="flex min-h-screen items-center justify-center">
+        <div className="flex min-h-[90vh] items-center justify-center">
           <div className="text-center">
             <h1 className="mb-4">Error 404</h1>
             <div className="text-lg">
