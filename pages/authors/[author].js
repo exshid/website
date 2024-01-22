@@ -16,7 +16,7 @@ const Author = ({ author, posts }) => {
     <Base title={`${author} - ${title} `} >
       <div className="section">
         <div className="pt-3 md:px-6 lg:p-6 xl:px-20 px-4">
-      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold uppercase">{author}</h1>
+      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold italic uppercase">{author}</h1>
       </div>
           <LatestPostsContainer>
          <LatestTags items={posts} />

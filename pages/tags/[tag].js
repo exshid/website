@@ -17,7 +17,7 @@ const Tag = ({ tag, posts }) => {
     <Base title={`${tag} - ${title} `} >
       <div className="section">
       <div className="pt-3 md:px-6 lg:p-6 xl:px-20 px-4">
-      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold uppercase">{tag}</h1>
+      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold italic uppercase">{tag}</h1>
       </div>
           <LatestPostsContainer>
          <LatestTags items={posts} />

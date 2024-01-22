@@ -11,7 +11,7 @@ const HeadLines = ({ items, category }) => {
           </Link>
 
         <div className="flex flex-wrap justify-between flex-col lg:flex-row">
-        {items.filter(item => item.cats.includes(category)).slice(0, 3).map((item) => (
+        {items.map((item) => (
             <div key={Math.random()} className="w-full lg:w-1/3 lg:py-2">
               <div className="py-2 lg:py-4 rounded-lg flex">
                 <div className="pl-3 pr-5 w-1/3">

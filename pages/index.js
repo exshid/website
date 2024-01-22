@@ -23,7 +23,7 @@ import LatestPosts from "@layouts/components/LatestPosts";
 import Sidebar from "@layouts/components/Sidebar";
 import Posts from "@partials/Posts";
 
-const Home = ({ articles }) => {
+const Home = ({ articles, tv, tvPosts }) => {
 
       const generationConfig = {
         temperature: 0.8,
@@ -301,7 +301,7 @@ const result = await model.generateContent({
 <EditorPickLeft items={articles} category="Movies" />
 </EditorContainer>
 <MustRead items={articles} />
-    <HeadLines items={articles} category="TV" />
+    <HeadLines items={tvPosts} category={tv} />
     <div className="px-4 pt-3 md:px-6 lg:p-6 xl:px-20">
     <span className="text-black text-3xl font-semibold uppercase pl-3">Latest</span>
     </div>
@@ -326,22 +326,34 @@ export async function getStaticProps() {
   const tweetsCollection = db.collection('rweets');
   const rweets = await tweetsCollection.find().toArray()
   client.close()
+  let reversedRweets = [...rweets].reverse();
+  let tv = 'TV'
+  let tvPosts = reversedRweets.filter(item => item.cats.includes(tv)).slice(0, 3);
   return {
-      props: {
-        articles: [...rweets].reverse().slice(0, 20).map(rweet => ({
-          author: rweet.author,
-          title: rweet.title,
-          content: rweet.content,
-          description: rweet.description,
-          url: rweet.url,
-          tags: rweet.tags,
-          cats: rweet.cats,
-          date: rweet.date,
-          id: rweet._id.toString(),
-          image: rweet.image
-        })),
-      },
-      revalidate: 1
-    }
-    
+    props: {
+      articles: reversedRweets.slice(0, 20).map(rweet => ({
+        author: rweet.author,
+        title: rweet.title,
+        content: rweet.content,
+        description: rweet.description,
+        url: rweet.url,
+        tags: rweet.tags,
+        cats: rweet.cats,
+        date: rweet.date,
+        id: rweet._id.toString(),
+        image: rweet.image
+      })),
+      tvPosts: filteredRweets.map(rweet => ({
+        author: rweet.author,
+        title: rweet.title,
+        description: rweet.description,
+        url: rweet.url,
+        id: rweet._id.toString(),
+        image: rweet.image
+      })),
+      tv: tv,
+    },
+    revalidate: 1
+  }
+      
 }
