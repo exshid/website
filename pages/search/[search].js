@@ -54,44 +54,28 @@ const Search = ({ search}) => {
     useEffect(() => {
         if (mydata) {
             
-            let filteredPosts = mydata.filter(post => 
-                (post.title && post.title.includes(search)) || 
-                (post.content && post.content.includes(search)) || 
-                (post.description && post.description.includes(search))
-                );
-                setFiltered(filteredPosts)
-                console.log(filtered); 
-    }
+          let searchLower = search.toLowerCase();
+          let filteredPosts = mydata.filter(post => 
+              (post.title && post.title.toLowerCase().includes(searchLower)) || 
+              (post.content && post.content.toLowerCase().includes(searchLower)) || 
+              (post.description && post.description.toLowerCase().includes(searchLower))
+          );
+                          setFiltered(filteredPosts)
+   }
     }, [mydata, search]);
 
 
-    if (!filtered) {
-        return
-        <Base title={search}>
-        <div className="section">
-            <h1 className="h2 mb-8 text-center">
-              Showing posts from <span className="text-primary">{search}</span>{" "}
-              category
-            </h1>
-  
-        <LatestPostsContainer>
-        <div>Loading...</div>;
-            </LatestPostsContainer>
-        </div>
-    </Base>
-
-    }
-
-
   return (
-    <Base title={search}>
+    <Base title={`Search results for ${search} - ${title} `} >
       <div className="section">
-          <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{search}</span>{" "}
-            search
+      <div className="pt-3 md:px-6 lg:p-6 xl:px-20 px-4">
+      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold italic uppercase">{search}</h1>
+      </div>
 
-         </h1>
          <LatestPostsContainer>
+      {!filtered ? (
+        <div>Loading...</div>
+        ) : (
 
           <div className="w-full xl:px-20 divide-y p-3">
       {filtered.reverse().slice(0, 20).map((item) => (
@@ -143,10 +127,16 @@ const Search = ({ search}) => {
       </div>
     </div> )}
 </>
-      ))}
+      )
+      
+      )}
 
   </div>
+)}
   </LatestPostsContainer>
+
+
+
 
           </div>
     </Base>
