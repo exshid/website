@@ -76,7 +76,8 @@ const Search = ({ search}) => {
 
          <LatestPostsContainer>
       {!filtered ? (
-        <div>Loading...</div>
+                  <div className="w-full xl:px-20 text-black p-3">
+                  Loading...</div>
         ) : (
 
           <div className="w-full xl:px-20 divide-y p-3">
@@ -108,7 +109,7 @@ const Search = ({ search}) => {
      
      ) : (
       <div key={Math.random()} className="flex flex-col">
-         <Link href={`/${item._id.toString()}`}>
+         <Link href={`/posts/${item._id.toString()}`}>
 
         <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
 </Link>
@@ -123,7 +124,12 @@ const Search = ({ search}) => {
        : item.description}
          </p>
       <div>
-        <span className="font-bold text-black pb-2">{item.author}</span>
+        <span className="font-bold text-black pb-2">
+        <Link href={`/authors/${item.author}`}>
+
+          {item.author}
+</Link>
+          </span>
       </div>
       </div>
       </div>

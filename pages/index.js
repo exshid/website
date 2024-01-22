@@ -193,7 +193,7 @@ const Home = ({ articles, tv, games, movies,news, tvPosts, moviesPosts, newsPost
           const model = genAI.getGenerativeModel({ model: MODEL_NAME });
       
           const parts = [
-            { text: `sir, you are a professional writer. rewrite this post in a publish-ready quality. if there is any quotes, do not change it any way. separate pargaraphs using HTML <p> tags, and if there is any trace of mention another website or the author at the end of the post, remove it, and if there is a youtube or twitter link, embed it: ${postDescription}` }
+            { text: `sir, you are a professional writer. rewrite this post in a publish-ready quality. if there is any quotes, do not change it any way. separate pargaraphs using HTML <p> tags, and if there is any trace of mention another website or the author, remove it, and if there is a youtube or twitter link, embed it: ${postDescription}` }
       
           ];
       

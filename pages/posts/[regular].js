@@ -90,14 +90,14 @@ return <>
           objectFit="cover"/>
             </div>
           <div className="pt-8">
-          <Link href={post._id}>
+          <Link href={`/posts/${post._id}`}>
            <h3 className="text-lg font-bold hover:underline text-black hover:text-gray-500">
             {post.title}
           </h3>
           </Link >
 
               <p className="my-2 text-gray-500">{post.description}</p>
-          <Link href={`authors/${post.author}`}>
+          <Link href={`/authors/${post.author}`}>
           <span className="mt-2 text-gray-700 hover:underline hover:text-black">{post.author}
           </span>
        </Link>

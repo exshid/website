@@ -20,7 +20,7 @@ const HeadLines = ({ items, category }) => {
                 objectFit="cover"/>
                 </div>
                 <div className="w-2/3">
-                <Link href={item.id}>
+                <Link href={`/posts/${item.id}`}>
                   
                   <h3 className="text-lg font-bold text-black hover:text-gray-500 hover:underline mb-1">{item.title}</h3>
                 </Link>

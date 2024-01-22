@@ -29,7 +29,7 @@ const LatestPosts = ({ items }) => {
             className="object-cover !relative lg:pr-4 lg:py-3 w-28 h-20 md:w-60 md:h-48 lg:w-80 lg:h-64 rounded-m"
                     objectFit="cover"/>
             <div>
-            <Link href={item.id}>
+            <Link href={`/posts/${item.id}`}>
               <h3 className="font-semibold transition text-black hover:text-gray-500 hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
       </Link>
               <p className="py-2 text-black">{item.description}</p>

@@ -7,7 +7,7 @@ const Sidebar = ({ items, category }) => {
         {items.map((article) => (
           <div key={Math.random()} className="flex justify-between items-start p-2">
             <div className="flex-1 space-y-2">
-            <Link href={article.id}>
+            <Link href={`/posts/${article.id}`}>
 
               <h3 className="font-bold text-black hover:text-gray-500 hover:underline text-lg">{article.title}</h3>
 </Link>

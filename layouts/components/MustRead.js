@@ -29,7 +29,8 @@ const ArticleCard = ({ image, title, description, author, id }) => {
           objectFit="cover"/>
             </div>
           <div className="pt-8">
-          <Link href={id}>
+          <Link href={`/posts/${id}`}>
+
            <h3 className="text-lg font-bold text-black hover:text-gray-500 hover:underline">
             {title}
           </h3>
@@ -37,7 +38,7 @@ const ArticleCard = ({ image, title, description, author, id }) => {
 
               <p className="my-2 text-gray-500">{description}</p>
               
-          <Link href={`authors/${author}`}>
+          <Link href={`/authors/${author}`}>
           <span className="mt-2 text-gray-500 hover:underline hover:text-black">{author}
           </span>
           </Link>

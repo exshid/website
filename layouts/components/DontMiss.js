@@ -15,7 +15,7 @@ const DontMiss = ({ items, category }) => {
               <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-900">{item.description}</p>
 
-<Link href={item.id}>
+<Link href={`/posts/${item.id}`}>
                 <h3 className="mt-2 text-lg font-bold text-black hover:text-gray-500 hover:underline">{item.title}</h3>
     </Link>
     <Link href={`/authors/${item.author}`}>

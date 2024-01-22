@@ -53,7 +53,7 @@ const LatestTags = ({ items }) => {
      
      ) : (
       <div key={Math.random()} className="flex flex-col">
-         <Link href={`/${item._id}`}>
+      <Link href={`/posts/${item._id}`}>
 
         <h3 className="font-semibold transition hover:underline text-lg md:text-xl lg:text-3xl pt-2">{item.title}</h3>
 </Link>
