@@ -1,15 +1,14 @@
-import Image from 'next/image'
-import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
 import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
-import { MongoClient } from 'mongodb'
+import { MongoClient } from "mongodb";
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
 import LatestTags from "@layouts/components/LatestTags";
 
-// category page
 const Category = ({ category, posts }) => {
   const { title } = config.site;
 
@@ -18,15 +17,17 @@ const Category = ({ category, posts }) => {
   }
 
   return (
-    <Base title={`${category} - ${title} `} >
+    <Base title={`${category} - ${title} `}>
       <div className="section">
-      <div className="pt-3 md:px-6 lg:p-6 xl:px-20 px-4">
-      <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold italic uppercase">{category}</h1>
-      </div>
-          <LatestPostsContainer>
-         <LatestTags items={posts} />
-            </LatestPostsContainer>
+        <div className="pt-3 md:px-6 lg:p-6 xl:px-20 px-4">
+          <h1 className="text-black xl:px-20 px-4 py-3 text-3xl font-semibold italic uppercase">
+            {category}
+          </h1>
         </div>
+        <LatestPostsContainer>
+          <LatestTags items={posts} />
+        </LatestPostsContainer>
+      </div>
     </Base>
   );
 };
@@ -34,18 +35,20 @@ const Category = ({ category, posts }) => {
 export default Category;
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority')
-  const db = client.db()
-  const tweetsCollection = db.collection('rweets');
-  const rweets = await tweetsCollection.find().toArray()
-  
+  const client = await MongoClient.connect(
+    "mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const tweetsCollection = db.collection("rweets");
+  const rweets = await tweetsCollection.find().toArray();
+
   const allCategories = rweets.reduce((acc, tweet) => {
-    const cats = JSON.parse(tweet.cats); // Parse the JSON string into a JavaScript array
+    const cats = JSON.parse(tweet.cats); 
     return acc.concat(cats);
   }, []);
-  const categories = [...new Set(allCategories)]; // Extract unique categories
-  
-  client.close()
+  const categories = [...new Set(allCategories)]; 
+
+  client.close();
 
   const paths = allCategories.map((category) => ({
     params: {
@@ -54,29 +57,29 @@ export async function getStaticPaths() {
   }));
 
   return { paths, fallback: false };
-};
-
+}
 
 export async function getStaticProps({ params }) {
-  const client = await MongoClient.connect('mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority'); 
-  const db = client.db() 
-  const tweetsCollection = db.collection('rweets');
+  const client = await MongoClient.connect(
+    "mongodb+srv://ali:Ar7iy9BMcCLpXE4@cluster0.hi03pow.mongodb.net/tweets?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const tweetsCollection = db.collection("rweets");
   let posts = await tweetsCollection.find().toArray();
 
-    posts = posts.reverse().map(post => ({
+  posts = posts.reverse().map((post) => ({
     ...post,
     _id: post._id.toString(),
   }));
-  const filteredPost = posts.filter(item => {
-    const catsArray = JSON.parse(item.cats).map(cat => cat.toLowerCase()); 
-    return catsArray.includes(params.category.toLowerCase()); 
+  const filteredPost = posts.filter((item) => {
+    const catsArray = JSON.parse(item.cats).map((cat) => cat.toLowerCase());
+    return catsArray.includes(params.category.toLowerCase());
   });
-    
 
   return {
-    props: { 
-      posts: filteredPost.slice(0, 20), 
-      category: params.category, 
+    props: {
+      posts: filteredPost.slice(0, 20),
+      category: params.category,
     },
   };
-};
+}

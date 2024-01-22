@@ -1,7 +1,7 @@
 import InnerPage from "@layouts/components/InnerPage";
 
 
-function About ({content, pageTitle}) {
+function About ({content, pageTitle,description}) {
   return <InnerPage content={content} pageTitle={pageTitle} description={description} />
 
 }
