@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { slugify } from "@lib/utils/textConverter";
 import { useRouter } from "next/router";
-
+import config from "@config/config.json";
 import Base from "@layouts/Baseof";
 import Posts from "@partials/Posts";
 import LatestPostsContainer from "@layouts/components/LatestPostsContainer";
@@ -11,6 +11,8 @@ import LatestTags from "@layouts/components/LatestTags";
 
 // category page
 const Search = ({ search}) => {
+  const { title } = config.site;
+
   const router = useRouter();
   const { query } = router;
 
