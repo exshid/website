@@ -43,7 +43,6 @@ const Search = ({ search }) => {
     fetch("/api/get-data")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMydata(data);
         setIsLoading(false);
       })

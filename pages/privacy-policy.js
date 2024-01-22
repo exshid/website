@@ -1,7 +1,7 @@
 import InnerPage from "@layouts/components/InnerPage";
 
 
-function Privacy ({content, pageTitle}) {
+function Privacy ({content, pageTitle, description}) {
   return <InnerPage content={content} pageTitle={pageTitle} description={description} />
 
 }
