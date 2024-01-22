@@ -9,8 +9,7 @@
 
   "settings": {
     "pagination": 3,
-    "summary_length": 200,
-    "blog_folder": "posts"
+    "summary_length": 200
   },
 
   "params": {
